@@ -1,0 +1,42 @@
+# Robot Framework configuration file
+# This file contains default settings for Robot Framework execution
+
+# Output directory configuration
+outputdir: Output
+
+# Log level
+loglevel: INFO
+
+# Console output
+console: verbose
+
+# Timestamp outputs
+timestampoutputs: true
+
+# Include/Exclude tags (if you want to use tags)
+# include: smoke
+# exclude: slow
+
+# Variables that can be overridden
+variables:
+  ENV: test
+  HEADLESS: true
+  BROWSER: chrome
+
+# Libraries to be imported automatically
+libraries:
+  - SeleniumLibrary
+
+# Resource files to be imported
+resources:
+  - Resources/Login_Page.robot
+  - Resources/Add_Shipment_File.robot
+  - Resources/Auto_Accept.robot
+  - Resources/Auto_Ship_Out.robot
+  - Resources/Blind_Receive_and_Accept.robot
+  - Resources/Decommission.robot
+  - Resources/Inbound_Adhoc.robot
+  - Resources/Outbound_Adhoc.robot
+  - Resources/Pack_By_Add_And_Remove.robot
+  - Resources/Pack_By_Aggregation.robot
+  - Resources/Unpack.robot
