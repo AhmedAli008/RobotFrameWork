@@ -28,9 +28,9 @@ pipeline {
     }
 
     environment {
-        PYTHON_PATH = "${WORKSPACE}/venv"
-        ROBOT_OUTPUT_DIR = "${WORKSPACE}/Output"
-        ROBOT_LOG_DIR = "${WORKSPACE}/log"
+        PYTHON_PATH = "${WORKSPACE}\\venv"
+        ROBOT_OUTPUT_DIR = "${WORKSPACE}\\Output"
+        ROBOT_LOG_DIR = "${WORKSPACE}\\log"
     }
 
     stages {
@@ -43,100 +43,76 @@ pipeline {
 
         stage('Setup Python Environment') {
             steps {
-                script {
-                    if (isUnix()) {
-                        // Linux/Mac setup
-                        sh '''
-                            python3 -m venv venv
-                            . venv/bin/activate
-                            pip install --upgrade pip
-                            pip install robotframework
-                            pip install robotframework-seleniumlibrary
-                            pip install selenium
-                            pip install requests
-                            pip install webdriver-manager
-                        '''
-                    } else {
-                        // Windows setup
-                        bat '''
-                            python -m venv venv
-                            call venv\\Scripts\\activate.bat
-                            pip install --upgrade pip
-                            pip install robotframework
-                            pip install robotframework-seleniumlibrary
-                            pip install selenium
-                            pip install requests
-                            pip install webdriver-manager
-                        '''
-                    }
-                }
+                bat '''
+                    echo Setting up Python environment...
+                    python -m venv venv
+                    call venv\\Scripts\\activate.bat
+                    python -m pip install --upgrade pip
+                    pip install robotframework==6.1.1
+                    pip install robotframework-seleniumlibrary==6.2.0
+                    pip install selenium==4.15.2
+                    pip install requests==2.31.0
+                    pip install webdriver-manager==4.0.1
+                    echo Python environment setup completed
+                '''
             }
         }
 
-        stage('Install Browser Dependencies') {
+        stage('Setup Browser Drivers') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh '''
-                            . venv/bin/activate
-                            python -c "
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-import os
+                    // Create Python script for driver setup
+                    writeFile file: 'setup_browser.py', text: '''
+import sys
+try:
+    from webdriver_manager.chrome import ChromeDriverManager
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
 
-# Download and setup ChromeDriver
-chrome_driver_path = ChromeDriverManager().install()
-print(f'ChromeDriver installed at: {chrome_driver_path}')
+    print("Installing ChromeDriver...")
+    driver_path = ChromeDriverManager().install()
+    print(f"ChromeDriver installed successfully at: {driver_path}")
 
-# Setup Chrome options for headless mode
-from selenium.webdriver.chrome.options import Options
-chrome_options = Options()
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--disable-dev-shm-usage')
-chrome_options.add_argument('--disable-gpu')
-chrome_options.add_argument('--window-size=1920,1080')
+    # Test browser setup
+    print("Testing browser setup...")
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
 
-print('Browser dependencies installed successfully')
-"
-                        '''
-                    } else {
-                        bat '''
-                            call venv\\Scripts\\activate.bat
-                            python -c "
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-import os
+    service = Service(driver_path)
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.get("https://www.google.com")
+    title = driver.title
+    driver.quit()
 
-# Download and setup ChromeDriver
-chrome_driver_path = ChromeDriverManager().install()
-print(f'ChromeDriver installed at: {chrome_driver_path}')
+    print(f"Browser test successful. Page title: {title}")
+    print("Browser setup completed successfully!")
 
-print('Browser dependencies installed successfully')
-"
-                        '''
-                    }
+except Exception as e:
+    print(f"Error during browser setup: {e}")
+    sys.exit(1)
+'''
                 }
+
+                bat '''
+                    call venv\\Scripts\\activate.bat
+                    python setup_browser.py
+                    del setup_browser.py
+                '''
             }
         }
 
         stage('Create Output Directories') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh '''
-                            mkdir -p Output
-                            mkdir -p log
-                        '''
-                    } else {
-                        bat '''
-                            if not exist Output mkdir Output
-                            if not exist log mkdir log
-                        '''
-                    }
-                }
+                bat '''
+                    if not exist Output mkdir Output
+                    if not exist log mkdir log
+                    echo Output directories created
+                '''
             }
         }
 
@@ -144,59 +120,46 @@ print('Browser dependencies installed successfully')
             steps {
                 script {
                     def testCommand = ""
-                    def outputDir = "Output"
-                    def logDir = "log"
 
                     // Determine which test to run
                     switch(params.TEST_SUITE) {
                         case 'All_Tests':
-                            testCommand = "Tests/"
+                            testCommand = "Tests\\"
                             break
                         case 'Adhoc_Inbound_and_Outbound':
-                            testCommand = "Tests/Adhoc_Inbound_and_Outbound.robot"
+                            testCommand = "Tests\\Adhoc_Inbound_and_Outbound.robot"
                             break
                         case 'Auto_Accept_Auto_Ship_Out':
-                            testCommand = "Tests/Auto_Accept_Auto_Ship_Out.robot"
+                            testCommand = "Tests\\Auto_Accept_Auto_Ship_Out.robot"
                             break
                         case 'Decommission':
-                            testCommand = "Tests/Decommission.robot"
+                            testCommand = "Tests\\Decommission.robot"
                             break
                         case 'Pack_And_Decommisson':
-                            testCommand = "Tests/Pack_And_Decommisson.robot"
+                            testCommand = "Tests\\Pack_And_Decommisson.robot"
                             break
                         case 'Pack_Unpack_Child':
-                            testCommand = "Tests/Pack_Unpack_Child.robot"
+                            testCommand = "Tests\\Pack_Unpack_Child.robot"
                             break
                         case 'Pack_Unpack_Parent':
-                            testCommand = "Tests/Pack_Unpack_Parent.robot"
+                            testCommand = "Tests\\Pack_Unpack_Parent.robot"
                             break
                         default:
-                            testCommand = "Tests/"
+                            testCommand = "Tests\\"
                     }
 
-                    if (isUnix()) {
-                        sh """
-                            . venv/bin/activate
-                            robot -d ${outputDir} \\
-                                  -L DEBUG \\
-                                  -v ENV:${params.ENVIRONMENT} \\
-                                  -v HEADLESS:${params.HEADLESS_MODE} \\
-                                  --timestampoutputs \\
-                                  --console verbose \\
-                                  ${testCommand}
-                        """
-                    } else {
-                        bat """
-                            call venv\\Scripts\\activate.bat
-                            robot -d ${outputDir} ^
-                                  -L DEBUG ^
-                                  -v ENV:${params.ENVIRONMENT} ^
-                                  -v HEADLESS:${params.HEADLESS_MODE} ^
-                                  --timestampoutputs ^
-                                  --console verbose ^
-                                  ${testCommand}
-                        """
-                    }
+                    bat """
+                        call venv\\Scripts\\activate.bat
+                        robot -d Output ^
+                              -L DEBUG ^
+                              -v ENV:${params.ENVIRONMENT} ^
+                              -v HEADLESS:${params.HEADLESS_MODE} ^
+                              --timestampoutputs ^
+                              --console verbose ^
+                              --reporttitle "Robot Framework Test Report" ^
+                              --logtitle "Robot Framework Test Log" ^
+                              ${testCommand}
+                    """
                 }
             }
         }
@@ -204,39 +167,59 @@ print('Browser dependencies installed successfully')
 
     post {
         always {
-            echo 'Cleaning up and publishing results...'
+            echo 'Pipeline completed. Archiving results...'
 
-            // Archive test results
-            archiveArtifacts artifacts: 'Output/**/*', allowEmptyArchive: true
+            // Archive all output files
+            archiveArtifacts artifacts: 'Output/**/*', allowEmptyArchive: true, fingerprint: true
             archiveArtifacts artifacts: 'log/**/*', allowEmptyArchive: true
 
-            // Publish Robot Framework results
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'Output',
-                reportFiles: '*.html',
-                reportName: 'Robot Framework Test Results',
-                reportTitles: 'Test Report'
-            ])
+            // List output files for verification
+            bat '''
+                echo Listing output files:
+                dir Output /b
+            '''
 
-            // Clean workspace if needed
-            script {
-                if (params.CLEAN_WORKSPACE == true) {
-                    cleanWs()
-                }
-            }
+            echo 'Results archived successfully!'
+            echo 'You can download the HTML reports from the Build Artifacts section.'
         }
 
         success {
-            echo 'Tests completed successfully!'
-            // You can add notifications here (email, Slack, etc.)
+            echo 'All tests completed successfully!'
+            emailext (
+                subject: "Jenkins Success: ${env.JOB_NAME} - Build ${env.BUILD_NUMBER}",
+                body: """
+Test execution completed successfully!
+
+Environment: ${params.ENVIRONMENT}
+Test Suite: ${params.TEST_SUITE}
+Headless Mode: ${params.HEADLESS_MODE}
+
+View results at: ${env.BUILD_URL}
+
+Download reports from the Build Artifacts section.
+                """,
+                to: "${env.CHANGE_AUTHOR_EMAIL}",
+                mimeType: 'text/plain'
+            )
         }
 
         failure {
-            echo 'Tests failed!'
-            // You can add failure notifications here
+            echo 'Pipeline failed! Check the console output for details.'
+            emailext (
+                subject: "Jenkins Failure: ${env.JOB_NAME} - Build ${env.BUILD_NUMBER}",
+                body: """
+Test execution failed!
+
+Environment: ${params.ENVIRONMENT}
+Test Suite: ${params.TEST_SUITE}
+
+Check the console output at: ${env.BUILD_URL}console
+
+Please review the logs and fix the issues.
+                """,
+                to: "${env.CHANGE_AUTHOR_EMAIL}",
+                mimeType: 'text/plain'
+            )
         }
 
         unstable {
