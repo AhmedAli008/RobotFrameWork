@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Setup script for Origin Robot Framework Test Automation
-This script helps set up the environment for running tests locally or in CI/CD
-"""
-
 import os
 import sys
 import subprocess
