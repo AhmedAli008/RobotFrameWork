@@ -157,22 +157,3 @@ except Exception as e:
         }
     }
 }
-```
-
-## Why This Fixes The Issue
-
-1. **Direct Git checkout** using simple `git` step instead of complex SCM configuration
-2. **No dependency on external Jenkinsfile** - everything is in the job configuration
-3. **Simplified approach** that bypasses the Git workspace initialization issue
-4. **Immediate execution** without Jenkins trying to read files from repository first
-
-## Alternative Solution: Fix SCM Configuration
-
-If you prefer to keep using "Pipeline script from SCM":
-
-1. **Check your GitHub repository** - make sure the Jenkinsfile exists in the root
-2. **Try different branch** - use 'main' instead of 'master' if that's your default branch
-3. **Add Git credentials** if repository is private
-4. **Check Jenkins Git plugin** is properly installed
-
-But the inline script approach above should work immediately and bypass all Git configuration issues.
