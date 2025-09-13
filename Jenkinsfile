@@ -291,7 +291,7 @@ View Results:
 
 Please review the test results to identify which tests failed and take appropriate action.
                 """.trim(),
-                to: "${params.EMAIL_RECIPIENTS}",
+                to: "Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
