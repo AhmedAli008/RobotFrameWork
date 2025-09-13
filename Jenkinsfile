@@ -276,6 +276,7 @@ Action Required: Please investigate the failure and re-run the tests.
         unstable {
             echo 'Pipeline is unstable. Some tests may have failed.'
 
+            // Send to primary recipient first
             emailext (
                 subject: "[Jenkins] UNSTABLE: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
@@ -295,7 +296,30 @@ View Results:
 Please review the test results to identify which tests failed and take appropriate action.
                 """.trim(),
                 to: "Ahmed.Ali@originsysglobal.com",
-                cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                mimeType: 'text/plain'
+            )
+
+            // Send to secondary recipients with small delay
+            sleep(time: 2, unit: 'SECONDS')
+            emailext (
+                subject: "[Jenkins] UNSTABLE: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+⚠️ Test Execution Unstable!
+
+Some Robot Framework tests may have failed or the build is unstable.
+
+Environment: ${params.ENVIRONMENT}
+Test Suite: ${params.TEST_SUITE}
+Build Duration: ${currentBuild.durationString}
+
+View Results:
+• Test Report: ${env.BUILD_URL}artifact/Output/report.html
+• Test Log: ${env.BUILD_URL}artifact/Output/log.html
+• Console Output: ${env.BUILD_URL}console
+
+Please review the test results to identify which tests failed and take appropriate action.
+                """.trim(),
+                to: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
