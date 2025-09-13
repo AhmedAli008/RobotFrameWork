@@ -189,7 +189,8 @@ ${testSummary}
 
 This is an automated message from Jenkins.
                     """.trim(),
-                    to: "Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                    to: "Ahmed.Ali@originsysglobal.com",
+                    cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                     mimeType: 'text/plain'
                 )
             }
@@ -216,7 +217,8 @@ View Results:
 
 Great work! All tests are passing.
                 """.trim(),
-                to: "Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                to: "Ahmed.Ali@originsysglobal.com",
+                cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
@@ -265,7 +267,8 @@ If test results were generated:
 
 Action Required: Please investigate the failure and re-run the tests.
                 """.trim(),
-                to: "Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                to: "Ahmed.Ali@originsysglobal.com",
+                cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
@@ -291,7 +294,8 @@ View Results:
 
 Please review the test results to identify which tests failed and take appropriate action.
                 """.trim(),
-                to: "Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                to: "Ahmed.Ali@originsysglobal.com",
+                cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
