@@ -157,7 +157,6 @@ pipeline {
                 if (fileExists('Output/output.xml')) {
                     try {
                         def output = readFile('Output/output.xml')
-                        // Extract basic statistics (you might want to enhance this parsing)
                         testSummary = "\n\nTest results are available in the archived artifacts."
                     } catch (Exception e) {
                         testSummary = "\n\nTest results could not be parsed."
@@ -166,6 +165,7 @@ pipeline {
                     testSummary = "\n\nNo test results found."
                 }
 
+                // Send to primary recipient first
                 emailext (
                     subject: "[Jenkins] ${buildStatus}: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                     body: """
@@ -190,7 +190,35 @@ ${testSummary}
 This is an automated message from Jenkins.
                     """.trim(),
                     to: "Ahmed.Ali@originsysglobal.com",
-                    cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                    mimeType: 'text/plain'
+                )
+
+                // Send to secondary recipients with small delay
+                sleep(time: 2, unit: 'SECONDS')
+                emailext (
+                    subject: "[Jenkins] ${buildStatus}: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """
+Robot Framework Test Execution Report
+
+Build Status: ${buildStatus}
+Job: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Environment: ${params.ENVIRONMENT}
+Test Suite: ${params.TEST_SUITE}
+Headless Mode: ${params.HEADLESS_MODE}
+Build Duration: ${currentBuild.durationString}
+Triggered by: ${currentBuild.getBuildCauses()[0]?.shortDescription ?: 'Unknown'}
+
+Build URL: ${env.BUILD_URL}
+Console Output: ${env.BUILD_URL}console
+Test Report: ${env.BUILD_URL}artifact/Output/report.html
+Test Log: ${env.BUILD_URL}artifact/Output/log.html
+
+${testSummary}
+
+This is an automated message from Jenkins.
+                    """.trim(),
+                    to: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                     mimeType: 'text/plain'
                 )
             }
@@ -199,10 +227,11 @@ This is an automated message from Jenkins.
         success {
             echo 'Pipeline completed successfully!'
 
+            // Send to primary recipient first
             emailext (
                 subject: "[Jenkins] SUCCESS: Robot Framework Tests Passed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-🎉 Test Execution Successful!
+Test Execution Successful!
 
 All Robot Framework tests completed successfully.
 
@@ -218,7 +247,30 @@ View Results:
 Great work! All tests are passing.
                 """.trim(),
                 to: "Ahmed.Ali@originsysglobal.com",
-                cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                mimeType: 'text/plain'
+            )
+
+            // Send to secondary recipients with small delay
+            sleep(time: 2, unit: 'SECONDS')
+            emailext (
+                subject: "[Jenkins] SUCCESS: Robot Framework Tests Passed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+Test Execution Successful!
+
+All Robot Framework tests completed successfully.
+
+Environment: ${params.ENVIRONMENT}
+Test Suite: ${params.TEST_SUITE}
+Build Duration: ${currentBuild.durationString}
+
+View Results:
+• Test Report: ${env.BUILD_URL}artifact/Output/report.html
+• Test Log: ${env.BUILD_URL}artifact/Output/log.html
+• Build Details: ${env.BUILD_URL}
+
+Great work! All tests are passing.
+                """.trim(),
+                to: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
@@ -242,10 +294,11 @@ Great work! All tests are passing.
                 )
             '''
 
+            // Send to primary recipient first
             emailext (
                 subject: "[Jenkins] FAILED: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-❌ Test Execution Failed!
+Test Execution Failed!
 
 The Robot Framework test execution encountered an error.
 
@@ -268,7 +321,37 @@ If test results were generated:
 Action Required: Please investigate the failure and re-run the tests.
                 """.trim(),
                 to: "Ahmed.Ali@originsysglobal.com",
-                cc: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
+                mimeType: 'text/plain'
+            )
+
+            // Send to secondary recipients with small delay
+            sleep(time: 2, unit: 'SECONDS')
+            emailext (
+                subject: "[Jenkins] FAILED: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+Test Execution Failed!
+
+The Robot Framework test execution encountered an error.
+
+Environment: ${params.ENVIRONMENT}
+Test Suite: ${params.TEST_SUITE}
+Build Duration: ${currentBuild.durationString}
+Failure Node: ${env.NODE_NAME}
+
+Troubleshooting:
+• Console Output: ${env.BUILD_URL}console
+• Build Details: ${env.BUILD_URL}
+• Archived Artifacts: ${env.BUILD_URL}artifact/
+
+Please check the console output for detailed error information.
+
+If test results were generated:
+• Test Report: ${env.BUILD_URL}artifact/Output/report.html
+• Test Log: ${env.BUILD_URL}artifact/Output/log.html
+
+Action Required: Please investigate the failure and re-run the tests.
+                """.trim(),
+                to: "Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
@@ -280,7 +363,7 @@ Action Required: Please investigate the failure and re-run the tests.
             emailext (
                 subject: "[Jenkins] UNSTABLE: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-⚠️ Test Execution Unstable!
+Test Execution Unstable!
 
 Some Robot Framework tests may have failed or the build is unstable.
 
@@ -304,7 +387,7 @@ Please review the test results to identify which tests failed and take appropria
             emailext (
                 subject: "[Jenkins] UNSTABLE: Robot Framework Tests - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-⚠️ Test Execution Unstable!
+Test Execution Unstable!
 
 Some Robot Framework tests may have failed or the build is unstable.
 
