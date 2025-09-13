@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-Test runner script for Origin Robot Framework Test Automation
-This script provides an easy way to run different test suites with various configurations
-"""
-
 import os
 import sys
 import subprocess
@@ -32,8 +26,33 @@ class TestRunner:
                 os.makedirs(directory)
                 print(f"Created directory: {directory}")
 
+    def create_pause_modifier(self, pause_seconds=2):
+        """Create a pause modifier file for Robot Framework"""
+        modifier_content = f'''
+import time
+
+class PauseModifier:
+    """Modifier that adds a pause after each test case"""
+    
+    ROBOT_LISTENER_API_VERSION = 2
+    
+    def __init__(self):
+        self.pause_seconds = {pause_seconds}
+    
+    def end_test(self, name, attributes):
+        """Called when a test case ends"""
+        print(f"Pausing for {{self.pause_seconds}} seconds after test: {{name}}")
+        time.sleep(self.pause_seconds)
+'''
+
+        modifier_path = os.path.join(self.project_root, "pause_modifier.py")
+        with open(modifier_path, 'w') as f:
+            f.write(modifier_content)
+
+        return modifier_path
+
     def run_robot_tests(self, test_suite, environment, headless=True, browser="chrome",
-                       tags=None, variables=None, additional_args=None):
+                        tags=None, variables=None, additional_args=None, pause_between_tests=0):
         """Run Robot Framework tests with specified parameters"""
 
         # Create output directories
@@ -63,6 +82,12 @@ class TestRunner:
         # Add browser variable
         cmd.extend(["-v", f"BROWSER:{browser}"])
 
+        # Add pause modifier if requested
+        if pause_between_tests > 0:
+            modifier_path = self.create_pause_modifier(pause_between_tests)
+            cmd.extend(["--listener", modifier_path])
+            print(f"Adding {pause_between_tests} second pause between test cases")
+
         # Add tags if specified
         if tags:
             for tag in tags:
@@ -91,11 +116,21 @@ class TestRunner:
         print(f"Environment: {environment}")
         print(f"Headless Mode: {headless}")
         print(f"Browser: {browser}")
+        if pause_between_tests > 0:
+            print(f"Pause between tests: {pause_between_tests} seconds")
         print("=" * 80)
 
         # Run the command
         try:
             result = subprocess.run(cmd, cwd=self.project_root, check=False)
+
+            # Clean up the temporary modifier file
+            if pause_between_tests > 0:
+                try:
+                    os.remove(modifier_path)
+                except:
+                    pass
+
             return result.returncode
         except Exception as e:
             print(f"Error running tests: {e}")
@@ -127,7 +162,6 @@ def main():
         "--suite", "-s",
         choices=[
             "all",
-            "Adhoc_Inbound_and_Outbound",
             "Auto_Accept_Auto_Ship_Out",
             "Decommission",
             "Pack_And_Decommisson",
@@ -183,6 +217,13 @@ def main():
         help="List available test suites"
     )
 
+    parser.add_argument(
+        "--pause", "-p",
+        type=int,
+        default=0,
+        help="Pause in seconds between test cases (default: 0 - no pause)"
+    )
+
     args = parser.parse_args()
 
     runner = TestRunner()
@@ -210,7 +251,8 @@ def main():
         headless=headless_mode,
         browser=args.browser,
         tags=args.tags,
-        variables=variables
+        variables=variables,
+        pause_between_suites=args.pause
     )
 
     # Print results summary

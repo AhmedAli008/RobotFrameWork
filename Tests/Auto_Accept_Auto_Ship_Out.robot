@@ -18,4 +18,4 @@ Auto Accept And Auto Ship Out
     Auto Accept    ${Name}
     Auto Ship Out    ${Name}
     Sleep    3s
-    #[Teardown]  Close Browser
+    [Teardown]  Close Browser

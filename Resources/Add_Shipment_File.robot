@@ -15,7 +15,7 @@ Add Shipment File
     Open Shipment File
     Wait Until Page Contains Element    ${Page_Load_In_Shipment}
     ${Name}    Add Shipment File Fetch File Name   ${Env}     ${Username}     ${Password}
-    Sleep    1s
+    Sleep    3s
     Reload Page
     RETURN  ${Name}
 
