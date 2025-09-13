@@ -189,7 +189,7 @@ ${testSummary}
 
 This is an automated message from Jenkins.
                     """.trim(),
-                    to: "${params.EMAIL_RECIPIENTS}",
+                    to: "Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                     mimeType: 'text/plain'
                 )
             }
@@ -265,7 +265,7 @@ If test results were generated:
 
 Action Required: Please investigate the failure and re-run the tests.
                 """.trim(),
-                to: "${params.EMAIL_RECIPIENTS}",
+                to: "Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, Ahmedali22007@gmail.com",
                 mimeType: 'text/plain'
             )
         }
