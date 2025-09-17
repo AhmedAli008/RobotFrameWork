@@ -6,6 +6,7 @@ Variables   ../API/Token_SSCC_Permit_Num.py
 *** Keywords ***
 Unpack By Parent
     [Arguments]     ${ENV}  ${Username}  ${Parent}
+    Sleep    2s
     Go To Home
     Open UnPack Screen
     Unpack By Parent To Scan    ${ENV}    ${Username}    ${Parent}
@@ -15,6 +16,7 @@ Unpack By Parent
 
 Unpack By Child
     [Arguments]     ${ENV}  ${Username}
+    Sleep    2s
     Go To Home
     Open UnPack Screen
     Sleep    2s

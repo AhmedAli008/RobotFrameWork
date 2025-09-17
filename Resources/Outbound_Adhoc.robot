@@ -19,6 +19,7 @@ ${Button_Wait}  xpath=//button[contains(text(), 'Ship Out')]
 Outbound Adhoc
     #Wait Until Page Contains Element    ${Home_Page}
     [Arguments]     ${ENV}
+    Sleep    2s
     Go To Home
     Sleep    1S
     Wait Until Page Contains Element    ${Selector}
@@ -31,7 +32,7 @@ Outbound Adhoc
     Outbound Adhoc Scan    ${ENV}   ${data['parent3_to_scan']}
     Sleep    2s
     Reload Page
-    #Sleep    3s
+    Sleep    2s
     #Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
     Submit Ship Out

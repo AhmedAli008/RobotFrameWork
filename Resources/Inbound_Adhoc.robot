@@ -17,6 +17,7 @@ ${Wait_Button}      xpath=//button[contains(text(), 'Submit')]
 *** Keywords ***
 Inbound Adhoc
     [Arguments]     ${ENV}
+    Sleep    2s
     Go To Home
     Wait Until Page Contains Element    ${Selector}
     Go To AdHoc Inbound
@@ -56,5 +57,6 @@ Submit Scan
     Click Button    xpath=//button[contains(text(), 'Submit')]
 
 Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
+    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]/div[2]
+
 

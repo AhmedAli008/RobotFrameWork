@@ -9,6 +9,7 @@ Auto Accept
     Reload Page
 Search File
     [Arguments]     ${File_Name}
+    Sleep    2s
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[1]/div[2]/div[2]/div/button[1]
     Sleep    1s
     Input Text    xpath=/html/body/div[1]/div[1]/main/div[5]/div[2]/table/thead/tr/th[5]/div[2]/div/div/div/div/input    ${File_Name}

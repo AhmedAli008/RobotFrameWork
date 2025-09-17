@@ -9,6 +9,7 @@ ${main_handle}
 *** Keywords ***
 Pack By Aggregation
     [Arguments]     ${ENV}
+    Sleep    2s
     Go To Home
     Open Pack Screen
     Pack By Aggregation To Scan    ${ENV}    ${data['parent1_to_scan']}

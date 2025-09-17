@@ -5,6 +5,7 @@ Variables   ../API/Token_SSCC_Permit_Num.py
 
 *** Keywords ***
 Open Decommission
+    Sleep    2s
     Go To Home
     Open Decommission Screen
 
