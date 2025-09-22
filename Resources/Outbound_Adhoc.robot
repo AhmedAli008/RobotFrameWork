@@ -61,4 +61,5 @@ Select Adhoc Supplier
 
 Submit Ship Out
     #Wait Until Page Contains Element    ${Button_Wait}
+    Sleep    2s
     Click Button    xpath=//button[contains(text(), 'Ship Out')]
