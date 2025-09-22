@@ -13,7 +13,7 @@ ${Password}     adminP@ssw0rd
 *** Test Cases ***
 Adhoc Inbound And Outbound
     Login Page   ${ENV}   ${UserName}     ${Password}
-    Sleep    1s
+    Sleep    2s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}
     Inbound Adhoc   ${ENV}
     Outbound Adhoc  ${ENV}
