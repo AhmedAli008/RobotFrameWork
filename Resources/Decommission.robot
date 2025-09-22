@@ -24,12 +24,14 @@ Go To Home
     Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
     
 Open Decommission Screen
-    Sleep    1s
+    Sleep    2s
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[5]/div/button
 
 Click Submit Decommission
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button
-    Sleep    2s
+    Sleep    3s
+
+
     
 Confirm Decommission
     Click Element    id=reason

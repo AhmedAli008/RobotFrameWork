@@ -43,7 +43,7 @@ def get_sscc(env, username, password):
         'Content-Type' : 'application/json'
     }
     response = requests.post(url['url_to_get_sscc'], json=payload, headers=headers)
-    return response.json()['data']['serials'][0]['code']
+    return response.json()['data']['barcodes'][0]['barcode']
 
 
 def get_gtin_and_lot_from_permit_num(env, username, password):
