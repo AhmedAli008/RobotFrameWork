@@ -127,7 +127,7 @@ pipeline {
 
                 // Using mail step with correct syntax
                 mail(
-                    to: 'Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, moataz.mamdouh@originsysglobal.com',
+                    to: 'Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, moataz.mamdouh@originsysglobal.com, Ahmed.magdysaber@originsysglobal.com',
                     subject: "[Jenkins] ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                     body: """
 Robot Framework Test Execution Report
