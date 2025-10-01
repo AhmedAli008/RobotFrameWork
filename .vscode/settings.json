@@ -1,0 +1,29 @@
+{
+    "files.associations": {
+    "*.robot": "robotframework"
+},
+"editor.tokenColorCustomizations": {
+    "textMateRules": [
+        {
+            "scope": "keyword.robot",
+            "settings": {
+                "foreground": "#FF5733",   // Keywords (orange-red)
+                "fontStyle": "bold"
+            }
+        },
+        {
+            "scope": "variable.robot",
+            "settings": {
+                "foreground": "#1E90FF"   // Variables (blue)
+            }
+        },
+        {
+            "scope": "comment.robot",
+            "settings": {
+                "foreground": "#2ECC71",  // Comments (green)
+                "fontStyle": "italic"
+            }
+        }
+    ]
+}
+}

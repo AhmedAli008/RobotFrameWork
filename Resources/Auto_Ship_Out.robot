@@ -4,7 +4,7 @@ Library     SeleniumLibrary
 *** Keywords ***
 Auto Ship Out
     [Arguments]     ${Name}
-    Sleep    2s
+    Sleep    3s
     Search File    ${Name}
     Shipout File
 

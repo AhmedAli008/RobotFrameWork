@@ -16,10 +16,10 @@ def select_env(env):
         })
     return url
 
-def inbound_adhoc_scan(env,parent):
+def inbound_adhoc_scan(env,supplier,parent):
     select_env(env)
     payload = {
-        'SupplierId' : data['supplier_to_add_shipment_file'],
+        'SupplierId' : supplier,
         'itemCodes' : [
             parent
         ]
