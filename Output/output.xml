@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-09-22T12:50:48.177687" rpa="false" schemaversion="5">
+<suite id="s1" name="Adhoc Inbound and Outbound" source="D:\Ahmed_Ali\Origin_Robot\Tests\Adhoc_Inbound_and_Outbound.robot">
+<test id="s1-t1" name="Adhoc Inbound And Outbound" line="14">
+<kw name="Login Page" owner="Login_Page">
+<kw name="Open Browser to Login Page" owner="Login_Page">
+<kw name="Set Variable If" owner="BuiltIn">
+<msg time="2025-09-22T12:50:48.479061" level="INFO">${URL} = https://wes.test.originsysglobal.com/</msg>
+<var>${URL}</var>
+<arg>'${ENV}' == 'test'</arg>
+<arg>https://wes.test.originsysglobal.com/</arg>
+<arg>'${ENV}' == 'stage'</arg>
+<arg>https://atp.aws.originsysglobal.com/</arg>
+<doc>Sets variable based on the given condition.</doc>
+<status status="PASS" start="2025-09-22T12:50:48.478885" elapsed="0.000205"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:50:48.479388" level="INFO">Opening browser 'chrome' to base url 'https://wes.test.originsysglobal.com/'.</msg>
+<arg>${URL}</arg>
+<arg>${Browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-09-22T12:50:48.479224" elapsed="6.771662"/>
+</kw>
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:50:55.257019" level="INFO">Page title is 'ORIDX TT'.</msg>
+<arg>ORIDX TT</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="PASS" start="2025-09-22T12:50:55.251104" elapsed="0.006055"/>
+</kw>
+<arg>${ENV}</arg>
+<status status="PASS" start="2025-09-22T12:50:48.478385" elapsed="6.778918"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-09-22T12:50:55.257521" elapsed="0.024963"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:50:58.283623" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:50:55.282665" elapsed="3.001194"/>
+</kw>
+<kw name="Type In Username" owner="Login_Page">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:50:58.285807" level="INFO">Typing text '6251151000003_admin' into text field 'id=username'.</msg>
+<arg>id=username</arg>
+<arg>${Username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:50:58.285026" elapsed="0.233889"/>
+</kw>
+<arg>${username}</arg>
+<status status="PASS" start="2025-09-22T12:50:58.284349" elapsed="0.234720"/>
+</kw>
+<kw name="Type In Password" owner="Login_Page">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:50:58.519890" level="INFO">Typing text 'adminP@ssw0rd' into text field 'id=password'.</msg>
+<arg>id=password</arg>
+<arg>${Password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:50:58.519647" elapsed="0.175418"/>
+</kw>
+<arg>${password}</arg>
+<status status="PASS" start="2025-09-22T12:50:58.519283" elapsed="0.175875"/>
+</kw>
+<kw name="Submit credentials" owner="Login_Page">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:50:58.695602" level="INFO">Clicking button 'xpath=//button[contains(text(), 'LOGIN')]'.</msg>
+<arg>xpath=//button[contains(text(), 'LOGIN')]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:50:58.695480" elapsed="0.075271"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:50:58.695295" elapsed="0.075571"/>
+</kw>
+<kw name="Welcome Page Should be Open" owner="Login_Page">
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:50:58.774270" level="INFO">Page title is 'ORIDX TT'.</msg>
+<arg>ORIDX TT</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="PASS" start="2025-09-22T12:50:58.771190" elapsed="0.003149"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:50:58.770998" elapsed="0.003438"/>
+</kw>
+<arg>${ENV}</arg>
+<arg>${UserName}</arg>
+<arg>${Password}</arg>
+<status status="PASS" start="2025-09-22T12:50:48.477880" elapsed="10.296598"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:00.775726" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:50:58.774761" elapsed="2.001241"/>
+</kw>
+<kw name="Add Shipment File" owner="Add_Shipment_File">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Selector}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:00.777830" elapsed="0.021149"/>
+</kw>
+<kw name="Open Shipment File" owner="Add_Shipment_File">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:00.800208" level="INFO">Clicking button 'xpath=//*[@id="root"]/div[1]/main/div[2]/div[3]/div/button'.</msg>
+<arg>xpath=//*[@id="root"]/div[1]/main/div[2]/div[3]/div/button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:00.799881" elapsed="0.245124"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:00.799375" elapsed="0.245721"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Page_Load_In_Shipment}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:01.045206" elapsed="0.040225"/>
+</kw>
+<kw name="Add Shipment File Fetch File Name" owner="Add_Shipment_File_From_CT">
+<msg time="2025-09-22T12:51:08.682403" level="INFO">${Name} = ShipmentFile_6251151000003_2025-09-22T09-51-07</msg>
+<var>${Name}</var>
+<arg>${Env}</arg>
+<arg>${Username}</arg>
+<arg>${Password}</arg>
+<status status="PASS" start="2025-09-22T12:51:01.085572" elapsed="7.596918"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:11.683525" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:08.682769" elapsed="3.000976"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2025-09-22T12:51:11.684055" elapsed="0.688300"/>
+</kw>
+<return>
+<value>${Name}</value>
+<status status="PASS" start="2025-09-22T12:51:12.372511" elapsed="0.000119"/>
+</return>
+<msg time="2025-09-22T12:51:12.372886" level="INFO">${Name} = ShipmentFile_6251151000003_2025-09-22T09-51-07</msg>
+<var>${Name}</var>
+<arg>${ENV}</arg>
+<arg>${UserName}</arg>
+<arg>${Password}</arg>
+<status status="PASS" start="2025-09-22T12:51:00.776862" elapsed="11.596061"/>
+</kw>
+<kw name="Inbound Adhoc" owner="Inbound_Adhoc">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:14.374406" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:12.373941" elapsed="2.000662"/>
+</kw>
+<kw name="Go To Home" owner="Inbound_Adhoc">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:14.375636" level="INFO">Clicking element 'xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]/div[2]'.</msg>
+<arg>xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]/div[2]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:14.375385" elapsed="0.142988"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:14.374933" elapsed="0.143544"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Selector}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:14.518599" elapsed="0.018870"/>
+</kw>
+<kw name="Go To AdHoc Inbound" owner="Inbound_Adhoc">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:14.538353" level="INFO">Clicking button 'xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button'.</msg>
+<arg>xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:14.537993" elapsed="0.216231"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:17.755271" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:14.754559" elapsed="3.000987"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:17.756563" level="INFO">Clicking button 'id=full-width-tab-1'.</msg>
+<arg>id=full-width-tab-1</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:17.756010" elapsed="0.163737"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:14.537728" elapsed="3.382272"/>
+</kw>
+<kw name="Search About Supplier" owner="Inbound_Adhoc">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Table_Load}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:17.920786" elapsed="0.010529"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:17.931601" level="INFO">Clicking button 'xpath=//*[@id="full-width-tabpanel-1"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]'.</msg>
+<arg>xpath=//*[@id="full-width-tabpanel-1"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:17.931458" elapsed="0.092062"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Text_Load}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:18.023665" elapsed="0.012250"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:18.036839" level="INFO">Typing text '6294018311140' into text field 'xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input'.</msg>
+<arg>xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input</arg>
+<arg>${data['supplier_to_add_shipment_file']}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:18.036067" elapsed="0.279460"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:17.920386" elapsed="0.395242"/>
+</kw>
+<kw name="Select Supplier" owner="Inbound_Adhoc">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Action_Load}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:18.316226" elapsed="0.009729"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:19.326924" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:18.326116" elapsed="1.001016"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:19.327890" level="INFO">Clicking button 'xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]'.</msg>
+<arg>xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:19.327466" elapsed="0.088121"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Drop_List_Wait}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:19.415769" elapsed="0.008578"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:19.424720" level="INFO">Clicking element 'xpath=/html/body/div[4]/div[3]/ul/li'.</msg>
+<arg>xpath=/html/body/div[4]/div[3]/ul/li</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:19.424502" elapsed="0.128238"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:18.315860" elapsed="1.237039"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:20.553566" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:19.553088" elapsed="1.000710"/>
+</kw>
+<kw name="Inbound Adhoc Scan" owner="Inbound_Scan">
+<arg>${ENV}</arg>
+<arg>${data['parent1_to_scan']}</arg>
+<status status="PASS" start="2025-09-22T12:51:20.554141" elapsed="0.491718"/>
+</kw>
+<kw name="Inbound Adhoc Scan" owner="Inbound_Scan">
+<arg>${ENV}</arg>
+<arg>${data['parent2_to_scan']}</arg>
+<status status="PASS" start="2025-09-22T12:51:21.046237" elapsed="0.471152"/>
+</kw>
+<kw name="Inbound Adhoc Scan" owner="Inbound_Scan">
+<arg>${ENV}</arg>
+<arg>${data['parent3_to_scan']}</arg>
+<status status="PASS" start="2025-09-22T12:51:21.517643" elapsed="0.540105"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2025-09-22T12:51:22.058191" elapsed="0.635404"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:22.694400" level="INFO">Executing JavaScript:
+document.body.style.zoom='70%'
+Without any arguments.</msg>
+<arg>document.body.style.zoom='70%'</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-22T12:51:22.693858" elapsed="0.005277"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:25.700203" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:22.699290" elapsed="3.001155"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Wait_Button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:25.700825" elapsed="0.023778"/>
+</kw>
+<kw name="Submit Scan" owner="Inbound_Adhoc">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:25.726013" level="INFO">Clicking button 'xpath=//button[contains(text(), 'Submit')]'.</msg>
+<arg>xpath=//button[contains(text(), 'Submit')]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:25.725639" elapsed="0.108502"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:25.725022" elapsed="0.109249"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:28.834978" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:25.834382" elapsed="3.000892"/>
+</kw>
+<arg>${ENV}</arg>
+<status status="PASS" start="2025-09-22T12:51:12.373521" elapsed="16.462040"/>
+</kw>
+<kw name="Outbound Adhoc" owner="Outbound_Adhoc">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:30.837658" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:28.837242" elapsed="2.000666"/>
+</kw>
+<kw name="Go To Home" owner="Outbound_Adhoc">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:30.839722" level="INFO">Clicking element 'xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]'.</msg>
+<arg>xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:30.839190" elapsed="0.101166"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:30.838433" elapsed="0.102021"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:31.941128" level="INFO">Slept 1 second.</msg>
+<arg>1S</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:30.940677" elapsed="1.000672"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Selector}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:31.941712" elapsed="0.019010"/>
+</kw>
+<kw name="Go TO Outbound AdHoc" owner="Outbound_Adhoc">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:31.962416" level="INFO">Clicking button 'xpath=//*[@id="root"]/div[1]/main/div[2]/div[2]/div/button'.</msg>
+<arg>xpath=//*[@id="root"]/div[1]/main/div[2]/div[2]/div/button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:31.961881" elapsed="0.196757"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:35.159136" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:32.158802" elapsed="3.000557"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:35.160117" level="INFO">Clicking button 'id=full-width-tab-1'.</msg>
+<arg>id=full-width-tab-1</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:35.159710" elapsed="0.160247"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Table_Wait}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:35.320124" elapsed="0.018193"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:31.961204" elapsed="3.377205"/>
+</kw>
+<kw name="Search about Adhoc Supplier" owner="Outbound_Adhoc">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:35.338874" level="INFO">Clicking button 'xpath=//*[@id="full-width-tabpanel-1"]/div/div/div[1]/div[2]/div[2]/div/button[1]'.</msg>
+<arg>xpath=//*[@id="full-width-tabpanel-1"]/div/div/div[1]/div[2]/div[2]/div/button[1]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:35.338747" elapsed="0.085383"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Text_Wait}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:35.424276" elapsed="0.011959"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:35.436557" level="INFO">Typing text '6285125000027' into text field 'xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input'.</msg>
+<arg>xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input</arg>
+<arg>${outbound_adhoc_supplier}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:35.436377" elapsed="0.294649"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:35.338542" elapsed="0.392581"/>
+</kw>
+<kw name="Select Adhoc Supplier" owner="Outbound_Adhoc">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Action_Wait}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:35.731488" elapsed="0.008625"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:36.740894" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:35.740273" elapsed="1.000870"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:36.741973" level="INFO">Clicking button 'xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]'.</msg>
+<arg>xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:36.741571" elapsed="0.098236"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${Drop_Wait}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-09-22T12:51:36.839981" elapsed="0.005866"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:36.846219" level="INFO">Clicking element 'xpath=/html/body/div[4]/div[3]/ul/li'.</msg>
+<arg>xpath=/html/body/div[4]/div[3]/ul/li</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:36.846000" elapsed="0.046011"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:35.731264" elapsed="1.160840"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:38.892621" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:36.892210" elapsed="2.000517"/>
+</kw>
+<kw name="Outbound Adhoc Scan" owner="Outbound_Scan">
+<arg>${ENV}</arg>
+<arg>${data['parent1_to_scan']}</arg>
+<status status="PASS" start="2025-09-22T12:51:38.892880" elapsed="0.481751"/>
+</kw>
+<kw name="Outbound Adhoc Scan" owner="Outbound_Scan">
+<arg>${ENV}</arg>
+<arg>${data['parent2_to_scan']}</arg>
+<status status="PASS" start="2025-09-22T12:51:39.375007" elapsed="0.528558"/>
+</kw>
+<kw name="Outbound Adhoc Scan" owner="Outbound_Scan">
+<arg>${ENV}</arg>
+<arg>${data['parent3_to_scan']}</arg>
+<status status="PASS" start="2025-09-22T12:51:39.903944" elapsed="0.502479"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:42.407569" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:40.406878" elapsed="2.000932"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2025-09-22T12:51:42.408288" elapsed="0.612220"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:45.021412" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:43.020708" elapsed="2.000941"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:45.022801" level="INFO">Executing JavaScript:
+document.body.style.zoom='70%'
+Without any arguments.</msg>
+<arg>document.body.style.zoom='70%'</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2025-09-22T12:51:45.022011" elapsed="0.011222"/>
+</kw>
+<kw name="Submit Ship Out" owner="Outbound_Adhoc">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:47.034903" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:45.034282" elapsed="2.000914"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-09-22T12:51:47.036338" level="INFO">Clicking button 'xpath=//button[contains(text(), 'Ship Out')]'.</msg>
+<arg>xpath=//button[contains(text(), 'Ship Out')]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-09-22T12:51:47.035730" elapsed="0.112004"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:51:45.033662" elapsed="2.114181"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:52.148730" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:47.147953" elapsed="5.001014"/>
+</kw>
+<arg>${ENV}</arg>
+<status status="PASS" start="2025-09-22T12:51:28.836537" elapsed="23.313094"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-09-22T12:51:55.151414" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-09-22T12:51:52.150495" elapsed="3.001142"/>
+</kw>
+<status status="PASS" start="2025-09-22T12:50:48.477185" elapsed="66.675121"/>
+</test>
+<status status="PASS" start="2025-09-22T12:50:48.178886" elapsed="66.975169"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Adhoc Inbound and Outbound" id="s1" pass="1" fail="0" skip="0">Adhoc Inbound and Outbound</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
