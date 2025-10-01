@@ -19,6 +19,16 @@ Add Shipment File
     Reload Page
     RETURN  ${Name}
 
+Add Shipment File sGTIN
+    [Arguments]     ${ENV}     ${Username}     ${Password}    ${NUM}
+    Wait Until Page Contains Element   ${Selector}
+    Open Shipment File
+    Wait Until Page Contains Element    ${Page_Load_In_Shipment}
+    ${Name}    Add Shipment File Sgtin Fetch File Name   ${Env}     ${Username}     ${Password}  ${NUM}
+    Sleep    1s
+    Reload Page
+    RETURN  ${Name}
+
 
 Open Shipment File
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[3]/div/button

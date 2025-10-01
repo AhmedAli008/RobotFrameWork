@@ -4,6 +4,7 @@ Library     SeleniumLibrary
 *** Keywords ***
 Auto Ship Out
     [Arguments]     ${Name}
+    Execute JavaScript    document.body.style.zoom='70%'
     Sleep    3s
     Search File    ${Name}
     Shipout File
@@ -18,14 +19,17 @@ Search File
 Shipout File
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[2]/table/tbody/tr[1]/td[10]/button
     Sleep    2s
-    Click Element    xpath=/html/body/div[4]/div[3]/ul/li[4]
+    #Click Element    xpath=/html/body/div[4]/div[3]/ul/li[4]
+    Press Keys    None    ARROW_DOWN
+    Press Keys    None    ARROW_DOWN
+    Press Keys    None    ENTER
     Sleep    2s
     Input Text    xpath=//*[@id="partner"]    6294018311140
     Sleep    2s
     #Click Element    xpath=/html/body/div[4]/div[3]
-    #Sleep    3s
+    Sleep    3s
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
-    Click Button    xpath=/html/body/div[4]/div[3]/div/form/div[3]/div/button
+    Click Button    xpath=//button[contains(text(), 'Confirm')]
     Sleep    3s
-    Click Button    xpath=/html/body/div[4]/div[3]/div/div[1]/button
+    Click Button    xpath=/html/body/div[7]/div[3]/div/div[1]/button

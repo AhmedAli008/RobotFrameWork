@@ -25,5 +25,5 @@ Accept File
     Press Keys    None    ENTER
     Sleep    2s
     Click Button    xpath=//button[contains(text(), 'Confirm')]
-    Sleep    2s
+    Sleep    10s
     Click Button    xpath=//button[contains(text(), 'Close')]

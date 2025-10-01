@@ -13,7 +13,7 @@ def select_env(env, parent, username):
             'url_to_verify_status' : 'https://stg.identity.aws.originsysglobal.com/Site/'+username[:13]+'/Item/'+parent+'/Status?culture=en'
         })
     #return url
-#test
+
 def scan_to_verify_status(env, parent, username):
     select_env(env, parent, username)
     headers = {
