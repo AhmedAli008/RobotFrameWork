@@ -15,6 +15,9 @@ dist/
 
 # Log files
 *.log
+*/log.html
+*/output.xml
+*/report.html
 
 # Package files
 *.jar
