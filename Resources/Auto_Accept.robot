@@ -4,12 +4,13 @@ Library     SeleniumLibrary
 *** Keywords ***
 Auto Accept
     [Arguments]     ${Name}
+    Sleep    2s
+    Execute JavaScript    document.body.style.zoom='70%'
     Search File    ${Name}
     Accept File
     Reload Page
 Search File
     [Arguments]     ${File_Name}
-    Sleep    2s
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[1]/div[2]/div[2]/div/button[1]
     Sleep    1s
     Input Text    xpath=/html/body/div[1]/div[1]/main/div[5]/div[2]/table/thead/tr/th[5]/div[2]/div/div/div/div/input    ${File_Name}
@@ -17,8 +18,11 @@ Search File
 
 Accept File
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[2]/table/tbody/tr[1]/td[10]/button
-    Sleep    1s
-    Click Element    xpath=/html/body/div[4]/div[3]/ul/li[2]
+    Sleep    2s
+    #Click Element    xpath=/html/body/div[7]/div[3]/ul/li[2]
+    Press Keys    None    ARROW_DOWN
+    Sleep    1s 
+    Press Keys    None    ENTER
     Sleep    2s
     Click Button    xpath=//button[contains(text(), 'Confirm')]
     Sleep    2s

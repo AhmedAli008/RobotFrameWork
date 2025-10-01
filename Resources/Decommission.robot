@@ -5,7 +5,7 @@ Variables   ../API/Token_SSCC_Permit_Num.py
 
 *** Keywords ***
 Open Decommission
-    Sleep    2s
+    Sleep    3s
     Go To Home
     Open Decommission Screen
 
@@ -24,14 +24,12 @@ Go To Home
     Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
     
 Open Decommission Screen
-    Sleep    2s
+    Sleep    1s
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[5]/div/button
 
 Click Submit Decommission
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button
-    Sleep    3s
-
-
+    Sleep    2s
     
 Confirm Decommission
     Click Element    id=reason

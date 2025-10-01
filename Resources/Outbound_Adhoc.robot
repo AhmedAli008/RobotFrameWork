@@ -1,6 +1,7 @@
 *** Settings ***
 Library     SeleniumLibrary
 Library     ../API/Outbound_Scan.py
+Library    Collections
 Variables   ../API/Outbound_Scan.py
 Variables   ../API/Token_SSCC_Permit_Num.py
 
@@ -19,7 +20,7 @@ ${Button_Wait}  xpath=//button[contains(text(), 'Ship Out')]
 Outbound Adhoc
     #Wait Until Page Contains Element    ${Home_Page}
     [Arguments]     ${ENV}
-    Sleep    2s
+    Sleep    3s
     Go To Home
     Sleep    1S
     Wait Until Page Contains Element    ${Selector}
@@ -32,9 +33,10 @@ Outbound Adhoc
     Outbound Adhoc Scan    ${ENV}   ${data['parent3_to_scan']}
     Sleep    2s
     Reload Page
-    Sleep    2s
+    #Sleep    3s
     #Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
+    Sleep    3s
     Submit Ship Out
     Sleep    5s
 Go To Home
@@ -56,10 +58,11 @@ Select Adhoc Supplier
     Wait Until Page Contains Element   ${Action_Wait}
     Sleep    1s
     Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
-    Wait Until Page Contains Element   ${Drop_Wait}
-    Click Element    xpath=/html/body/div[4]/div[3]/ul/li
+    #Wait Until Page Contains Element   ${Drop_Wait}
+    #Click Element    xpath=/html/body/div[4]/div[3]/ul/li
+    Sleep    2s
+    Press Keys    None    ENTER
 
 Submit Ship Out
     #Wait Until Page Contains Element    ${Button_Wait}
-    Sleep    2s
     Click Button    xpath=//button[contains(text(), 'Ship Out')]
