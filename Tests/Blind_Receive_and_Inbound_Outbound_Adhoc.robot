@@ -12,6 +12,7 @@ ${Password}     adminP@ssw0rd
 ${GLN_Supplier}  6285125000027
 
 *** Test Cases ***
+#Update
 Blind Receive and Inbound Outbound Adhoc
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    1s
