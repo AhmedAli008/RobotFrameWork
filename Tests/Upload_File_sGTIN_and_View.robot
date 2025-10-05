@@ -2,8 +2,7 @@
 Library     SeleniumLibrary
 Resource    ../Resources/Login_Page.robot
 Resource    ../Resources/Add_Shipment_File.robot
-Resource    ../Resources/Auto_Accept.robot
-Resource    ../Resources/Auto_Ship_Out.robot
+Resource    ../Resources/View_Data.robot
 
 *** Variables ***
 ${ENV}
@@ -16,7 +15,6 @@ Auto Accept And Auto Ship Out sGTIN
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    1s
     ${Name}   Add Shipment File sGTIN   ${ENV}  ${UserName}   ${Password}    ${NUM}
-    Auto Accept    ${Name}
-    Auto Ship Out    ${Name}
+    View Data    ${Name}
     Sleep    3s
     #[Teardown]  Close Browser

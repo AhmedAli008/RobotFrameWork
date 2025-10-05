@@ -12,7 +12,7 @@ def get_env(env):
         'content_type' :'application/json',
         'clientid' : "21554-545gfdf12-hjhj21-213",
         'clientSecret' : "454545sgfgfg4512121a",
-        'supplier_to_add_shipment_file' : "6294018311140"
+        'supplier_to_add_shipment_file' : "6285125000027"
         })
 
     elif env == 'stage':
@@ -22,7 +22,7 @@ def get_env(env):
             'content_type': 'application/json',
             'clientid': "452102yty-5421dqaew450-75454hgdf3-1000253ee",
             'clientSecret': "ix4iQXhrwABn9IqlZyTH0FzgjzfjVSLE545423weds",
-            'supplier_to_add_shipment_file': "6294018311140"
+            'supplier_to_add_shipment_file': "6285125000027"
         })
 
 

@@ -26,8 +26,8 @@ def get_payload_to_add_file_sgtin(env, username, password, num):
     for index in range(num):  # For 100 items, change to range(100)
         json_items.append({
             "barcode": barcode_list[index],
-            "GTIN": data['permit_number'][0]['itemTagId'][:14],
-            "batch_number": data['permit_number'][0]['itemTagId'][15:],
+            "GTIN": data['GTIN'],#data['permit_number'][0]['itemTagId'][:14],
+            "batch_number": data['Lot'],#data['permit_number'][0]['itemTagId'][15:],
             "expiry": "2026-03-13",
             "manufacturing_date": "2025-03-17"
         })

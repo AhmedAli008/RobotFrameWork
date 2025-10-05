@@ -33,29 +33,27 @@ def get_payload_to_add_file(env, username, password):
         json_items.append({
             "barcode": barcode_list[index],
             "parent1": parent1_1[2:],
-            "GTIN": data['permit_number'][0]['itemTagId'][:14],
-            "batch_number": data['permit_number'][0]['itemTagId'][15:],
+            "GTIN": data['GTIN'],#data['permit_number'][0]['itemTagId'][:14],
+            "batch_number": data['Lot'],#data['permit_number'][0]['itemTagId'][15:],
             "expiry": "2026-03-13",
             "manufacturing_date": "2025-03-17"
         })
-        #data['child'+str(index)+'tos_can']= '01'+str(json_items['GTIN'])+'21'+json_items['barcode']+'17'+json_items["expiry"]+'10'json_items["batch_number"]
 
     for index in range(2, 4):  # For the next 100 items, change to range(100, 200)
         json_items.append({
             "barcode": barcode_list[index],
             "parent1": parent1_2[2:],
-            "GTIN": data['permit_number'][0]['itemTagId'][:14],
-            "batch_number": data['permit_number'][0]['itemTagId'][15:],
+            "GTIN": data['GTIN'],#data['permit_number'][0]['itemTagId'][:14],
+            "batch_number": data['Lot'],#data['permit_number'][0]['itemTagId'][15:],
             "expiry": "2026-03-13",
             "manufacturing_date": "2025-03-17"
         })
-        #data['child'+str(index)+'tos_can']= f'01{json_items['GTIN']}21{json_items['barcode']}17{json_items["expiry"]}10{json_items["batch_number"]}'
     for index in range(4, 6):  # For the next 100 items, change to range(100, 200)
         json_items.append({
             "barcode": barcode_list[index],
             "parent1": parent1_3[2:],
-            "GTIN": data['permit_number'][0]['itemTagId'][:14],
-            "batch_number": data['permit_number'][0]['itemTagId'][15:],
+            "GTIN": data['GTIN'],#data['permit_number'][0]['itemTagId'][:14],
+            "batch_number": data['Lot'],#data['permit_number'][0]['itemTagId'][15:],
             "expiry": "2026-03-13",
             "manufacturing_date": "2025-03-17"
         })
