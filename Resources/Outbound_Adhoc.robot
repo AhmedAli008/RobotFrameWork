@@ -61,7 +61,9 @@ Outbound Adhoc SGTIN
 
 
 Go TO Outbound AdHoc
+    Sleep    2s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=outbound-orders
     #Wait Until Page Contains Element   ${Tag_Wait}
     Sleep    3s

@@ -4,7 +4,8 @@ Library     ../API/Add_Shipment_File_From_CT.py
 Resource    Permit_Number.robot
 
 *** Variables ***
-${Selector}     xpath=//*[@id="root"]/div[1]/main/div[2]/div[3]/div/button
+${Selector}     id=logistic-operation
+${Selector2}     id=files
 ${Wait_Time}    10s
 ${Page_Load_In_Shipment}    xpath=//*[@id="root"]/div[1]/main/div[5]/div[2]
 
@@ -14,8 +15,9 @@ Add Shipment File
     ${SSCC_Num}    Convert To Integer    ${SSCC_Num}
     ${SGTIN_Num}    Convert To Integer    ${SGTIN_Num}
     Permit Number    ${Username}
-    Sleep    2s
-    Wait Until Page Contains Element   ${Selector}
+    Sleep    3s
+    #Wait Until Page Contains Element   ${Selector}
+    #Wait Until Page Contains Element   ${Selector}
     Open Shipment File
     Wait Until Page Contains Element    ${Page_Load_In_Shipment}
     ${Name}    Add Shipment File Fetch File Name   ${Env}     ${Username}     ${Password}    ${SSCC_Num}    ${SGTIN_Num}
@@ -40,6 +42,6 @@ Add Shipment File sGTIN
 
 
 Open Shipment File
-    Click Element    id=logistic-operation
+    Click Element    id=logistic-operations
     Click Element    id=files
 

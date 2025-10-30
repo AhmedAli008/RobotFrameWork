@@ -38,8 +38,9 @@ Unpack By Child sGTIN
 
 
 Open UnPack Screen
-    Sleep    1s
+    Sleep    2s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=unpack
 
 Select Unpack By Child

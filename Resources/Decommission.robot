@@ -22,6 +22,7 @@ Submit Decommission
 Open Decommission Screen
     Sleep    1s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=decommision
 
 Click Submit Decommission

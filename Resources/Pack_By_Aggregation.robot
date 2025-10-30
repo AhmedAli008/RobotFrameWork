@@ -42,8 +42,9 @@ Pack By Aggregation sGTIN
 
 
 Open Pack Screen
-    Sleep    1s
+    Sleep    2s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=pack
     
 Submit Aggregation

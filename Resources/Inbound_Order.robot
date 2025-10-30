@@ -16,8 +16,9 @@ Create Inbound Order
 
 
 Open Inbound
-    Wait Until Page Contains Element    ${Selector}
+    Sleep    2s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=inbound
     
 

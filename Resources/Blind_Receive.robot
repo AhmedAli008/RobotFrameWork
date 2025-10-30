@@ -49,7 +49,9 @@ Submit Blind Receive
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button[2]
 
 Open Blind Receive
+    Sleep    2s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=inbound
     Sleep    2s
     Click Button    id=full-width-tab-4

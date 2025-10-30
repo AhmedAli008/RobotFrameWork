@@ -54,7 +54,7 @@ Add Permit Number
     #Select GTIN
     &{GTIN}    Check GTIN based UserName    ${UserName}
     #Add Permit Name
-    Input Text    xpath=//input[@id="permitNumber"]   ${Permit Name}
+    Input Text    xpath=//*[@id="permitNumber"]   ${Permit Name}
     #Select Product 
     Click Element    xpath=//*[@id="permitNumberLines[0].product"]/div[1]/div/div[1]/input
     Sleep    2s

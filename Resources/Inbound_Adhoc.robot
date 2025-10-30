@@ -52,7 +52,9 @@ Inbound Adhoc sGTIN
     Sleep    3s
 
 Go To AdHoc Inbound
+    Sleep    2s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=inbound
     Execute JavaScript    document.body.style.zoom='70%'
     #Wait Until Page Contains Element   ${Page_Load}

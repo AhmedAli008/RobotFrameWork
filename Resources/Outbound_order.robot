@@ -15,7 +15,9 @@ Create Outbound Order
 
 
 Open Outbound
+    Sleep    2s
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=outbound-orders
 New Order
     Click Button    xpath=//button[contains(text(), 'New Order')]    
