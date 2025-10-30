@@ -10,7 +10,6 @@ ${main_handle}
 Pack By Aggregation
     [Arguments]     ${ENV}
     Sleep    3s
-    Go To Home
     Open Pack Screen
     FOR    ${key}    ${value}    IN    &{data_SSCC}
         Pack By Aggregation To Scan   ${ENV}    ${value}
@@ -26,7 +25,6 @@ Pack By Aggregation
 Pack By Aggregation sGTIN
     [Arguments]     ${ENV}
     Sleep    2s
-    Go To Home
     Open Pack Screen
     Sleep    2s
     FOR    ${key}    ${value}    IN    &{data_SGTIN}
@@ -41,12 +39,12 @@ Pack By Aggregation sGTIN
     RETURN   ${Aggregation SSCC}
 
 
-Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
+
 
 Open Pack Screen
     Sleep    1s
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[6]/div/button
+    Click Element    id=logistic-operations
+    Click Element    id=pack
     
 Submit Aggregation
     Click Button    xpath=//button[contains(text(), 'Submit')]

@@ -9,6 +9,8 @@ Agent Commissioning
     Search File    ${Name}
     Accept File With Agent Commissioning
     Reload Page
+
+
 Search File
     [Arguments]     ${File_Name}
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[1]/div[2]/div[2]/div/button[1]
@@ -26,7 +28,7 @@ Accept File With Agent Commissioning
     Sleep    1s 
     Press Keys    None    ENTER
     Sleep    2s
-    Input Text    xpath=//input[@id="permitNumber"]    shp/MP/48913/2020
+    Input Text    id=permitNumber    shp/MP/48913/2020
     Sleep    1s
     Press Keys    None    ARROW_DOWN
     Sleep    1s 

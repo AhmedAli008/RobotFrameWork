@@ -15,8 +15,6 @@ Add Shipment File
     ${SGTIN_Num}    Convert To Integer    ${SGTIN_Num}
     Permit Number    ${Username}
     Sleep    2s
-    Go To Home
-    Sleep    2s
     Wait Until Page Contains Element   ${Selector}
     Open Shipment File
     Wait Until Page Contains Element    ${Page_Load_In_Shipment}
@@ -30,8 +28,6 @@ Add Shipment File sGTIN
     [Arguments]     ${ENV}     ${Username}     ${Password}    ${NUM}
     Permit Number    ${Username}
     Sleep    2s
-    Go To Home
-    Sleep    2s
     Wait Until Page Contains Element   ${Selector}
     Open Shipment File
     Wait Until Page Contains Element    ${Page_Load_In_Shipment}
@@ -42,9 +38,8 @@ Add Shipment File sGTIN
     RETURN  ${Name}
 
 
-Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
 
 Open Shipment File
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[3]/div/button
+    Click Element    id=logistic-operation
+    Click Element    id=files
 

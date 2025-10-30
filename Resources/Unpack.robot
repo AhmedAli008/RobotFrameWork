@@ -7,7 +7,6 @@ Variables   ../API/Token_SSCC_Permit_Num.py
 Unpack By Parent
     [Arguments]     ${ENV}  ${Username}  ${Parent}
     Sleep    3s
-    Go To Home
     Open UnPack Screen
     Unpack By Parent To Scan    ${ENV}    ${Username}    ${Parent}
     Sleep    3s
@@ -17,7 +16,6 @@ Unpack By Parent
 Unpack By Child
     [Arguments]     ${ENV}  ${Username}
     Sleep    3s
-    Go To Home
     Open UnPack Screen
     Sleep    2s
     Select Unpack By Child
@@ -29,7 +27,6 @@ Unpack By Child
 Unpack By Child sGTIN
     [Arguments]     ${ENV}  ${Username}
     Sleep    3s
-    Go To Home
     Open UnPack Screen
     Sleep    2s
     Select Unpack By Child
@@ -38,12 +35,12 @@ Unpack By Child sGTIN
     Execute JavaScript    document.body.style.zoom='70%'
     Submit Unpack By Child    
 
-Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
+
 
 Open UnPack Screen
     Sleep    1s
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[7]/div/button
+    Click Element    id=logistic-operations
+    Click Element    id=unpack
 
 Select Unpack By Child
     Click Button    id=full-width-tab-1

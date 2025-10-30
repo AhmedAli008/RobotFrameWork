@@ -10,19 +10,15 @@ ${Selector}     xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button
 *** Keywords ***
 Create Inbound Order
     [Arguments]     ${ENV}  ${Supplier}    ${Doc.No}    ${Qty Num}
-    Go To Home
     Open Inbound
     New Order
     Insert All Req Data    ${Supplier}    ${Doc.No}    ${Qty Num}
 
 
-Go To Home
-    Sleep    2s
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
-
 Open Inbound
     Wait Until Page Contains Element    ${Selector}
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button
+    Click Element    id=logistic-operations
+    Click Element    id=inbound
     
 
 New Order

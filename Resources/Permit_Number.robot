@@ -15,7 +15,7 @@ Permit Number
     Veirfy Permit Number    ${UserName}
 
 Open Permit Number
-    Click Element    xpath=//*[@id="permit-number"]
+    Click Element    id=permit-number
 
 Search about Permit
     Sleep    1s

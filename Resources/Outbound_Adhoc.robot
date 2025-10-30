@@ -21,8 +21,6 @@ Outbound Adhoc
     #Wait Until Page Contains Element    ${Home_Page}
     [Arguments]     ${ENV}
     Sleep    3s
-    Go To Home
-    Sleep    1S
     Wait Until Page Contains Element    ${Selector}
     Go TO Outbound AdHoc
     Search about Adhoc Supplier
@@ -44,8 +42,6 @@ Outbound Adhoc SGTIN
     #Wait Until Page Contains Element    ${Home_Page}
     [Arguments]     ${ENV}
     Sleep    3s
-    Go To Home
-    Sleep    1S
     Wait Until Page Contains Element    ${Selector}
     Go TO Outbound AdHoc
     Search about Adhoc Supplier
@@ -62,11 +58,11 @@ Outbound Adhoc SGTIN
     Sleep    3s
     Submit Ship Out
     Sleep    5s
-Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
+
 
 Go TO Outbound AdHoc
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[2]/div/button
+    Click Element    id=logistic-operations
+    Click Element    id=outbound-orders
     #Wait Until Page Contains Element   ${Tag_Wait}
     Sleep    3s
     Click Button    id=full-width-tab-1

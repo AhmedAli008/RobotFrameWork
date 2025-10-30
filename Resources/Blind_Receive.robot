@@ -33,12 +33,6 @@ Blind Receive
     #Open Shipment File
 
 
-Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
-
-Open Shipment File
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[3]/div/button
-
 Scan Parent
     [Arguments]     ${ENV}  ${Supplier}   ${Parent}
     Scan Parent Blind Receive    ${ENV}    ${Supplier}    ${Parent}
@@ -55,7 +49,8 @@ Submit Blind Receive
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button[2]
 
 Open Blind Receive
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button
+    Click Element    id=logistic-operations
+    Click Element    id=inbound
     Sleep    2s
     Click Button    id=full-width-tab-4
 

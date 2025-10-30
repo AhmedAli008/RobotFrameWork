@@ -26,7 +26,7 @@ Dispance SGTIN
     Sleep    2s
     Submit POS
 Open POS
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[4]
+    Click Element    id=point-of-sale
 
 Scan SSCC
     [Arguments]    ${ENV} 

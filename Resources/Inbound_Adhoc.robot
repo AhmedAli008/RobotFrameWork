@@ -18,7 +18,6 @@ ${Wait_Button}      xpath=//button[contains(text(), 'Submit')]
 Inbound Adhoc
     [Arguments]     ${ENV}  ${Supplier}
     Sleep    3s
-    Go To Home
     Wait Until Page Contains Element    ${Selector}
     Go To AdHoc Inbound
     Search About Supplier    ${Supplier}
@@ -37,7 +36,6 @@ Inbound Adhoc
 Inbound Adhoc sGTIN
     [Arguments]     ${ENV}  ${Supplier}
     Sleep    3s
-    Go To Home
     Wait Until Page Contains Element    ${Selector}
     Go To AdHoc Inbound
     Search About Supplier    ${Supplier}
@@ -54,7 +52,8 @@ Inbound Adhoc sGTIN
     Sleep    3s
 
 Go To AdHoc Inbound
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button
+    Click Element    id=logistic-operations
+    Click Element    id=inbound
     Execute JavaScript    document.body.style.zoom='70%'
     #Wait Until Page Contains Element   ${Page_Load}
     Sleep    3s
@@ -81,6 +80,5 @@ Select Supplier
 Submit Scan
     Click Button    xpath=//button[contains(text(), 'Submit')]
 
-Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
+
 

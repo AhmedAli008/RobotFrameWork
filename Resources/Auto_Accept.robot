@@ -9,6 +9,7 @@ Auto Accept
     Search File    ${Name}
     Accept File
     Reload Page
+    
 Search File
     [Arguments]     ${File_Name}
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[1]/div[2]/div[2]/div/button[1]

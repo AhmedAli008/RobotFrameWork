@@ -9,16 +9,14 @@ Variables   ../API/Token_SSCC_Permit_Num.py
 Create Outbound Order
     [Arguments]    ${Doc.No}    ${Qty Num}
     Sleep    2s
-    Go To Home
     Open Outbound
     New Order
     Insert All Req Data    ${Doc.No}    ${Qty Num}
 
-Go To Home
-    Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]
 
 Open Outbound
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[2]/div/button
+    Click Element    id=logistic-operations
+    Click Element    id=outbound-orders
 New Order
     Click Button    xpath=//button[contains(text(), 'New Order')]    
 
