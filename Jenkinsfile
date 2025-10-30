@@ -16,7 +16,13 @@ pipeline {
                 'Decommission',
                 'Pack_And_Decommisson',
                 'Pack_Unpack_Child',
-                'Pack_Unpack_Parent'
+                'Pack_Unpack_Parent',
+                'Inbound_Outbound_Order',
+                'Blind_Receive_and_Inbound_Outbound_Adhoc',
+                'Agent_Commissioning_Ship_Out',
+                'POS_SGTIN',
+                'POS_SSCC',
+                'Upload_File_sGTIN_and_View'
             ],
             description: 'Select test suite to execute'
         )
@@ -117,7 +123,7 @@ pipeline {
         }
     }
 
-     post {
+    post {
         always {
             echo 'Archiving results...'
             archiveArtifacts artifacts: 'Output/**/*', allowEmptyArchive: true
@@ -130,22 +136,22 @@ pipeline {
                     to: 'Ahmed.Ali@originsysglobal.com, Aliaa.samy@originsysglobal.com, moataz.mamdouh@originsysglobal.com, Ahmed.magdysaber@originsysglobal.com',
                     subject: "[Jenkins] ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                     body: """
-Robot Framework Test Execution Report
+                    Robot Framework Test Execution Report
 
-Build Status: ${buildStatus}
-Job: ${env.JOB_NAME}
-Build Number: ${env.BUILD_NUMBER}
-Environment: ${params.ENVIRONMENT}
-Test Suite: ${params.TEST_SUITE}
-Headless Mode: ${params.HEADLESS_MODE}
-Build Duration: ${currentBuild.durationString}
+                    Build Status: ${buildStatus}
+                    Job: ${env.JOB_NAME}
+                    Build Number: ${env.BUILD_NUMBER}
+                    Environment: ${params.ENVIRONMENT}
+                    Test Suite: ${params.TEST_SUITE}
+                    Headless Mode: ${params.HEADLESS_MODE}
+                    Build Duration: ${currentBuild.durationString}
 
-Build URL: ${env.BUILD_URL}
-Console Output: ${env.BUILD_URL}console
-Test Report: ${env.BUILD_URL}artifact/Output/report.html
-Test Log: ${env.BUILD_URL}artifact/Output/log.html
+                    Build URL: ${env.BUILD_URL}
+                    Console Output: ${env.BUILD_URL}console
+                    Test Report: ${env.BUILD_URL}artifact/Output/report.html
+                    Test Log: ${env.BUILD_URL}artifact/Output/log.html
 
-This is an automated message from Jenkins.
+                    This is an automated message from Jenkins.
                     """
                 )
             }

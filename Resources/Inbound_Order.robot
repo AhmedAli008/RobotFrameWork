@@ -8,14 +8,12 @@ Variables   ../API/Token_SSCC_Permit_Num.py
 ${Selector}     xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button
 
 *** Keywords ***
-Inbound Order
-    [Arguments]     ${ENV}  ${Supplier}    ${UserName}
+Create Inbound Order
+    [Arguments]     ${ENV}  ${Supplier}    ${Doc.No}    ${Qty Num}
     Go To Home
     Open Inbound
     New Order
-    ${Doc.No}    Random String
-    Insert All Req Data    ${Supplier}    ${Doc.No}
-    Scan Inbound Order     ${Doc.No}    ${ENV}    ${UserName}
+    Insert All Req Data    ${Supplier}    ${Doc.No}    ${Qty Num}
 
 
 Go To Home
@@ -32,7 +30,7 @@ New Order
     Click Button    xpath=//button[contains(text(), 'New Order')]
 
 Insert All Req Data
-    [Arguments]    ${Supplier}    ${Doc.No}
+    [Arguments]    ${Supplier}    ${Doc.No}    ${Qty Num}
     #Doc.Type
     Sleep    1s
     Click Element    xpath=//*[@id="documentType"]
@@ -50,10 +48,11 @@ Insert All Req Data
     Press Keys    None    ENTER
     #Product
     Click Element    xpath=//*[@id="lines[0].product"]/div[1]/div/div[1]/input
+    Sleep    2s
     Input Text   xpath=/html/body/div[6]/div/div/div[2]/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input   ${data['GTIN']}
     Sleep    3s
     Click Element    xpath=/html/body/div[6]/div/div/div[2]/div/div[6]/div/div/div[1]/div/table/tbody/tr[1]
-    Input Text    xpath=//*[@id="lines[0].quantity"]    6
+    Input Text    xpath=//*[@id="lines[0].quantity"]    ${Qty Num}
     Input Text    xpath=//*[@id="lines[0].lot"]    ${data['Lot']}
     #Confirm
     Click Button    xpath=//button[contains(text(), 'Confirm')]
@@ -68,19 +67,53 @@ Scan Inbound Order
     Sleep    2s
     Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
     Sleep    2s
-    Click Element    xpath=//li[@class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-r2hyib"]
+    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
     #Scan Items
-    Inbound Order Scan    ${ENV}        ${UserName}    ${data['parent1_to_scan']}    ${Doc.No}
-    Inbound Order Scan    ${ENV}        ${UserName}    ${data['parent2_to_scan']}    ${Doc.No}
-    Inbound Order Scan    ${ENV}        ${UserName}    ${data['parent3_to_scan']}    ${Doc.No}
+    Scan Items    ${Doc.No}    ${ENV}    ${UserName}
+    
+    
+Scan Items
+    [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        ${Msg}    Inbound Order Scan    ${ENV}    ${UserName}    ${value}    ${Doc.No}
+        TRY
+            Should Be Equal As Strings    ${Msg}    Quantity exceeded the limit
+            Execute JavaScript    alert("${Msg}")
+            Sleep    5s
+            Handle Alert     timeout=3s
+            ${Qty Num}    Get Length    ${data_SGTIN}
+            Edit Order    ${Doc.No}    ${Qty Num}
+            Scan Inbound Order    ${Doc.No}    ${ENV}    ${UserName}
+        EXCEPT
+            Continue For Loop
+        END
+    END 
     Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
     #Submit Accepted
-    Sleep    5s
+    Sleep    2s
     Click Button    xpath=//button[contains(text(), 'Submit')]
-    Sleep    5s
     
-    
+Edit Order
+    [Arguments]    ${Doc.No}     ${Qty Num}
+    Go Back
+    #Search about Doc.No
+    Sleep    2s
+    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
+    Sleep    2s
+    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    #Click Edit from Actions
+    Sleep    2s
+    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Sleep    2s
+    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[3]
+    Sleep    2s
+    #Edit Qty
+    Input Text    xpath=//*[@id="lines[0].quantity"]    ${Qty Num}
+    Sleep    2s
+    #Confirm Edit
+    Click Button    xpath=//button[contains(text(),'Confirm')]
+
 Random String
     ${str}  Generate Random String    8
-    Return From Keyword    ${str}
+    RETURN    ${str}

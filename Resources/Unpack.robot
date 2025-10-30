@@ -21,11 +21,22 @@ Unpack By Child
     Open UnPack Screen
     Sleep    2s
     Select Unpack By Child
-    Unpack By Child To Scan    ${ENV}    ${Username}    ${data['parent1_to_scan']}
+    Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SSCC['SSCC1']}
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
     Submit Unpack By Child
-    
+
+Unpack By Child sGTIN
+    [Arguments]     ${ENV}  ${Username}
+    Sleep    3s
+    Go To Home
+    Open UnPack Screen
+    Sleep    2s
+    Select Unpack By Child
+    Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SGTIN['SGTIN1']}
+    Sleep    3s
+    Execute JavaScript    document.body.style.zoom='70%'
+    Submit Unpack By Child    
 
 Go To Home
     Click Element    xpath=//*[@id="root"]/div[1]/div/div/ul/div[1]

@@ -24,15 +24,35 @@ Inbound Adhoc
     Search About Supplier    ${Supplier}
     Select Supplier
     Sleep    1s
-    Inbound Adhoc Scan      ${ENV}  ${Supplier}  ${data['parent1_to_scan']}    
-    Inbound Adhoc Scan      ${ENV}  ${Supplier}  ${data['parent2_to_scan']}    
-    Inbound Adhoc Scan      ${ENV}  ${Supplier}  ${data['parent3_to_scan']}    
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Inbound Adhoc Scan    ${ENV}    ${Supplier}    ${value}
+    END    
     Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
     Sleep    3s
     Wait Until Page Contains Element   ${Wait_Button}
     Submit Scan
     Sleep    3s
+
+Inbound Adhoc sGTIN
+    [Arguments]     ${ENV}  ${Supplier}
+    Sleep    3s
+    Go To Home
+    Wait Until Page Contains Element    ${Selector}
+    Go To AdHoc Inbound
+    Search About Supplier    ${Supplier}
+    Select Supplier
+    Sleep    1s
+    FOR    ${key}    ${value}    IN    &{data_SGTIN}
+        Inbound Adhoc Scan    ${ENV}    ${Supplier}    ${value}
+    END    
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    Sleep    10s
+    Wait Until Page Contains Element   ${Wait_Button}
+    Submit Scan
+    Sleep    3s
+
 Go To AdHoc Inbound
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button
     Execute JavaScript    document.body.style.zoom='70%'
@@ -43,6 +63,7 @@ Go To AdHoc Inbound
 Search About Supplier
     [Arguments]    ${Supplier}
     Wait Until Page Contains Element    ${Table_Load}
+    Sleep    2s
     Click Button    xpath=//*[@id="full-width-tabpanel-1"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
     Wait Until Page Contains Element   ${Text_Load}
     Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input   ${Supplier}

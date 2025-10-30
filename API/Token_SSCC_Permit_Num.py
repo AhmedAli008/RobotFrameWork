@@ -1,6 +1,7 @@
 import requests
 
 data = {}
+data_SSCC = {}
 data_SGTIN = {}
 url= {}
 def select_env(env):

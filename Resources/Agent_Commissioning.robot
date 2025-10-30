@@ -2,14 +2,13 @@
 Library     SeleniumLibrary
 
 *** Keywords ***
-View Data
+Agent Commissioning
     [Arguments]     ${Name}
     Sleep    2s
     Execute JavaScript    document.body.style.zoom='70%'
     Search File    ${Name}
-    View
-    Sleep    5s
-    Close View
+    Accept File With Agent Commissioning
+    Reload Page
 Search File
     [Arguments]     ${File_Name}
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[1]/div[2]/div[2]/div/button[1]
@@ -17,15 +16,20 @@ Search File
     Input Text    xpath=/html/body/div[1]/div[1]/main/div[5]/div[2]/table/thead/tr/th[5]/div[2]/div/div/div/div/input    ${File_Name}
     Sleep    1s
 
-View 
+Accept File With Agent Commissioning
     Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[2]/table/tbody/tr[1]/td[10]/button
     Sleep    2s
     #Click Element    xpath=/html/body/div[7]/div[3]/ul/li[2]
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ARROW_DOWN
+    Press Keys    None    ARROW_DOWN
     Sleep    1s 
     Press Keys    None    ENTER
-
-Close View
-    #Click Button     xpath=/html/body/div[7]/div[3]/div/div[1]/button
-    Press Keys    None    ESC
+    Sleep    2s
+    Input Text    xpath=//input[@id="permitNumber"]    shp/MP/48913/2020
+    Sleep    1s
+    Press Keys    None    ARROW_DOWN
+    Sleep    1s 
+    Press Keys    None    ENTER
+    Sleep    2s
+    Click Button    xpath=//button[contains(text(), 'Confirm')]

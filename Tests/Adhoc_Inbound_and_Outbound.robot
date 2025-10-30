@@ -9,12 +9,14 @@ Resource    ../Resources/Outbound_Adhoc.robot
 ${ENV}
 ${UserName}     6251151000003_admin
 ${Password}     adminP@ssw0rd
+${SSCC_Num}     2
+${SGTIN_Num}    3
 
 *** Test Cases ***
 Adhoc Inbound And Outbound
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    1s
-    ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}
+    ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     Inbound Adhoc   ${ENV}      ${data['supplier_to_add_shipment_file']}
     Outbound Adhoc  ${ENV}
     Sleep    3s

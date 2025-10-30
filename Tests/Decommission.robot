@@ -9,17 +9,19 @@ Resource    ../Resources/Decommission.robot
 ${ENV}
 ${UserName}     6251151000003_admin
 ${Password}     adminP@ssw0rd
+${SSCC_Num}     2
+${SGTIN_Num}    3
 
 *** Test Cases ***
 Decommissin
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    1s
-    ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}
+    ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     Auto Accept    ${Name}
     Open Decommission
-    Scan To Decommission    ${ENV}    ${UserName}    ${data['parent1_to_scan']}
-    Scan To Decommission    ${ENV}    ${UserName}    ${data['parent2_to_scan']}
-    Scan To Decommission    ${ENV}    ${UserName}    ${data['parent3_to_scan']}
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Scan To Decommission    ${ENV}    ${UserName}    ${value}
+    END 
     Submit Decommission
     Sleep    3s
     #[Teardown]  Close Browser

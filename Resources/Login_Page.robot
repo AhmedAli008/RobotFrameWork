@@ -36,6 +36,7 @@ Type In Password
     Input Text    id=password    ${Password}
 
 Submit credentials
+    Sleep    5s
     Click Button    xpath=//button[contains(text(), 'LOGIN')]
 
 Welcome Page Should be Open

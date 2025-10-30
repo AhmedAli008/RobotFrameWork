@@ -38,7 +38,7 @@ def inbound_adhoc_scan(env,supplier,parent):
         'Content-Type' : url['content_type'],
         'Authorization' : data['token from login']
     }
-    response = requests.post(url['url_inbound_adhoc'], json=payload, headers=headers)
+    response = requests.post(url['url_inbound_adhoc'], json=payload, headers=headers, timeout=30)
     return response.json()['message']
 
 def inbound_order_scan(env,username,parent,doc_num):

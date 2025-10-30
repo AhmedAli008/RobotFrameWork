@@ -1,7 +1,7 @@
 *** Settings ***
 Library     SeleniumLibrary
 Library     ../API/Outbound_Scan.py
-Library    Collections
+Library     Collections
 Variables   ../API/Outbound_Scan.py
 Variables   ../API/Token_SSCC_Permit_Num.py
 
@@ -28,9 +28,32 @@ Outbound Adhoc
     Search about Adhoc Supplier
     Select Adhoc Supplier
     Sleep    2s
-    Outbound Adhoc Scan    ${ENV}   ${data['parent1_to_scan']}
-    Outbound Adhoc Scan    ${ENV}   ${data['parent2_to_scan']}
-    Outbound Adhoc Scan    ${ENV}   ${data['parent3_to_scan']}
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Outbound Adhoc Scan    ${ENV}    ${value}
+    END 
+    Sleep    2s
+    Reload Page
+    #Sleep    3s
+    #Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    Sleep    3s
+    Submit Ship Out
+    Sleep    5s
+
+Outbound Adhoc SGTIN
+    #Wait Until Page Contains Element    ${Home_Page}
+    [Arguments]     ${ENV}
+    Sleep    3s
+    Go To Home
+    Sleep    1S
+    Wait Until Page Contains Element    ${Selector}
+    Go TO Outbound AdHoc
+    Search about Adhoc Supplier
+    Select Adhoc Supplier
+    Sleep    2s
+    FOR    ${key}    ${value}    IN    &{data_SGTIN}
+        Outbound Adhoc Scan    ${ENV}    ${value}
+    END 
     Sleep    2s
     Reload Page
     #Sleep    3s
@@ -52,7 +75,7 @@ Go TO Outbound AdHoc
 Search about Adhoc Supplier
     Click Button    xpath=//*[@id="full-width-tabpanel-1"]/div/div/div[1]/div[2]/div[2]/div/button[1]
     Wait Until Page Contains Element   ${Text_Wait}
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${outbound_adhoc_supplier}
+    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${outbound_supplier}
 
 Select Adhoc Supplier
     Wait Until Page Contains Element   ${Action_Wait}

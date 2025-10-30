@@ -11,7 +11,8 @@ Resource    Resources/Pack_By_Aggregation.robot
 Resource    Resources/Pack_By_Add_And_Remove.robot
 Resource    Resources/Unpack.robot
 Resource    Resources/Decommission.robot
-Resource    Resources/Blind_Receive_and_Accept.robot
+#Resource    Resources/Blind_Receive_and_Accept.robot
+Resource    Resources/Permit_Number.robot
 
 *** Variables ***
 ${ENV}
@@ -21,6 +22,7 @@ ${GLN_Supplier}     6285125000027
 
 *** Test Cases ***
 Add File And Receive And Ship Out
+    Sleep    5s
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    1s
     #${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}
@@ -39,9 +41,10 @@ Add File And Receive And Ship Out
     #Open Decommission
     #Scan To Decommission    ${ENV}    ${UserName}    ${SSCC}
     #Submit Decommission
-    Get Payload To Add File    ${ENV}    ${UserName}    ${Password}
-    Blind Receive   ${ENV}   ${GLN_Supplier}
-    Sleep    3s
-    Auto Accept    BlindReceive
+    #Get Payload To Add File    ${ENV}    ${UserName}    ${Password}
+    #Blind Receive   ${ENV}   ${GLN_Supplier}
+    #Sleep    3s
+    #Auto Accept    BlindReceive
+    Permit Number    ${UserName}
     Sleep    10s
     [Teardown]  Close Browser

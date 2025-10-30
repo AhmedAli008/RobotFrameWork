@@ -9,38 +9,25 @@ Variables  ../API/Token_SSCC_Permit_Num.py
 
 *** Keywords ***
 Blind Receive
-    [Arguments]   ${ENV}   ${Supplier}
+    [Arguments]   ${ENV}   ${Supplier}    ${SGTIN Num}
     Open Blind Receive
     Select Supplier  ${Supplier}
     Action To Scan
     Execute JavaScript    document.body.style.zoom='70%'
-    Aggregate Button
-    Execute JavaScript    document.body.style.zoom='70%'
-    Scan Parent    ${ENV}    ${Supplier}    ${data['parent1_to_scan']}
-    Reload Page
-    Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN1']}
-    Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN2']}
-    Reload Page
-    Submit Aggregation
-    Sleep    3s
-    Aggregate Button
-    Execute JavaScript    document.body.style.zoom='70%'
-    Scan Parent    ${ENV}    ${Supplier}    ${data['parent2_to_scan']}
-    Reload Page
-    Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN3']}
-    Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN4']}
-    Reload Page
-    Submit Aggregation
-    Sleep    3s
-    Aggregate Button
-    Execute JavaScript    document.body.style.zoom='70%'
-    Scan Parent    ${ENV}    ${Supplier}    ${data['parent3_to_scan']}
-    Reload Page
-    Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN5']}
-    Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN6']}
-    Reload Page
-    Submit Aggregation
-    Sleep    5s
+    ${SGTIN Serials}     Set Variable   1
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Aggregate Button
+        Execute JavaScript    document.body.style.zoom='70%'
+        Scan Parent    ${ENV}    ${Supplier}    ${value}
+        Reload Page
+        FOR    ${Index}    IN RANGE    ${SGTIN Num}
+            Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN'+ str(${SGTIN Serials})]}
+            ${SGTIN Serials}    Evaluate    ${SGTIN Serials}+1
+        END 
+        Reload Page
+        Submit Aggregation
+        Sleep    3s
+    END
     Submit Blind Receive
     #Go To Home
     #Open Shipment File

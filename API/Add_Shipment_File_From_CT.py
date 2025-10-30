@@ -40,9 +40,9 @@ def get_token_from_ct(env):
     token = "Bearer "+response.json()['data']['token']
     return token
 
-def add_shipment_file_fetch_file_name(env, username, password):
+def add_shipment_file_fetch_file_name(env, username, password, sscc_num, sgtin_num):
     get_env(env)
-    payload = get_payload_to_add_file(env, username, password)
+    payload = get_payload_to_add_file(env, username, password, sscc_num, sgtin_num)
     headers = {
         'Content-Type' : data_to_add_file['content_type'],
         'Authorization' : get_token_from_ct(env),
@@ -69,5 +69,5 @@ def add_shipment_file_sgtin_fetch_file_name(env, username, password, num):
     return response.json()['data'][0]['name']
 
 
-#print(add_shipment_file_sgtin_fetch_file_name('test', '6297001303009_admin', '6297001303009_P@ssw0rd', '10'))
+#print(add_shipment_file_fetch_file_name('test', '6297001303009_admin', '6297001303009_P@ssw0rd', 2, 3))
 #print(data)

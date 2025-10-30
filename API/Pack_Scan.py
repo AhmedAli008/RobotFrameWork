@@ -22,7 +22,7 @@ def pack_by_aggregation_to_scan(env, parent):
         'Content-Type' : 'application/json',
         'Authorization': data['token from login']
     }
-    response = requests.post(url['url_to_pack_by_aggregation'], headers=headers)
+    response = requests.post(url['url_to_pack_by_aggregation'], headers=headers, timeout=30)
     return response.json()['message']
 
 def submit_pack_by_aggregation():

@@ -12,9 +12,26 @@ Pack By Aggregation
     Sleep    3s
     Go To Home
     Open Pack Screen
-    Pack By Aggregation To Scan    ${ENV}    ${data['parent1_to_scan']}
-    Pack By Aggregation To Scan    ${ENV}    ${data['parent2_to_scan']}
-    Pack By Aggregation To Scan    ${ENV}    ${data['parent3_to_scan']}
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Pack By Aggregation To Scan   ${ENV}    ${value}
+    END 
+    Sleep    2s
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    Sleep    3s
+    ${Aggregation SSCC}     Submit Pack By Aggregation
+    Reload Page
+    RETURN   ${Aggregation SSCC}
+
+Pack By Aggregation sGTIN
+    [Arguments]     ${ENV}
+    Sleep    2s
+    Go To Home
+    Open Pack Screen
+    Sleep    2s
+    FOR    ${key}    ${value}    IN    &{data_SGTIN}
+        Pack By Aggregation To Scan    ${ENV}    ${value}
+    END
     Sleep    2s
     Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
