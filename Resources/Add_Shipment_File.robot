@@ -30,7 +30,6 @@ Add Shipment File sGTIN
     [Arguments]     ${ENV}     ${Username}     ${Password}    ${NUM}
     Permit Number    ${Username}
     Sleep    2s
-    Wait Until Page Contains Element   ${Selector}
     Open Shipment File
     Wait Until Page Contains Element    ${Page_Load_In_Shipment}
     ${Name}    Add Shipment File Sgtin Fetch File Name   ${Env}     ${Username}     ${Password}  ${NUM}

@@ -24,4 +24,4 @@ Pack And Decommission
     Scan To Decommission    ${ENV}    ${UserName}    ${SSCC}
     Submit Decommission
     Sleep    3s
-    #[Teardown]  Close Browser
+    [Teardown]  Close Browser

@@ -20,6 +20,7 @@ Open Outbound
     Sleep    1s
     Click Element    id=outbound-orders
 New Order
+    Sleep    2S
     Click Button    xpath=//button[contains(text(), 'New Order')]    
 
 Insert All Req Data

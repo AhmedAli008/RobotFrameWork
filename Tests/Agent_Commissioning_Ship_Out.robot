@@ -15,9 +15,9 @@ ${SGTIN_Num}    3
 *** Test Cases ***
 Agent Commissioning and Ship Out
     Login Page   ${ENV}   ${UserName}     ${Password}
-    Sleep    1s
+    Sleep    2s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     Agent Commissioning    ${Name}
     Auto Ship Out    ${Name}
     Sleep    2s
-    #[Teardown]  Close Browser
+    [Teardown]  Close Browser

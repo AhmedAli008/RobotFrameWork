@@ -20,3 +20,4 @@ Inbound And Outbound Order
     ${Qty Num}    Evaluate     ${SSCC_Num}*${SGTIN_Num}-2
     Create Inbound Order    ${ENV}    ${data['supplier_to_add_shipment_file']}    ${Doc.No}    ${Qty Num}
     Scan Inbound Order     ${Doc.No}    ${ENV}    ${UserName}
+    [Teardown]  Close Browser

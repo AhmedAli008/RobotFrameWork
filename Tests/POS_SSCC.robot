@@ -18,4 +18,5 @@ POS SSCC
     Sleep    2s
     ${Name}    Add Shipment File    ${ENV}    ${UserName}    ${Password}    ${SSCC Num}    ${SGTIN Num}
     Auto Accept    ${Name}
-    Dispance SSCC    ${ENV}    
+    Dispance SSCC    ${ENV}   
+    [Teardown]  Close Browser 

@@ -20,4 +20,4 @@ Adhoc Inbound And Outbound
     Inbound Adhoc   ${ENV}      ${data['supplier_to_add_shipment_file']}
     Outbound Adhoc  ${ENV}
     Sleep    3s
-    #[Teardown]  Close Browser
+    [Teardown]  Close Browser

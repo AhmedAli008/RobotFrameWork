@@ -24,4 +24,4 @@ Decommissin
     END 
     Submit Decommission
     Sleep    3s
-    #[Teardown]  Close Browser
+    [Teardown]  Close Browser

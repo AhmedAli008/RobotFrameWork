@@ -21,7 +21,6 @@ Outbound Adhoc
     #Wait Until Page Contains Element    ${Home_Page}
     [Arguments]     ${ENV}
     Sleep    3s
-    Wait Until Page Contains Element    ${Selector}
     Go TO Outbound AdHoc
     Search about Adhoc Supplier
     Select Adhoc Supplier
@@ -42,7 +41,6 @@ Outbound Adhoc SGTIN
     #Wait Until Page Contains Element    ${Home_Page}
     [Arguments]     ${ENV}
     Sleep    3s
-    Wait Until Page Contains Element    ${Selector}
     Go TO Outbound AdHoc
     Search about Adhoc Supplier
     Select Adhoc Supplier

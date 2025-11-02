@@ -18,7 +18,6 @@ ${Wait_Button}      xpath=//button[contains(text(), 'Submit')]
 Inbound Adhoc
     [Arguments]     ${ENV}  ${Supplier}
     Sleep    3s
-    Wait Until Page Contains Element    ${Selector}
     Go To AdHoc Inbound
     Search About Supplier    ${Supplier}
     Select Supplier
@@ -36,7 +35,6 @@ Inbound Adhoc
 Inbound Adhoc sGTIN
     [Arguments]     ${ENV}  ${Supplier}
     Sleep    3s
-    Wait Until Page Contains Element    ${Selector}
     Go To AdHoc Inbound
     Search About Supplier    ${Supplier}
     Select Supplier

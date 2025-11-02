@@ -24,3 +24,4 @@ Blind Receive and Inbound Outbound Adhoc
     Sleep    3s
     Inbound Adhoc   ${ENV}      ${GLN_Supplier}
     Outbound Adhoc  ${ENV}
+    [Teardown]  Close Browser

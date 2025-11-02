@@ -22,4 +22,4 @@ Pack And Unpack Child
     Pack By Aggregation    ${ENV}
     Unpack By Child    ${ENV}    ${UserName}
     Sleep    3s
-    #[Teardown]  Close Browser
+    [Teardown]  Close Browser

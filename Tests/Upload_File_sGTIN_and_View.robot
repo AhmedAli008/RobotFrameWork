@@ -25,4 +25,4 @@ Upload and Adhoc Scan and Pack sGTIN
     Pack By Aggregation sGTIN    ${ENV}
     Unpack By Child sGTIN    ${ENV}    ${UserName}
     Outbound Adhoc SGTIN    ${ENV}
-    #[Teardown]  Close Browser
+    [Teardown]  Close Browser

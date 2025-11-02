@@ -23,3 +23,4 @@ Inbound And Outbound Order
     Scan Inbound Order     ${Doc.No}    ${ENV}    ${UserName}
     Create Outbound Order    ${Doc.No}    ${Qty Num}
     Scan Outbound Order    ${ENV}    ${Doc.No}
+    [Teardown]  Close Browser
