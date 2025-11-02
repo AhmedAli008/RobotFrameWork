@@ -12,6 +12,7 @@ Unpack By Parent
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
     Submit Unpack By Parent
+    Reload Page
 
 Unpack By Child
     [Arguments]     ${ENV}  ${Username}
@@ -22,6 +23,7 @@ Unpack By Child
     Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SSCC['SSCC1']}
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
+    Reload Page
     Submit Unpack By Child
 
 Unpack By Child sGTIN
@@ -33,8 +35,8 @@ Unpack By Child sGTIN
     Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SGTIN['SGTIN1']}
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
+    Reload Page
     Submit Unpack By Child    
-
 
 
 Open UnPack Screen

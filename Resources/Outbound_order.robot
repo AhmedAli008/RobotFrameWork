@@ -25,28 +25,29 @@ New Order
 
 Insert All Req Data
     [Arguments]    ${Doc.No}    ${Qty Num}
-    Sleep    2s
+    Sleep    3s
     #Document Type
-    Click Element    xpath=//input[@id='documentType']    
+    Click Element    id=documentType   
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     #Document Number
-    Input Text    xpath=//input[@id='documentNumber']    ${Doc.No}
+    Input Text    id=documentNumber    ${Doc.No}
     #Order Type
-    Click Element     xpath=//input[@id='orderType']
+    Click Element     id=orderType
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     #Buyer
-    Input Text     xpath=//input[@id='buyer']    ${outbound_supplier}
+    Input Text     id=buyer    ${outbound_supplier}
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     #Shipping Type
-    Click Element    xpath=//input[@id='shippingType']
+    Click Element    id=shippingType
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     #Product
     Click Element     xpath=//*[@id="lines[0].product"]/div[1]/div/div[1]/input
-    Input Text    xpath=/html/body/div[6]/div/div/div[2]/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input    ${data['GTIN']}
+    Sleep    2s
+    Input Text    xpath=/html/body/div[7]/div/div/div[2]/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input    ${data['GTIN']}
     Sleep    2s
     Click Element    xpath=//tr[@class='dx-row dx-data-row dx-column-lines' and @aria-rowindex='1']
     #Quantity

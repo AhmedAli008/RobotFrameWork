@@ -1,7 +1,8 @@
 *** Settings ***
 Library     SeleniumLibrary
 Library     ../API/Add_Shipment_File_From_CT.py
-Resource    Permit_Number.robot
+Library    ../API/Permit_Numder.py
+#Resource    Permit_Number.robot
 
 *** Variables ***
 ${Selector}     id=logistic-operation
@@ -14,7 +15,8 @@ Add Shipment File
     [Arguments]     ${ENV}     ${Username}     ${Password}     ${SSCC_Num}    ${SGTIN_Num}
     ${SSCC_Num}    Convert To Integer    ${SSCC_Num}
     ${SGTIN_Num}    Convert To Integer    ${SGTIN_Num}
-    Permit Number    ${Username}
+    #Permit Number    ${Username}
+    Permit Num    ${ENV}    ${Username}    ${Password}
     Sleep    3s
     #Wait Until Page Contains Element   ${Selector}
     #Wait Until Page Contains Element   ${Selector}
@@ -28,7 +30,8 @@ Add Shipment File
 
 Add Shipment File sGTIN
     [Arguments]     ${ENV}     ${Username}     ${Password}    ${NUM}
-    Permit Number    ${Username}
+    #Permit Number    ${Username}
+    Permit Num    ${ENV}    ${Username}    ${Password}
     Sleep    2s
     Open Shipment File
     Wait Until Page Contains Element    ${Page_Load_In_Shipment}

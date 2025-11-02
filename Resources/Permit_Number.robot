@@ -50,11 +50,12 @@ Add Permit Number
     #Add Permit
     Sleep    2s
     Click Button    xpath=//button[contains(text(), 'New Permit')]
-    Sleep    2s
+    Sleep    3s
     #Select GTIN
     &{GTIN}    Check GTIN based UserName    ${UserName}
+    Sleep    3s
     #Add Permit Name
-    Input Text    xpath=//*[@id="permitNumber"]   ${Permit Name}
+    Input Text    xpath=//input[@id="permitNumber"]   ${Permit Name}
     #Select Product 
     Click Element    xpath=//*[@id="permitNumberLines[0].product"]/div[1]/div/div[1]/input
     Sleep    2s

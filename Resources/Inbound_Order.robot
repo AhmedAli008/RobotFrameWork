@@ -23,24 +23,25 @@ Open Inbound
     
 
 New Order
-    Sleep    1s
+    Sleep    2s
     Click Button    xpath=//button[contains(text(), 'New Order')]
 
 Insert All Req Data
     [Arguments]    ${Supplier}    ${Doc.No}    ${Qty Num}
     #Doc.Type
-    Sleep    1s
-    Click Element    xpath=//*[@id="documentType"]
+    Sleep    2s
+    Click Element    id=documentType
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     #Doc.Num
-    Input Text   xpath=//*[@id="documentNumber"]    ${Doc.No}
+    Input Text   id=documentNumber    ${Doc.No}
     #Order Type
-    Click Element    xpath=//*[@id="orderType"]
+    Click Element    id=orderType
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     #Supplier
-    Input Text    xpath=//*[@id="supplier"]    ${Supplier}
+    Input Text    id=supplier    ${Supplier}
+    Sleep     1s
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     #Product
