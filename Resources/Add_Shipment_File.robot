@@ -28,6 +28,20 @@ Add Shipment File
     Execute JavaScript    document.body.style.zoom='70%'
     RETURN  ${Name}
 
+Add Mixed Shipment File
+    [Arguments]     ${ENV}     ${Username}     ${Password}     ${SSCC_Num}    ${SGTIN_Num}
+    ${SSCC_Num}    Convert To Integer    ${SSCC_Num}
+    ${SGTIN_Num}    Convert To Integer    ${SGTIN_Num}
+    Permit Num    ${ENV}    ${Username}    ${Password}
+    Sleep    3s
+    Open Shipment File
+    Wait Until Page Contains Element    ${Page_Load_In_Shipment}
+    ${Name}    Add Mixed Shipment File Fetch File Name   ${Env}     ${Username}     ${Password}    ${SSCC_Num}    ${SGTIN_Num}
+    Sleep    1s
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    RETURN  ${Name}
+
 Add Shipment File sGTIN
     [Arguments]     ${ENV}     ${Username}     ${Password}    ${NUM}
     #Permit Number    ${Username}

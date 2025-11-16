@@ -8,16 +8,16 @@ Resource    ../../../Resources/Inbound_Order.robot
 ${ENV}
 ${UserName}     6251151000003_admin
 ${Password}     adminP@ssw0rd
-${SSCC_Num}     1
-${SGTIN_Num}    5
+${SSCC_Num}     2
+${SGTIN_Num}    4
 
 *** Test Cases ***
-Exceed Limit
+Mixed Items
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    2s
-    ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
+    ${Name}   Add Mixed Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     ${Doc.No}    Random String
-    ${Qty Num}    Evaluate     ${SSCC_Num}*${SGTIN_Num}-2
-    Create Inbound Order      ${data['supplier_to_add_shipment_file']}    ${Doc.No}    ${Qty Num}
+    ${Qty Num}    Evaluate     ${SSCC_Num}*${SGTIN_Num}
+    Create Mixed Inbound Order      ${data['supplier_to_add_shipment_file']}    ${Doc.No}    ${Qty Num}
     Scan Inbound Order     ${Doc.No}    ${ENV}    ${UserName}
     [Teardown]  Close Browser

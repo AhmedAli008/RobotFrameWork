@@ -19,7 +19,7 @@ Inbound And Outbound Order
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     ${Doc.No}    Random String
     ${Qty Num}    Evaluate     ${SSCC_Num}*${SGTIN_Num}
-    Create Inbound Order    ${ENV}    ${data['supplier_to_add_shipment_file']}    ${Doc.No}    ${Qty Num}
+    Create Inbound Order     ${data['supplier_to_add_shipment_file']}    ${Doc.No}    ${Qty Num}
     Scan Inbound Order     ${Doc.No}    ${ENV}    ${UserName}
     Create Outbound Order    ${Doc.No}    ${Qty Num}
     Scan Outbound Order    ${ENV}    ${Doc.No}

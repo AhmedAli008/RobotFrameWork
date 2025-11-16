@@ -62,6 +62,8 @@ def get_gtin_and_lot_from_permit_num(env, username, password):
     data['permit_number']=result[0]['permitNumberLines']
     data['GTIN']=data['permit_number'][0]['itemTagId'][:14]
     data['Lot']=data['permit_number'][0]['itemTagId'][15:]
+    data['GTIN1']=data['permit_number'][1]['itemTagId'][:14]
+    data['Lot1']=data['permit_number'][1]['itemTagId'][15:]
     return result[0]['permitNumberLines']
 
 #print(get_gtin_and_lot_from_permit_num('test','6251151000003_admin','adminP@ssw0rd'))
