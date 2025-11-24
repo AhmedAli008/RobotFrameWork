@@ -11,8 +11,8 @@ def select_env(env, parent):
         })
     elif env == 'stage':
         url.update({
-            'url_to_pack_by_aggregation' : 'https://stg.identity.aws.originsysglobal.com/api/v1/pack-by-aggregation/scan/'+parent+'?culture=en',
-            'url_submit_pack_by_aggregation': 'https://stg.identity.aws.originsysglobal.com/api/v1/pack-by-aggregation/submit?culture=en'
+            'url_to_pack_by_aggregation' : 'https://atp.staging.api.aws.originsysglobal.com/api/v1/pack-by-aggregation/scan/'+parent+'?culture=en',
+            'url_submit_pack_by_aggregation': 'https://atp.staging.api.aws.originsysglobal.com/api/v1/pack-by-aggregation/submit?culture=en'
         })
     #return url
 

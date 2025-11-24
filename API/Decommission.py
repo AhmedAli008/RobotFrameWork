@@ -10,7 +10,7 @@ def select_env(env, username):
         })
     elif env == 'stage':
         url.update({
-            'url_to_decommission' : 'https://stg.identity.aws.originsysglobal.com/Decommission/Site/'+username[:13]+'/ScanSerialized?culture=en'
+            'url_to_decommission' : 'https://atp.staging.api.aws.originsysglobal.com/Decommission/Site/'+username[:13]+'/ScanSerialized?culture=en'
         })
     #return url
 

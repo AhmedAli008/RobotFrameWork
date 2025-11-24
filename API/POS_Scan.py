@@ -11,7 +11,7 @@ def select_env(env, parent):
         })
     elif env == 'stage':
         url.update({
-            'url_to_POS' : 'https://stg.identity.aws.originsysglobal.com/api/v1/dispense/scan/'+parent+'?culture=en'
+            'url_to_POS' : 'https://atp.staging.api.aws.originsysglobal.com/api/v1/dispense/scan/'+parent+'?culture=en'
         })
     #return url
 

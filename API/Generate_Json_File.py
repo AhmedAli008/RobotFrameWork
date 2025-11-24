@@ -15,7 +15,7 @@ def get_payload_to_add_file(env, username, password, sscc_num, sgtin_num):
 
     def generate_random_numeric(length):
         return ''.join(random.choices(string.digits, k=length))
-
+    data_SSCC.clear()
     for index in range(sscc_num):
         data_SSCC[f'SSCC{index}'] = get_sscc(env, username, password)
         
@@ -42,6 +42,7 @@ def get_payload_to_add_file(env, username, password, sscc_num, sgtin_num):
             barcode_index += 1
 
     num = 1
+    data_SGTIN.clear()
     for item in json_items:
         data_SGTIN[f'SGTIN{num}'] = generate_gs1_serial(item)
         num += 1
@@ -62,7 +63,7 @@ def get_payload_to_add_mixed_file(env, username, password, sscc_num, sgtin_num):
 
     def generate_random_numeric(length):
         return ''.join(random.choices(string.digits, k=length))
-
+    data_SSCC.clear()
     for index in range(sscc_num):
         data_SSCC[f'SSCC{index}'] = get_sscc(env, username, password)
         
@@ -98,6 +99,7 @@ def get_payload_to_add_mixed_file(env, username, password, sscc_num, sgtin_num):
             barcode_index += 2
 
     num = 1
+    data_SGTIN.clear()
     for item in json_items:
         data_SGTIN[f'SGTIN{num}'] = generate_gs1_serial(item)
         num += 1

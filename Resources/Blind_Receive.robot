@@ -54,12 +54,12 @@ Open Blind Receive
     Sleep    1s
     Click Element    id=inbound
     Sleep    2s
-    Click Button    id=full-width-tab-4
+    Click Button    xpath=//button[contains(text(),'Blind Receive')]
 
 Select Supplier
     [Arguments]     ${Supplier}
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-4"]/div/div/div[1]/div[2]/div[2]/div/button[1]
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Sleep    2s
     Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[5]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${Supplier}
 

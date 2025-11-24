@@ -12,7 +12,7 @@ Resource    ../Resources/Outbound_Adhoc.robot
 ${ENV}
 ${UserName}     6251151000003_admin
 ${Password}     adminP@ssw0rd
-${NUM}    10
+${NUM}    25000
 
 *** Test Cases ***
 Upload and Adhoc Scan and Pack sGTIN

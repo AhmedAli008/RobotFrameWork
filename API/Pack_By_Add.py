@@ -10,8 +10,8 @@ def select_env(env, username):
         })
     elif env == 'stage':
         url.update({
-            'url_to_pack_by_add': 'https://stg.identity.aws.originsysglobal.com/item/getdetails?culture=en',
-            'url_to_submit_pack_by_add': 'https://stg.identity.aws.originsysglobal.com/site/'+username[:13]+'/aggregateByAdd?culture=en'
+            'url_to_pack_by_add': 'https://atp.staging.api.aws.originsysglobal.com/item/getdetails?culture=en',
+            'url_to_submit_pack_by_add': 'https://atp.staging.api.aws.originsysglobal.com/site/'+username[:13]+'/aggregateByAdd?culture=en'
         })
 
 sscc_scan = []

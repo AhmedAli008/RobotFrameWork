@@ -14,10 +14,10 @@ def select_env(env, username, parent):
         })
     elif env == 'stage':
         url.update({
-            'url_to_unpack_by_parent' : 'https://stg.identity.aws.originsysglobal.com/Item/GetHighestParentDetails?culture=en',
-            'url_to_unpack_by_child' : 'https://stg.identity.aws.originsysglobal.com/Item/GetContainerDetails?culture=en',
-            'url_submit_unpack_by_parent': 'https://stg.identity.aws.originsysglobal.com/Site/'+username[:13]+'/unpack?culture=en',
-            'url_submit_unpack_by_child': 'https://stg.identity.aws.originsysglobal.com/Site/'+username[:13]+'/UnpackParents?culture=en',
+            'url_to_unpack_by_parent' : 'https://atp.staging.api.aws.originsysglobal.com/Item/GetHighestParentDetails?culture=en',
+            'url_to_unpack_by_child' : 'https://atp.staging.api.aws.originsysglobal.com/Item/GetContainerDetails?culture=en',
+            'url_submit_unpack_by_parent': 'https://atp.staging.api.aws.originsysglobal.com/Site/'+username[:13]+'/unpack?culture=en',
+            'url_submit_unpack_by_child': 'https://atp.staging.api.aws.originsysglobal.com/Site/'+username[:13]+'/UnpackParents?culture=en',
             'parent_to_scan': parent
         })
     #return url

@@ -13,6 +13,8 @@ Create Inbound Order
     [Arguments]     ${Supplier}    ${Doc.No}    ${Qty Num}
     Open Inbound
     New Order
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
     Insert All Req Data    ${Supplier}    ${Doc.No}
     Insert Product    ${Qty Num}
     Confirm Order
@@ -134,6 +136,70 @@ Scan Inbound Order
     #Scan Items
     Scan Items    ${Doc.No}    ${ENV}    ${UserName}
 
+Scan Inbound Order Twice To Remove
+    [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
+    #Search about Doc.No
+    Sleep    2s
+    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
+    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    #Click Scan from Actions
+    Sleep    2s
+    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Sleep    2s
+    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
+    #Scan Items Twice To Remove
+    Inbound Order Scan    ${ENV}    ${UserName}    ${data_SSCC['SSCC0']}    ${Doc.No}
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    ${Msg}    Inbound Order Scan    ${ENV}    ${UserName}    ${data_SSCC['SSCC0']}    ${Doc.No}
+    ${Msg}    Set Variable    ${Msg['message']}
+    Execute JavaScript    alert("${Msg}")
+    Sleep    5s
+    Handle Alert     timeout=3s
+    #Click Confirm To Remove
+    Inbound Order Scan To Remove    ${ENV}    ${UserName}    ${data_SSCC['SSCC0']}    ${Doc.No}
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    #Scan All Items
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Inbound Order Scan    ${ENV}    ${UserName}    ${value}    ${Doc.No}
+    END
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    #Clear All
+    Sleep    3s
+    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div/div[2]/button
+    Sleep    2s
+    Click Button    xpath=//button[contains(text(), 'Confirm')]
+    Sleep    3s
+    #Scan All Items
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Inbound Order Scan    ${ENV}    ${UserName}    ${value}    ${Doc.No}
+    END
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    #Submit Accepted
+    Sleep    3s
+    Click Button    xpath=//button[contains(text(), 'Submit')]
+    Sleep    5s
+
+
+Scan Inbound Order after Exeed Limit
+    [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
+    #Search about Doc.No
+    Sleep    2s
+    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
+    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    #Click Scan from Actions
+    Sleep    2s
+    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Sleep    2s
+    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
+    #Scan Items
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Inbound Order Scan    ${ENV}    ${UserName}    ${value}    ${Doc.No}
+    END
+
 Scan Inbound Order Multi SKU
     [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
     #Search about Doc.No
@@ -179,6 +245,7 @@ Scan Items
     [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
     FOR    ${key}    ${value}    IN    &{data_SSCC}
         ${Msg}    Inbound Order Scan    ${ENV}    ${UserName}    ${value}    ${Doc.No}
+        ${Msg}    Set Variable    ${Msg['message']}
         TRY
             Should Be Equal As Strings    ${Msg}    Quantity exceeded the limit
             Execute JavaScript    alert("${Msg}")
@@ -186,7 +253,7 @@ Scan Items
             Handle Alert     timeout=3s
             ${Qty Num}    Get Length    ${data_SGTIN}
             Edit Order    ${Doc.No}    ${Qty Num}
-            Scan Inbound Order    ${Doc.No}    ${ENV}    ${UserName}
+            Scan Inbound Order after Exeed Limit    ${Doc.No}    ${ENV}    ${UserName}
         EXCEPT
             Continue For Loop
         END
@@ -194,9 +261,9 @@ Scan Items
     Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
     #Submit Accepted
-    Sleep    2s
-    Click Button    xpath=//button[contains(text(), 'Submit')]
     Sleep    3s
+    Click Button    xpath=//button[contains(text(), 'Submit')]
+    Sleep    5s
     
 Edit Order
     [Arguments]    ${Doc.No}     ${Qty Num}
@@ -213,7 +280,8 @@ Edit Order
     Click Element    xpath=/html/body/div[7]/div[3]/ul/li[3]
     Sleep    2s
     #Edit Qty
-    Clear Element Text    xpath=//*[@id="lines[0].quantity"]
+    Click Element    xpath=//*[@id="lines[0].quantity"]
+    Press Keys    None    BACKSPACE
     Input Text    xpath=//*[@id="lines[0].quantity"]    ${Qty Num}
     Sleep    2s
     #Confirm Edit

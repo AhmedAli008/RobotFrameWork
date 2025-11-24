@@ -12,8 +12,8 @@ def select_env(env):
         })
     elif env == 'stage':
         url.update({
-            'url_outbound_adhoc': 'https://stg.identity.aws.originsysglobal.com/api/adhocoutbound/scan?culture=en',
-            'url_outbound_order': 'https://stg.identity.aws.originsysglobal.com/Outbound/scan?culture=en',
+            'url_outbound_adhoc': 'https://atp.staging.api.aws.originsysglobal.com/api/adhocoutbound/scan?culture=en',
+            'url_outbound_order': 'https://atp.staging.api.aws.originsysglobal.com/Outbound/scan?culture=en',
             'content_type': 'application/json'
         })
 def outbound_adhoc_scan(env, parent):

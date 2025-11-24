@@ -11,7 +11,7 @@ def select_url(env, supplier, serial):
         })
     elif env == 'stage':
         url.update({
-            'url_scan_parent_blind_receive' : 'https://stg.identity.aws.originsysglobal.com/api/v1/inbound/blind-receive/'+supplier[:13]+'/aggregate/scan-parent/'+serial+'?culture=en',
+            'url_scan_parent_blind_receive' : 'https://atp.staging.api.aws.originsysglobal.com/api/v1/inbound/blind-receive/'+supplier[:13]+'/aggregate/scan-parent/'+serial+'?culture=en',
             'url_scan_child_blind_receive' : 'https://atp.staging.api.aws.originsysglobal.com/api/v1/inbound/blind-receive/'+supplier[:13]+'/aggregate/scan-child/'+serial+'?culture=en'
         })
     #return url

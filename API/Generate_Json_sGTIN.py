@@ -33,6 +33,7 @@ def get_payload_to_add_file_sgtin(env, username, password, num):
         })
 
     number = 1
+    data_SGTIN.clear()
     for item in json_items:
         data_SGTIN[f'SGTIN{number}'] = generate_gs1_serial(item)
         number += 1

@@ -32,6 +32,21 @@ Inbound Adhoc
     Submit Scan
     Sleep    3s
 
+Inbound Adhoc Without Supplier
+    [Arguments]     ${ENV}  
+    Sleep    3s
+    Go To AdHoc Inbound
+    Select Without Supplier
+    FOR    ${key}    ${value}    IN    &{data_SSCC}
+        Inbound Adhoc Without Supplier Scan   ${ENV}    ${value}
+    END    
+    Reload Page
+    Execute JavaScript    document.body.style.zoom='70%'
+    Sleep    3s
+    Wait Until Page Contains Element   ${Wait_Button}
+    Submit Scan
+    Sleep    3s
+
 Inbound Adhoc sGTIN
     [Arguments]     ${ENV}  ${Supplier}
     Sleep    3s
@@ -80,5 +95,7 @@ Select Supplier
 Submit Scan
     Click Button    xpath=//button[contains(text(), 'Submit')]
 
-
-
+Select Without Supplier
+    Sleep    2s
+    Click Button    xpath=//button[contains(text(), 'Without Supplier')]
+    Sleep    2s

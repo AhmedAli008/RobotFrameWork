@@ -10,7 +10,7 @@ def select_env(env, parent, username):
         })
     elif env == 'stage':
         url.update({
-            'url_to_verify_status' : 'https://stg.identity.aws.originsysglobal.com/Site/'+username[:13]+'/Item/'+parent+'/Status?culture=en'
+            'url_to_verify_status' : 'https://atp.staging.api.aws.originsysglobal.com/Site/'+username[:13]+'/Item/'+parent+'/Status?culture=en'
         })
     #return url
 

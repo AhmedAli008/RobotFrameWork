@@ -20,13 +20,10 @@ def get_env(env):
             'url_to_get_token_from_ct': 'https://stg.identity.aws.originsysglobal.com/api/Authentication/oauth/token',
             'url_to_add_file_from_ct': 'https://atp.staging.api.aws.originsysglobal.com/ShipmentFile/Add',
             'content_type': 'application/json',
-            'clientid': "452102yty-5421dqaew450-75454hgdf3-1000253ee",
-            'clientSecret': "ix4iQXhrwABn9IqlZyTH0FzgjzfjVSLE545423weds",
+            'clientid': "2e84a065-14bd-4387-8b43-4fc24faab5a2",
+            'clientSecret': "wes_Byl0X5o7tspEIsOPXdaS1aWnFqqlWPoa",
             'supplier_to_add_shipment_file': "6285125000027"
         })
-
-
-
 
 def get_token_from_ct(env):
     payload = {

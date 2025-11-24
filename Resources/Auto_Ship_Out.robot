@@ -24,7 +24,7 @@ Shipout File
     Press Keys    None    ARROW_DOWN
     Press Keys    None    ENTER
     Sleep    2s
-    Input Text    xpath=//*[@id="partner"]    6294018311140
+    Input Text    xpath=//*[@id="partner"]    6297001303009
     Sleep    2s
     #Click Element    xpath=/html/body/div[4]/div[3]
     Sleep    3s
