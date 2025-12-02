@@ -17,7 +17,7 @@ Add Shipment File
     ${SGTIN_Num}    Convert To Integer    ${SGTIN_Num}
     #Permit Number    ${Username}
     Permit Num    ${ENV}    ${Username}    ${Password}
-    Sleep    3s
+    Sleep    3s   
     #Wait Until Page Contains Element   ${Selector}
     #Wait Until Page Contains Element   ${Selector}
     Open Shipment File

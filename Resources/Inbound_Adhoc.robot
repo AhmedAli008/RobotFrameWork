@@ -72,13 +72,13 @@ Go To AdHoc Inbound
     Execute JavaScript    document.body.style.zoom='70%'
     #Wait Until Page Contains Element   ${Page_Load}
     Sleep    3s
-    Click Button    id=full-width-tab-1
+    Click Button    xpath=//button[contains(text(),'Adhoc')]
 
 Search About Supplier
     [Arguments]    ${Supplier}
     Wait Until Page Contains Element    ${Table_Load}
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-1"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Wait Until Page Contains Element   ${Text_Load}
     Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input   ${Supplier}
 
@@ -86,7 +86,7 @@ Select Supplier
     Wait Until Page Contains Element   ${Action_Load}
     Sleep    1s
     #Wait Until Element Is Enabled    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]   timeout=5s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     #Wait Until Page Contains Element   ${Drop_List_Wait}
     #Click Element    xpath=/html/body/div[4]/div[3]/ul/li
     Sleep    2s
