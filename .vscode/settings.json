@@ -1,45 +1,49 @@
 {
     "files.associations": {
-    "*.robot": "robotframework"
-},
-"editor.tokenColorCustomizations": {
-    "textMateRules": [
-        {
-            "scope": "keyword.robot",
-            "settings": {
-                "foreground": "#FF5733",   // Keywords (orange-red)
-                "fontStyle": "bold"
-            }
-        },
-        {
-            "scope": "variable.robot",
-            "settings": {
-                "foreground": "#1E90FF"   // Variables (blue)
-            }
-        },
-        {
-            "scope": "comment.robot",
-            "settings": {
-                "foreground": "#2ECC71",  // Comments (green)
-                "fontStyle": "italic"
-            }
-        },
-         {
-            "scope": "string.quoted.double.robot, string.unquoted.robot",
-            "settings": {
-                    "foreground": "#FFFFFF"   // Arguments white
+        "*.robot": "robotframework"
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "keyword.robot",
+                "settings": {
+                    "foreground": "#FF5733", // Keywords (orange-red)
+                    "fontStyle": "bold"
                 }
-        }
-    ]
-},
-"editor.semanticTokenColorCustomizations": {
-    "rules": {
-        "parameter.robot": {
-            "foreground": "#FFFFFF"   // white color for arguments
-        },
-        "string.robot": {
-            "foreground": "#FFFFFF"   // strings also white
+            },
+            {
+                "scope": "variable.robot",
+                "settings": {
+                    "foreground": "#1E90FF" // Variables (blue)
+                }
+            },
+            {
+                "scope": "comment.robot",
+                "settings": {
+                    "foreground": "#2ECC71", // Comments (green)
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": [
+                    "string",
+                    "string.quoted.double",
+                    "string.quoted.single"
+                ],
+                "settings": {
+                    "foreground": "#FFFFFF"
+                }
+            }
+        ]
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "rules": {
+            "parameter.robot": {
+                "foreground": "#FFFFFF" // white color for arguments
+            },
+            "string.robot": {
+                "foreground": "#FFFFFF" // strings also white
+            }
         }
     }
-}
 }
