@@ -2,6 +2,7 @@
 Library     SeleniumLibrary
 Library     ../API/Pack_By_Add.py
 Variables   ../API/Token_SSCC_Permit_Num.py
+Resource    Common_Keywords.robot
 
 *** Variables ***
 
@@ -23,10 +24,10 @@ Pack By Add
 
 Open Pack Screen
     Sleep    2s
-    Click Element    id=logistic-operations
-    Sleep    1s
-    Click Element    id=pack
-    
+    Wait And Click Element    id=logistic-operations
+    Sleep    2s
+    Wait And Click Element    id=pack
+
 Select Pack By Add Tag
     Sleep    3s
-    Click Button    id=full-width-tab-2
+    Safe Click Button    id=full-width-tab-2

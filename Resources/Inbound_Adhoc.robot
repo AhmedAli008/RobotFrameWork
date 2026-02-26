@@ -2,6 +2,7 @@
 Library     SeleniumLibrary
 Library     ../API/Inbound_Scan.py
 Variables   ../API/Token_SSCC_Permit_Num.py
+Resource    Common_Keywords.robot
 
 *** Variables ***
 ${Selector}     xpath=//*[@id="root"]/div[1]/main/div[2]/div[1]/div/button
@@ -66,36 +67,37 @@ Inbound Adhoc sGTIN
 
 Go To AdHoc Inbound
     Sleep    2s
-    Click Element    id=logistic-operations
-    Sleep    1s
-    Click Element    id=inbound
+    Wait And Click Element    id=logistic-operations
+    Sleep    2s
+    Wait And Click Element    id=inbound
     Execute JavaScript    document.body.style.zoom='70%'
     #Wait Until Page Contains Element   ${Page_Load}
     Sleep    3s
-    Click Button    xpath=//button[contains(text(),'Adhoc')]
+    Safe Click Button    xpath=//button[contains(text(),'Adhoc')]
 
 Search About Supplier
     [Arguments]    ${Supplier}
     Wait Until Page Contains Element    ${Table_Load}
     Sleep    2s
-    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Safe Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Wait Until Page Contains Element   ${Text_Load}
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input   ${Supplier}
+    Wait For Element And Input    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input   ${Supplier}
 
 Select Supplier
     Wait Until Page Contains Element   ${Action_Load}
-    Sleep    1s
+    Sleep    2s
     #Wait Until Element Is Enabled    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]   timeout=5s
-    Click Button    xpath=//button[@aria-label="Row Actions"]
+    Safe Click Button    xpath=//button[@aria-label="Row Actions"]
     #Wait Until Page Contains Element   ${Drop_List_Wait}
     #Click Element    xpath=/html/body/div[4]/div[3]/ul/li
     Sleep    2s
     Press Keys    None    ENTER
 
 Submit Scan
-    Click Button    xpath=//button[contains(text(), 'Submit')]
+    Wait Until Element Is Visible    xpath=//button[contains(text(), 'Submit')]    10s
+    JS Click Element    xpath=//button[contains(text(), 'Submit')]
 
 Select Without Supplier
     Sleep    2s
-    Click Button    xpath=//button[contains(text(), 'Without Supplier')]
+    Safe Click Button    xpath=//button[contains(text(), 'Without Supplier')]
     Sleep    2s

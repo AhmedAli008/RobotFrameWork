@@ -1,6 +1,6 @@
 *** Settings ***
 Library      SeleniumLibrary
-#Library      ../API/Token_SSCC_Permit_Num.py
+
 
 
 *** Variables ***
@@ -11,7 +11,6 @@ ${Browser}  chrome
 Login Page
     [Arguments]  ${ENV}   ${Username}     ${Password}
     Open Browser to Login Page      ${ENV}
-    #Get Token From Login    ${ENV}    ${Username}    ${Password}
     Maximize Browser Window
     Sleep    3s
     Type In Username    ${username}

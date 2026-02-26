@@ -2,6 +2,7 @@
 Library    SeleniumLibrary
 Library    ../API/POS_Scan.py
 Variables    ../API/Token_SSCC_Permit_Num.py
+Resource    Common_Keywords.robot
 
 *** Keywords ***
 Dispance SSCC
@@ -25,19 +26,21 @@ Dispance SGTIN
     Execute JavaScript    document.body.style.zoom='70%'
     Sleep    2s
     Submit POS
+
 Open POS
-    Click Element    id=point-of-sale
+    Wait And Click Element    id=point-of-sale
 
 Scan SSCC
-    [Arguments]    ${ENV} 
+    [Arguments]    ${ENV}
     FOR    ${key}    ${value}    IN    &{data_SSCC}
         Scan POS   ${ENV}    ${value}
-    END 
+    END
 
 Scan SGTIN
     [Arguments]    ${ENV}
     FOR    ${key}    ${value}    IN    &{data_SGTIN}
         Scan POS   ${ENV}    ${value}
-    END 
+    END
+
 Submit POS
-    Click Button    xpath=//button[contains(text(),'Submit')]
+    Safe Click Button    xpath=//button[contains(text(),'Submit')]

@@ -3,6 +3,7 @@ Library     SeleniumLibrary
 Library     ../API/Blind_Receive.py
 Library    ../API/Generate_Json_File.py
 Variables  ../API/Token_SSCC_Permit_Num.py
+Resource   Common_Keywords.robot
 
 *** Variables ***
 
@@ -23,7 +24,7 @@ Blind Receive
         FOR    ${Index}    IN RANGE    ${SGTIN Num}
             Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN'+ str(${SGTIN Serials})]}
             ${SGTIN Serials}    Evaluate    ${SGTIN Serials}+1
-        END 
+        END
         Reload Page
         Submit Aggregation
         Sleep    3s
@@ -43,36 +44,38 @@ Scan Child
 
 Submit Aggregation
     Sleep    3s
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[4]/button
+    Wait Until Element Is Visible    xpath=//*[@id="root"]/div[1]/main/div[4]/button    10s
+    JS Click Element    xpath=//*[@id="root"]/div[1]/main/div[4]/button
 
 Submit Blind Receive
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button[2]
+    Wait Until Element Is Visible    xpath=//*[@id="root"]/div[1]/main/div[5]/button[2]    10s
+    JS Click Element    xpath=//*[@id="root"]/div[1]/main/div[5]/button[2]
 
 Open Blind Receive
     Sleep    2s
-    Click Element    id=logistic-operations
-    Sleep    1s
-    Click Element    id=inbound
+    Wait And Click Element    id=logistic-operations
     Sleep    2s
-    Click Button    xpath=//button[contains(text(),'Blind Receive')]
+    Wait And Click Element    id=inbound
+    Sleep    2s
+    Safe Click Button    xpath=//button[contains(text(),'Blind Receive')]
 
 Select Supplier
     [Arguments]     ${Supplier}
     Sleep    2s
-    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Safe Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Sleep    2s
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[5]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${Supplier}
+    Wait For Element And Input    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[5]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${Supplier}
 
 Action To Scan
     Sleep    1s
-    Click Button    xpath=//button[@aria-label='Row Actions']
+    Safe Click Button    xpath=//button[@aria-label='Row Actions']
     Sleep    3s
     #Click Element    xpath=/html/body/div[7]/div[3]/ul/li
     Press Keys    None    ENTER
     Sleep    3s
 
 Aggregate Button
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button[1]
+    Safe Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button[1]
 
     
 

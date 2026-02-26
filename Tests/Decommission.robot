@@ -20,7 +20,7 @@ Decommissin
     Auto Accept    ${Name}
     Open Decommission
     FOR    ${key}    ${value}    IN    &{data_SSCC}
-        Scan To Decommission    ${ENV}    ${UserName}    ${value}
+        Scan To Decommission       ${value}
     END 
     Submit Decommission
     Sleep    3s

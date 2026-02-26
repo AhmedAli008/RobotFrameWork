@@ -12,12 +12,23 @@ class TestRunner:
         self.log_dir = os.path.join(self.project_root, "log")
 
         # Determine robot command based on platform
+        # Check if venv exists, otherwise use global commands
         if platform.system() == "Windows":
-            self.robot_cmd = os.path.join("venv", "Scripts", "robot.exe")
-            self.python_cmd = os.path.join("venv", "Scripts", "python.exe")
+            venv_robot = os.path.join(self.project_root, "venv", "Scripts", "robot.exe")
+            if os.path.exists(venv_robot):
+                self.robot_cmd = venv_robot
+                self.python_cmd = os.path.join(self.project_root, "venv", "Scripts", "python.exe")
+            else:
+                self.robot_cmd = "robot"
+                self.python_cmd = "python"
         else:
-            self.robot_cmd = os.path.join("venv", "bin", "robot")
-            self.python_cmd = os.path.join("venv", "bin", "python")
+            venv_robot = os.path.join(self.project_root, "venv", "bin", "robot")
+            if os.path.exists(venv_robot):
+                self.robot_cmd = venv_robot
+                self.python_cmd = os.path.join(self.project_root, "venv", "bin", "python")
+            else:
+                self.robot_cmd = "robot"
+                self.python_cmd = "python"
 
     def create_output_dirs(self):
         """Create output directories if they don't exist"""
@@ -160,16 +171,8 @@ def main():
 
     parser.add_argument(
         "--suite", "-s",
-        choices=[
-            "all",
-            "Auto_Accept_Auto_Ship_Out",
-            "Decommission",
-            "Pack_And_Decommisson",
-            "Pack_Unpack_Child",
-            "Pack_Unpack_Parent"
-        ],
         default="all",
-        help="Test suite to run"
+        help="Test suite to run (use --list to see available suites)"
     )
 
     parser.add_argument(
@@ -252,15 +255,15 @@ def main():
         browser=args.browser,
         tags=args.tags,
         variables=variables,
-        pause_between_suites=args.pause
+        pause_between_tests=args.pause
     )
 
     # Print results summary
     print("\n" + "=" * 80)
     if exit_code == 0:
-        print("✓ All tests passed successfully!")
+        print("[PASS] All tests passed successfully!")
     else:
-        print("✗ Some tests failed or encountered errors")
+        print("[FAIL] Some tests failed or encountered errors")
 
     print(f"Test results available in: {runner.output_dir}")
     print("=" * 80)

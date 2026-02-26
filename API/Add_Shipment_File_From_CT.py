@@ -12,7 +12,7 @@ def get_env(env):
         'content_type' :'application/json',
         'clientid' : "eed783ef-c458-4187-bfab-7635757c5e7d",
         'clientSecret' : "wes_whleOoVXVTAdfY0TRma2hD6XqfIrsqH6",
-        'supplier_to_add_shipment_file' : "6285125000027"
+        'supplier_to_add_shipment_file' : "0000000000001"
         })
 
     elif env == 'stage':

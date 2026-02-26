@@ -2,6 +2,7 @@
 Library     SeleniumLibrary
 Library     ../API/Add_Shipment_File_From_CT.py
 Library    ../API/Permit_Numder.py
+Resource    Common_Keywords.robot
 #Resource    Permit_Number.robot
 
 *** Variables ***
@@ -58,6 +59,7 @@ Add Shipment File sGTIN
 
 
 Open Shipment File
-    Click Element    id=logistic-operations
-    Click Element    id=files
+    Wait And Click Element    id=logistic-operations
+    Sleep    2s
+    Wait And Click Element    id=files
 

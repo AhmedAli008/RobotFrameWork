@@ -22,6 +22,19 @@ def select_env(env, username, parent):
         })
     #return url
 
+def safe_get_message(response):
+    """Safely extract message from API response"""
+    try:
+        result = response.json()
+        if 'message' in result:
+            return result['message']
+        elif 'error' in result:
+            return f"Error: {result['error']}"
+        else:
+            return f"Response: {response.status_code}"
+    except Exception as e:
+        return f"Exception: {str(e)}"
+
 def unpack_by_parent_to_scan(env, username, parent):
     select_env(env, username, parent)
     payload = {
@@ -33,7 +46,7 @@ def unpack_by_parent_to_scan(env, username, parent):
         'Authorization': data['token from login']
     }
     response = requests.post(url['url_to_unpack_by_parent'], json=payload, headers=headers)
-    return response.json()['message']
+    return safe_get_message(response)
 
 def unpack_by_child_to_scan(env, username, parent):
     select_env(env, username, parent)
@@ -46,7 +59,7 @@ def unpack_by_child_to_scan(env, username, parent):
         'Authorization': data['token from login']
     }
     response = requests.post(url['url_to_unpack_by_child'], json=payload, headers=headers)
-    return response.json()['message']
+    return safe_get_message(response)
 
 def submit_unpack_by_parent():
     payload = {
@@ -57,7 +70,7 @@ def submit_unpack_by_parent():
         'Authorization': data['token from login']
     }
     response = requests.post(url['url_submit_unpack_by_parent'], json=payload, headers=headers)
-    return response.json()['message']
+    return safe_get_message(response)
 
 def submit_unpack_by_child():
     payload = {
@@ -68,5 +81,5 @@ def submit_unpack_by_child():
         'Authorization': data['token from login']
     }
     response = requests.post(url['url_submit_unpack_by_child'], json=payload, headers=headers)
-    return response.json()['message']
+    return safe_get_message(response)
 

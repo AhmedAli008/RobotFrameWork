@@ -22,8 +22,17 @@ def pack_by_aggregation_to_scan(env, parent):
         'Content-Type' : 'application/json',
         'Authorization': data['token from login']
     }
-    response = requests.post(url['url_to_pack_by_aggregation'], headers=headers, timeout=30)
-    return response.json()['message']
+    try:
+        response = requests.post(url['url_to_pack_by_aggregation'], headers=headers, timeout=30)
+        result = response.json()
+        if 'message' in result:
+            return result['message']
+        elif 'error' in result:
+            return f"Error: {result['error']}"
+        else:
+            return f"Scan completed: {response.status_code}"
+    except Exception as e:
+        return f"Exception: {str(e)}"
 
 def submit_pack_by_aggregation():
     payload = {}
@@ -31,8 +40,17 @@ def submit_pack_by_aggregation():
         'Content-Type': 'application/json',
         'Authorization': data['token from login']
     }
-    response = requests.post(url['url_submit_pack_by_aggregation'], json=payload, headers=headers)
-    return response.json()['data'][0]['barCode']
+    try:
+        response = requests.post(url['url_submit_pack_by_aggregation'], json=payload, headers=headers)
+        result = response.json()
+        if 'data' in result and len(result['data']) > 0 and 'barCode' in result['data'][0]:
+            return result['data'][0]['barCode']
+        elif 'message' in result:
+            return result['message']
+        else:
+            return f"Submit completed: {response.status_code}"
+    except Exception as e:
+        return f"Exception: {str(e)}"
 
 
 

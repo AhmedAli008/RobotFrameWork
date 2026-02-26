@@ -2,6 +2,7 @@
 Library     SeleniumLibrary
 Library     ../API/UnPack_Scan.py
 Variables   ../API/Token_SSCC_Permit_Num.py
+Resource    Common_Keywords.robot
 
 *** Keywords ***
 Unpack By Parent
@@ -36,16 +37,17 @@ Unpack By Child sGTIN
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
     Reload Page
-    Submit Unpack By Child    
+    Submit Unpack By Child
 
 
 Open UnPack Screen
     Sleep    2s
-    Click Element    id=logistic-operations
-    Sleep    1s
-    Click Element    id=unpack
+    Wait And Click Element    id=logistic-operations
+    Sleep    2s
+    Wait And Click Element    id=unpack
 
 Select Unpack By Child
-    Click Button    id=full-width-tab-1
+    Safe Click Button    id=full-width-tab-1
+
 Submit Unpack
-    Click Button    xpath=//button[contains(text(), 'Submit')]
+    Safe Click Button    xpath=//button[contains(text(), 'Submit')]

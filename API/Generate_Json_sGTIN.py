@@ -28,7 +28,7 @@ def get_payload_to_add_file_sgtin(env, username, password, num):
             "barcode": barcode_list[index],
             "GTIN": data['GTIN'],#data['permit_number'][0]['itemTagId'][:14],
             "batch_number": data['Lot'],#data['permit_number'][0]['itemTagId'][15:],
-            "expiry": "2026-03-13",
+            "expiry": "2029-03-13",
             "manufacturing_date": "2025-03-17"
         })
 

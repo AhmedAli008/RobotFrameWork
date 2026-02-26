@@ -16,6 +16,19 @@ def select_url(env, supplier, serial):
         })
     #return url
 
+def safe_get_message(response):
+    """Safely extract message from API response"""
+    try:
+        result = response.json()
+        if 'message' in result:
+            return result['message']
+        elif 'error' in result:
+            return f"Error: {result['error']}"
+        else:
+            return f"Response: {response.status_code}"
+    except Exception as e:
+        return f"Exception: {str(e)}"
+
 def scan_parent_blind_receive(env, supplier, parent):
     select_url(env, supplier, parent)
     payload = {}
@@ -24,7 +37,8 @@ def scan_parent_blind_receive(env, supplier, parent):
         'Content-Type' : 'application/json'
     }
     response = requests.put(url['url_scan_parent_blind_receive'], json=payload, headers=headers)
-    return response.json()['message']
+    return safe_get_message(response)
+
 def scan_child_blind_receive(env, supplier, child):
     select_url(env, supplier, child)
     payload = {}
@@ -33,7 +47,7 @@ def scan_child_blind_receive(env, supplier, child):
         'Content-Type' : 'application/json'
     }
     response = requests.post(url['url_scan_child_blind_receive'], json=payload, headers=headers)
-    return response.json()['message']
+    return safe_get_message(response)
 
 #get_token_from_login('test','6251151000003_admin','adminP@ssw0rd')
 #get_payload_to_add_file('test','6251151000003_admin','adminP@ssw0rd')

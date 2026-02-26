@@ -21,8 +21,17 @@ def scan_POS(env, parent):
         'Content-Type' : 'application/json',
         'Authorization': data['token from login']
     }
-    response = requests.post(url['url_to_POS'], headers=headers, timeout=30)
-    return response.json()['message']
+    try:
+        response = requests.post(url['url_to_POS'], headers=headers, timeout=30)
+        result = response.json()
+        if 'message' in result:
+            return result['message']
+        elif 'error' in result:
+            return f"Error: {result['error']}"
+        else:
+            return f"Response: {response.status_code}"
+    except Exception as e:
+        return f"Exception: {str(e)}"
 
 #print(add_shipment_file_fetch_file_name('test', '6251151000003_admin', 'adminP@ssw0rd', 2, 3))
 #print(data_SSCC)

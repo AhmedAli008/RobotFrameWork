@@ -4,6 +4,7 @@ Library     ../API/Outbound_Scan.py
 Library     Collections
 Variables   ../API/Outbound_Scan.py
 Variables   ../API/Token_SSCC_Permit_Num.py
+Resource    Common_Keywords.robot
 
 *** Variables ***
 ${Wait_Time}    20s
@@ -60,23 +61,23 @@ Outbound Adhoc SGTIN
 
 Go TO Outbound AdHoc
     Sleep    2s
-    Click Element    id=logistic-operations
-    Sleep    1s
-    Click Element    id=outbound-orders
+    Wait And Click Element    id=logistic-operations
+    Sleep    2s
+    Wait And Click Element    id=outbound-orders
     #Wait Until Page Contains Element   ${Tag_Wait}
     Sleep    3s
-    Click Button    id=full-width-tab-1
+    Safe Click Button    id=full-width-tab-1
     Wait Until Page Contains Element   ${Table_Wait}
 
 Search about Adhoc Supplier
-    Click Button    xpath=//*[@id="full-width-tabpanel-1"]/div/div/div[1]/div[2]/div[2]/div/button[1]
+    Safe Click Button    xpath=//*[@id="full-width-tabpanel-1"]/div/div/div[1]/div[2]/div[2]/div/button[1]
     Wait Until Page Contains Element   ${Text_Wait}
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${outbound_supplier}
+    Wait For Element And Input    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${outbound_supplier}
 
 Select Adhoc Supplier
     Wait Until Page Contains Element   ${Action_Wait}
-    Sleep    1s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Sleep    2s
+    Safe Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
     #Wait Until Page Contains Element   ${Drop_Wait}
     #Click Element    xpath=/html/body/div[4]/div[3]/ul/li
     Sleep    2s
@@ -84,4 +85,6 @@ Select Adhoc Supplier
 
 Submit Ship Out
     #Wait Until Page Contains Element    ${Button_Wait}
-    Click Button    xpath=//button[contains(text(), 'Ship Out')]
+    Sleep    2s
+    Wait Until Element Is Visible    xpath=//button[contains(text(), 'Ship Out')]    10s
+    JS Click Element    xpath=//button[contains(text(), 'Ship Out')]

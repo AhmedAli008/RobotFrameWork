@@ -2,6 +2,7 @@
 Library     SeleniumLibrary
 Library     ../API/Pack_Scan.py
 Variables   ../API/Token_SSCC_Permit_Num.py
+Resource    Common_Keywords.robot
 
 *** Variables ***
 ${main_handle}
@@ -13,7 +14,7 @@ Pack By Aggregation
     Open Pack Screen
     FOR    ${key}    ${value}    IN    &{data_SSCC}
         Pack By Aggregation To Scan   ${ENV}    ${value}
-    END 
+    END
     Sleep    2s
     Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
@@ -43,9 +44,9 @@ Pack By Aggregation sGTIN
 
 Open Pack Screen
     Sleep    2s
-    Click Element    id=logistic-operations
-    Sleep    1s
-    Click Element    id=pack
+    Wait And Click Element    id=logistic-operations
+    Sleep    2s
+    Wait And Click Element    id=pack
     
 Submit Aggregation
     Click Button    xpath=//button[contains(text(), 'Submit')]
