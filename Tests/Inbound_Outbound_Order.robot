@@ -22,5 +22,5 @@ Inbound And Outbound Order
     Create Inbound Order     ${data['supplier_to_add_shipment_file']}    ${Doc.No}    ${Qty Num}
     Scan Inbound Order     ${Doc.No}    ${ENV}    ${UserName}
     Create Outbound Order    ${Doc.No}    ${Qty Num}
-    Scan Outbound Order    ${ENV}    ${Doc.No}
+    Scan Outbound Order    ${Doc.No}
     [Teardown]  Close Browser

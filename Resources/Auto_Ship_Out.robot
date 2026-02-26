@@ -3,28 +3,29 @@ Library     SeleniumLibrary
 
 *** Keywords ***
 Auto Ship Out
-    [Arguments]     ${Name}
+    [Arguments]     ${Name}    ${Supplier}
     Execute JavaScript    document.body.style.zoom='70%'
     Sleep    3s
     Search File    ${Name}
-    Shipout File
+    Shipout File    ${Supplier}
 
 Search File
     [Arguments]     ${File_Name}
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[1]/div[2]/div[2]/div/button[1]
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Sleep    2s
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[5]/div[2]/table/thead/tr/th[5]/div[2]/div/div/div/div/input    ${File_Name}
+    Input Text    id=filter-name    ${File_Name}
     Sleep    2s
 
 Shipout File
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[2]/table/tbody/tr[1]/td[10]/button
+    [Arguments]    ${Supplier}
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    #Click Element    xpath=/html/body/div[4]/div[3]/ul/li[4]
-    Press Keys    None    ARROW_DOWN
-    Press Keys    None    ARROW_DOWN
-    Press Keys    None    ENTER
+    Click Element    xpath=//p[contains(text(),'Ship Out')]
+    #Press Keys    None    ARROW_DOWN
+    #Press Keys    None    ARROW_DOWN
+    #Press Keys    None    ENTER
     Sleep    2s
-    Input Text    xpath=//*[@id="partner"]    6297001303009
+    Input Text    xpath=//*[@id="partner"]    ${Supplier}
     Sleep    2s
     #Click Element    xpath=/html/body/div[4]/div[3]
     Sleep    3s

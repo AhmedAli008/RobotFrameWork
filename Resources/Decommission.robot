@@ -8,9 +8,16 @@ Open Decommission
     Sleep    3s
     Open Decommission Screen
 
+#Scan To Decommission
+#    [Arguments]     ${ENV}  ${Username}     ${SSCC To Scan}
+#    Decommission To Scan    ${ENV}  ${Username}     ${SSCC To Scan}
+
 Scan To Decommission
-    [Arguments]     ${ENV}  ${Username}     ${SSCC To Scan}
-    Decommission To Scan    ${ENV}  ${Username}     ${SSCC To Scan}
+    [Arguments]     ${SSCC To Scan}
+    Sleep    2s
+    Input Text    id=test-scan-field    ${SSCC To Scan}
+    Sleep    2s
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
 
 Submit Decommission
     Reload Page
@@ -21,12 +28,13 @@ Submit Decommission
     
 Open Decommission Screen
     Sleep    1s
+    Execute JavaScript    document.body.style.zoom='70%'
     Click Element    id=logistic-operations
     Sleep    1s
     Click Element    id=decommision
 
 Click Submit Decommission
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button
+    Click Button    xpath=//button[contains(text(),'Submit')]
     Sleep    2s
     
 Confirm Decommission

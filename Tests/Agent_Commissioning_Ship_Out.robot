@@ -11,6 +11,7 @@ ${UserName}     6297001303009_admin
 ${Password}     6297001303009_P@ssw0rd
 ${SSCC_Num}     2
 ${SGTIN_Num}    3
+${Supplier}    6294018311140
 
 *** Test Cases ***
 Agent Commissioning and Ship Out
@@ -18,6 +19,6 @@ Agent Commissioning and Ship Out
     Sleep    2s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     Agent Commissioning    ${Name}
-    Auto Ship Out    ${Name}
+    Auto Ship Out    ${Name}    ${Supplier}
     Sleep    2s
     [Teardown]  Close Browser

@@ -8,11 +8,13 @@ ${main_handle}
 
 *** Keywords ***
 Pack By Aggregation
-    [Arguments]     ${ENV}
     Sleep    3s
     Open Pack Screen
+    Sleep  2s
     FOR    ${key}    ${value}    IN    &{data_SSCC}
-        Pack By Aggregation To Scan   ${ENV}    ${value}
+        #Pack By Aggregation To Scan   ${ENV}    ${value}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
     END 
     Sleep    2s
     Reload Page
@@ -23,15 +25,14 @@ Pack By Aggregation
     RETURN   ${Aggregation SSCC}
 
 Pack By Aggregation sGTIN
-    [Arguments]     ${ENV}
     Sleep    2s
     Open Pack Screen
     Sleep    2s
     FOR    ${key}    ${value}    IN    &{data_SGTIN}
-        Pack By Aggregation To Scan    ${ENV}    ${value}
+        #Pack By Aggregation To Scan    ${ENV}    ${value}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
     END
-    Sleep    2s
-    Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
     Sleep    3s
     ${Aggregation SSCC}     Submit Pack By Aggregation

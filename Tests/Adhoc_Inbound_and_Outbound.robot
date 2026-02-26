@@ -17,7 +17,7 @@ Adhoc Inbound And Outbound
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    1s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
-    Inbound Adhoc   ${ENV}      ${data['supplier_to_add_shipment_file']}
-    Outbound Adhoc  ${ENV}
+    Inbound Adhoc   ${data['supplier_to_add_shipment_file']}
+    Outbound Adhoc
     Sleep    3s
     [Teardown]  Close Browser

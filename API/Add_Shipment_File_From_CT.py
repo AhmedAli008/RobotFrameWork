@@ -1,7 +1,7 @@
 import requests
 from Generate_Json_File import get_payload_to_add_file, get_payload_to_add_mixed_file
 from Generate_Json_sGTIN import get_payload_to_add_file_sgtin
-from Token_SSCC_Permit_Num import data
+from Token_SSCC_Permit_Num import data, data_SSCC, data_SGTIN
 
 data_to_add_file = {}
 def get_env(env):
@@ -22,7 +22,7 @@ def get_env(env):
             'content_type': 'application/json',
             'clientid': "2e84a065-14bd-4387-8b43-4fc24faab5a2",
             'clientSecret': "wes_Byl0X5o7tspEIsOPXdaS1aWnFqqlWPoa",
-            'supplier_to_add_shipment_file': "6285125000027"
+            'supplier_to_add_shipment_file': "0351167000007"
         })
 
 def get_token_from_ct(env):
@@ -80,5 +80,8 @@ def add_shipment_file_sgtin_fetch_file_name(env, username, password, num):
     return response.json()['data'][0]['name']
 
 
-#print(add_shipment_file_fetch_file_name('test', '6251151000003_admin', 'adminP@ssw0rd', 2, 3))
-#print(data)
+#print(add_shipment_file_fetch_file_name('test', '6297001303009_admin', '6297001303009_P@ssw0rd', 5, 3))
+#print(add_shipment_file_fetch_file_name('stage', '6297001303009_admin', 'Admin@12345', 2, 3))
+#print(add_shipment_file_fetch_file_name('stage', '6251151000003_admin', 'adminP@ssw0rd', 2, 3))
+#print(data_SSCC)
+#print(data_SGTIN)

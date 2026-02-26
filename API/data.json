@@ -1,0 +1,56 @@
+{
+    "File": {
+        "referenceId": "",
+        "data": [
+            {
+                "barcode": "6m2bXhr3TPyzKtX",
+                "parent1": "262511511254731495",
+                "GTIN": "06251151000157",
+                "batch_number": "sdiKy",
+                "expiry": "2026-03-13",
+                "manufacturing_date": "2025-03-17"
+            },
+            {
+                "barcode": "Fcsx2RJibzsF9dU",
+                "parent1": "262511511254731495",
+                "GTIN": "06251151000157",
+                "batch_number": "sdiKy",
+                "expiry": "2026-03-13",
+                "manufacturing_date": "2025-03-17"
+            },
+            {
+                "barcode": "k9yPwnJhQ28wtKa",
+                "parent1": "262511511254731495",
+                "GTIN": "06251151000157",
+                "batch_number": "sdiKy",
+                "expiry": "2026-03-13",
+                "manufacturing_date": "2025-03-17"
+            },
+            {
+                "barcode": "jX6z798njgcbq88",
+                "parent1": "262511511254731501",
+                "GTIN": "06251151000157",
+                "batch_number": "sdiKy",
+                "expiry": "2026-03-13",
+                "manufacturing_date": "2025-03-17"
+            },
+            {
+                "barcode": "0xcTmBYgtRlJW5t",
+                "parent1": "262511511254731501",
+                "GTIN": "06251151000157",
+                "batch_number": "sdiKy",
+                "expiry": "2026-03-13",
+                "manufacturing_date": "2025-03-17"
+            },
+            {
+                "barcode": "UKfa7K4Vg6nd2rA",
+                "parent1": "262511511254731501",
+                "GTIN": "06251151000157",
+                "batch_number": "sdiKy",
+                "expiry": "2026-03-13",
+                "manufacturing_date": "2025-03-17"
+            }
+        ]
+    },
+    "OperationType": 3
+}

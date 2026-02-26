@@ -18,13 +18,13 @@ Blind Receive
     FOR    ${key}    ${value}    IN    &{data_SSCC}
         Aggregate Button
         Execute JavaScript    document.body.style.zoom='70%'
-        Scan Parent    ${ENV}    ${Supplier}    ${value}
-        Reload Page
+        Sleep    2s
+        Scan Parent    ${value}
         FOR    ${Index}    IN RANGE    ${SGTIN Num}
-            Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN'+ str(${SGTIN Serials})]}
+            Scan Child    ${data_SGTIN['SGTIN'+ str(${SGTIN Serials})]}
             ${SGTIN Serials}    Evaluate    ${SGTIN Serials}+1
-        END 
-        Reload Page
+            Sleep    1s
+        END
         Submit Aggregation
         Sleep    3s
     END
@@ -33,20 +33,30 @@ Blind Receive
     #Open Shipment File
 
 
+#Scan Parent
+#    [Arguments]     ${ENV}  ${Supplier}   ${Parent}
+#    Scan Parent Blind Receive    ${ENV}    ${Supplier}    ${Parent}
+#
+#Scan Child
+#    [Arguments]     ${ENV}  ${Supplier}     ${Child}
+#    Scan Child Blind Receive    ${ENV}    ${Supplier}    ${Child}
+
 Scan Parent
-    [Arguments]     ${ENV}  ${Supplier}   ${Parent}
-    Scan Parent Blind Receive    ${ENV}    ${Supplier}    ${Parent}
+    [Arguments]      ${Parent}
+    Input Text    id=test-scan-field    ${Parent}
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
 
 Scan Child
-    [Arguments]     ${ENV}  ${Supplier}     ${Child}
-    Scan Child Blind Receive    ${ENV}    ${Supplier}    ${Child}
+    [Arguments]     ${Child}
+    Input Text    id=test-scan-field     ${Child}
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
 
 Submit Aggregation
     Sleep    3s
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[4]/button
+    Click Button    xpath=//button[contains(text(),'Aggregate')]
 
 Submit Blind Receive
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button[2]
+    Click Button    xpath=//button[contains(text(),'Submit')]
 
 Open Blind Receive
     Sleep    2s
@@ -61,18 +71,18 @@ Select Supplier
     Sleep    2s
     Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Sleep    2s
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[5]/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input    ${Supplier}
+    Input Text    id=filter-id    ${Supplier}
 
 Action To Scan
     Sleep    1s
     Click Button    xpath=//button[@aria-label='Row Actions']
     Sleep    3s
-    #Click Element    xpath=/html/body/div[7]/div[3]/ul/li
-    Press Keys    None    ENTER
+    Click Element    xpath=//p[contains(text(),'Scan')]
+    #Press Keys    None    ENTER
     Sleep    3s
 
 Aggregate Button
-    Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/button[1]
+    Click Button    xpath=//button[contains(text(),'Add Aggregated')]
 
     
 

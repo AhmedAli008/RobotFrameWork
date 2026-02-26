@@ -59,5 +59,6 @@ Add Shipment File sGTIN
 
 Open Shipment File
     Click Element    id=logistic-operations
+    Sleep    1s
     Click Element    id=files
 

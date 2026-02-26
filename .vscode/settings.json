@@ -23,18 +23,25 @@
                     "foreground": "#2ECC71", // Comments (green)
                     "fontStyle": "italic"
                 }
-            },
-            {
+                },
+                {
                 "scope": [
-                    "string",
-                    "string.quoted.double",
-                    "string.quoted.single"
-                ],
-                "settings": {
-                    "foreground": "#FFFFFF"
+                        "string"
+                    ],
+                    "settings": {
+                        "foreground": "#FFFFFF"
+                    }
+                },
+                {
+                "scope": [
+                        "string.quoted.double",
+                        "string.quoted.single"
+                    ],
+                    "settings": {
+                        "foreground": "#2ECC71"
+                    }
                 }
-            }
-        ]
+            ]
     },
     "editor.semanticTokenColorCustomizations": {
         "rules": {

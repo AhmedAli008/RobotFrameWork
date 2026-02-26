@@ -14,12 +14,12 @@ ${SSCC_Num}     2
 ${SGTIN_Num}    3
 
 *** Test Cases ***
-Pack And Unpack Child
+Pack And Unpack Parent
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    2s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     Auto Accept    ${Name}
-    ${SSCC}     Pack By Aggregation    ${ENV}
-    Unpack By Parent    ${ENV}    ${UserName}    ${SSCC}
+    ${SSCC}     Pack By Aggregation
+    Unpack By Parent    ${SSCC}
     Sleep    3s
     [Teardown]  Close Browser

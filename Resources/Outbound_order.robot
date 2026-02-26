@@ -19,6 +19,7 @@ Open Outbound
     Click Element    id=logistic-operations
     Sleep    1s
     Click Element    id=outbound-orders
+
 New Order
     Sleep    2S
     Click Button    xpath=//button[contains(text(), 'New Order')]    
@@ -51,29 +52,30 @@ Insert All Req Data
     Sleep    2s
     Click Element    xpath=//tr[@class='dx-row dx-data-row dx-column-lines' and @aria-rowindex='1']
     #Quantity
-    Input Text    xpath=//input[@id='lines[0].quantity']    ${Qty Num}
+    Input Text    id=lines[0].quantity    ${Qty Num}
     #Batch or Lot
-    Input Text    xpath=//input[@id='lines[0].lot']    ${data['Lot']}
+    Input Text    id=lines[0].lot    ${data['Lot']}
     Sleep    2s
     #Confirm 
     Click Button    xpath=//button[contains(text(), 'Confirm')]
 
 Scan Outbound Order
-    [Arguments]    ${ENV}    ${Doc.No}
+    [Arguments]   ${Doc.No}
     Sleep    2s
     #Search about Document Number
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Input Text    id=filter-documentNumber    ${Doc.No}
     #Select Scan from Actions
     Sleep    2s
     Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    Click Element    xpath=//li[@class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-r2hyib"]
+    Click Element    xpath=//p[contains(text(),'Scan')]
     #Scan
     FOR    ${key}    ${value}    IN    &{data_SSCC}
-        Outbound Order Scan   ${ENV}    ${value}    ${Doc.No}
+        #Outbound Order Scan   ${ENV}    ${value}    ${Doc.No}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
     END 
-    Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
     #Confirm Ship Out
     Sleep    2s

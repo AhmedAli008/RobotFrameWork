@@ -17,13 +17,13 @@ Open Inbound Order
     [Arguments]    ${Doc.No}    
     #Search about Doc.No
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Input Text    id=filter-documentNumber    ${Doc.No}
     #Click Scan from Actions
     Sleep    2s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
+    Click Element    xpath=//p[contains(text(),'Scan')]
 
 Select NonSerialize Tab
     Sleep    2s

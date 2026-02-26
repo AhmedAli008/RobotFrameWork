@@ -19,9 +19,9 @@ Pack And Decommission
     Sleep    1s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     Auto Accept    ${Name}
-    ${SSCC}     Pack By Aggregation    ${ENV}
+    ${SSCC}     Pack By Aggregation
     Open Decommission
-    Scan To Decommission    ${ENV}    ${UserName}    ${SSCC}
+    Scan To Decommission    ${SSCC}
     Submit Decommission
     Sleep    3s
     [Teardown]  Close Browser

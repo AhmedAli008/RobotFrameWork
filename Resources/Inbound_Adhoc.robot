@@ -16,16 +16,17 @@ ${Wait_Button}      xpath=//button[contains(text(), 'Submit')]
 
 *** Keywords ***
 Inbound Adhoc
-    [Arguments]     ${ENV}  ${Supplier}
+    [Arguments]    ${Supplier}
     Sleep    3s
     Go To AdHoc Inbound
     Search About Supplier    ${Supplier}
     Select Supplier
     Sleep    1s
     FOR    ${key}    ${value}    IN    &{data_SSCC}
-        Inbound Adhoc Scan    ${ENV}    ${Supplier}    ${value}
-    END    
-    Reload Page
+        #Inbound Adhoc Scan    ${ENV}    ${Supplier}    ${value}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
+    END
     Execute JavaScript    document.body.style.zoom='70%'
     Sleep    3s
     Wait Until Page Contains Element   ${Wait_Button}
@@ -33,12 +34,13 @@ Inbound Adhoc
     Sleep    3s
 
 Inbound Adhoc Without Supplier
-    [Arguments]     ${ENV}  
     Sleep    3s
     Go To AdHoc Inbound
     Select Without Supplier
     FOR    ${key}    ${value}    IN    &{data_SSCC}
-        Inbound Adhoc Without Supplier Scan   ${ENV}    ${value}
+        #Inbound Adhoc Without Supplier Scan   ${ENV}    ${value}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
     END    
     Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
@@ -48,14 +50,16 @@ Inbound Adhoc Without Supplier
     Sleep    3s
 
 Inbound Adhoc sGTIN
-    [Arguments]     ${ENV}  ${Supplier}
+    [Arguments]     ${Supplier}
     Sleep    3s
     Go To AdHoc Inbound
     Search About Supplier    ${Supplier}
     Select Supplier
     Sleep    1s
     FOR    ${key}    ${value}    IN    &{data_SGTIN}
-        Inbound Adhoc Scan    ${ENV}    ${Supplier}    ${value}
+        #Inbound Adhoc Scan    ${ENV}    ${Supplier}    ${value}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
     END    
     Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
@@ -80,7 +84,7 @@ Search About Supplier
     Sleep    2s
     Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Wait Until Page Contains Element   ${Text_Load}
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[2]/div/div/div[2]/div[2]/table/thead/tr/th[2]/div[2]/div/div/div/div/input   ${Supplier}
+    Input Text    id=filter-id   ${Supplier}
 
 Select Supplier
     Wait Until Page Contains Element   ${Action_Load}
@@ -88,9 +92,9 @@ Select Supplier
     #Wait Until Element Is Enabled    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]   timeout=5s
     Click Button    xpath=//button[@aria-label="Row Actions"]
     #Wait Until Page Contains Element   ${Drop_List_Wait}
-    #Click Element    xpath=/html/body/div[4]/div[3]/ul/li
+    Click Element    xpath=//p[contains(text(),'Scan')]
     Sleep    2s
-    Press Keys    None    ENTER
+    #Press Keys    None    ENTER
 
 Submit Scan
     Click Button    xpath=//button[contains(text(), 'Submit')]

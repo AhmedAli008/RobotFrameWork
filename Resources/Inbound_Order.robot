@@ -71,8 +71,8 @@ Insert Product
     Input Text   xpath=/html/body/div[6]/div/div/div[2]/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input   ${data['GTIN']}
     Sleep    3s
     Click Element    xpath=/html/body/div[6]/div/div/div[2]/div/div[6]/div/div/div[1]/div/table/tbody/tr[1]
-    Input Text    xpath=//*[@id="lines[0].quantity"]    ${Qty Num}
-    #Input Text    xpath=//*[@id="lines[0].lot"]    ${data['Lot']}
+    Input Text    id=lines[0].quantity    ${Qty Num}
+    #Input Text    id=lines[0].lot    ${data['Lot']}
 
 Insert Mixed Product
     [Arguments]    ${Qty Num}
@@ -81,8 +81,8 @@ Insert Mixed Product
     Input Text   xpath=/html/body/div[6]/div/div/div[2]/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input   ${data['GTIN']}
     Sleep    3s
     Click Element    xpath=/html/body/div[6]/div/div/div[2]/div/div[6]/div/div/div[1]/div/table/tbody/tr[1]
-    Input Text    xpath=//*[@id="lines[0].quantity"]    ${Qty Num}
-    Input Text    xpath=//*[@id="lines[0].lot"]    ${data['Lot']}
+    Input Text    id=lines[0].quantity    ${Qty Num}
+    Input Text    id=lines[0].lot    ${data['Lot']}
     #Add Line
     Click Button    xpath=//button[contains(text(),'Add Line')]
     Click Element    xpath=//*[@id="lines[1].product"]/div[1]/div/div[1]/input
@@ -90,8 +90,8 @@ Insert Mixed Product
     Input Text   xpath=/html/body/div[7]/div/div/div[2]/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input   ${data['GTIN1']}
     Sleep    3s
     Click Element    xpath=/html/body/div[7]/div/div/div[2]/div/div[6]/div/div/div[1]/div/table/tbody/tr[2]
-    Input Text    xpath=//*[@id="lines[1].quantity"]    ${Qty Num}
-    Input Text    xpath=//*[@id="lines[1].lot"]    ${data['Lot1']}
+    Input Text    id=lines[1].quantity    ${Qty Num}
+    Input Text    id=lines[1].lot    ${data['Lot1']}
 
 Insert Multi SKU Product
     Click Element    xpath=//*[@id="lines[0].product"]/div[1]/div/div[1]/input
@@ -100,8 +100,8 @@ Insert Multi SKU Product
     Sleep    3s
     ${count}=   Get Element Count    ${TABLE_ROWS}
     Click Element    xpath=/html/body/div[6]/div/div/div[2]/div/div[6]/div/div/div[1]/div/table/tbody/tr[1]
-    Input Text    xpath=//*[@id="lines[0].quantity"]    10
-    Input Text    xpath=//*[@id="lines[0].lot"]    ${data['Lot']}
+    Input Text    id=lines[0].quantity    10
+    Input Text    id=lines[0].lot    ${data['Lot']}
     TRY
         Should Be Equal As Integers    ${count}    3
         #Add Line
@@ -111,8 +111,8 @@ Insert Multi SKU Product
         Input Text   xpath=/html/body/div[7]/div/div/div[2]/div/div[5]/div/table/tbody/tr[2]/td[2]/div/div[2]/div/div/div[1]/input   ${data['GTIN']}
         Sleep    3s
         Click Element    xpath=/html/body/div[7]/div/div/div[2]/div/div[6]/div/div/div[1]/div/table/tbody/tr[2]
-        Input Text    xpath=//*[@id="lines[1].quantity"]    10
-        Input Text    xpath=//*[@id="lines[1].lot"]    ${data['Lot']}
+        Input Text    id=lines[1].quantity    10
+        Input Text    id=lines[1].lot    ${data['Lot']}
     EXCEPT
         Execute JavaScript    alert("No Multi SKU for this Product")
         Sleep    5s
@@ -126,13 +126,13 @@ Scan Inbound Order
     [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
     #Search about Doc.No
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Input Text   id=filter-documentNumber    ${Doc.No}
     #Click Scan from Actions
     Sleep    2s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
+    Click Element    xpath=//p[contains(text(),'Scan')]
     #Scan Items
     Scan Items    ${Doc.No}    ${ENV}    ${UserName}
 
@@ -140,13 +140,13 @@ Scan Inbound Order Twice To Remove
     [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
     #Search about Doc.No
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Input Text   id=filter-documentNumber    ${Doc.No}
     #Click Scan from Actions
     Sleep    2s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
+    Click Element    xpath=//p[contains(text(),'Scan')]
     #Scan Items Twice To Remove
     Inbound Order Scan    ${ENV}    ${UserName}    ${data_SSCC['SSCC0']}    ${Doc.No}
     Reload Page
@@ -168,7 +168,7 @@ Scan Inbound Order Twice To Remove
     Execute JavaScript    document.body.style.zoom='70%'
     #Clear All
     Sleep    3s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div/div[2]/button
+    Click Button    xpath=//button[@aria-label="Clear All Scanned Items"]
     Sleep    2s
     Click Button    xpath=//button[contains(text(), 'Confirm')]
     Sleep    3s
@@ -188,13 +188,13 @@ Scan Inbound Order after Exeed Limit
     [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
     #Search about Doc.No
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Input Text    id=filter-documentNumber    ${Doc.No}
     #Click Scan from Actions
     Sleep    2s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
+    Click Element    xpath=//p[contains(text(),'Scan')]
     #Scan Items
     FOR    ${key}    ${value}    IN    &{data_SSCC}
         Inbound Order Scan    ${ENV}    ${UserName}    ${value}    ${Doc.No}
@@ -204,13 +204,13 @@ Scan Inbound Order Multi SKU
     [Arguments]    ${Doc.No}    ${ENV}    ${UserName}
     #Search about Doc.No
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
+    Input Text     id=filter-documentNumber    ${Doc.No}
     #Click Scan from Actions
     Sleep    2s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[1]
+    Click Element    xpath=//p[contains(text(),'Scan')]
     #Scan Items
     Scan Items Multi SKU   ${Doc.No}    ${ENV}    ${UserName}
     
@@ -270,19 +270,19 @@ Edit Order
     Go Back
     #Search about Doc.No
     Sleep    2s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div[2]/div[1]/div[2]/div[2]/div/button[1]
+    Click Button    xpath=//button[@aria-label="Show/Hide filters"]
     Sleep    2s
-    Input Text    xpath=/html/body/div[1]/div[1]/main/div[3]/div/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/div/input    ${Doc.No}
+    Input Text    id=filter-documentNumber    ${Doc.No}
     #Click Edit from Actions
     Sleep    2s
-    Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
+    Click Button    xpath=//button[@aria-label="Row Actions"]
     Sleep    2s
-    Click Element    xpath=/html/body/div[7]/div[3]/ul/li[3]
+    Click Element    xpath=//p[contains(text(),'Edit')]
     Sleep    2s
     #Edit Qty
-    Click Element    xpath=//*[@id="lines[0].quantity"]
+    Click Element    id=lines[0].quantity
     Press Keys    None    BACKSPACE
-    Input Text    xpath=//*[@id="lines[0].quantity"]    ${Qty Num}
+    Input Text    id=lines[0].quantity    ${Qty Num}
     Sleep    2s
     #Confirm Edit
     Click Button    xpath=//button[contains(text(),'Confirm')]

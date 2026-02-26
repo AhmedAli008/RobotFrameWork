@@ -1,5 +1,6 @@
 import random
 import string
+import json
 from Token_SSCC_Permit_Num import get_sscc, get_gtin_and_lot_from_permit_num, data, data_SGTIN
 
 def generate_gs1_serial(item):
@@ -37,6 +38,9 @@ def get_payload_to_add_file_sgtin(env, username, password, num):
     for item in json_items:
         data_SGTIN[f'SGTIN{number}'] = generate_gs1_serial(item)
         number += 1
+
+    #with open('data.json', 'w') as json_file:
+        #json.dump(data_SGTIN, json_file, indent=4)
 
     payload = {
         "File": {
