@@ -1,11 +1,98 @@
 image: python:3.9
 
-pipelines:
-  default:
-    - step:
-        name: Build and Test
+definitions:
+  caches:
+    pip-cache: ~/.cache/pip
+
+  steps:
+    - step: &run-automation-tests
+        name: Run Automation Tests
         caches:
-          - pip
+          - pip-cache
+        size: 2x
         script:
+          # Install Chrome browser
+          - apt-get update
+          - apt-get install -y wget gnupg2 unzip
+          - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+          - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+          - apt-get update
+          - apt-get install -y google-chrome-stable
+
+          # Install Python dependencies
+          - pip install --upgrade pip
           - pip install -r requirements.txt
-          - python -m pytest
+
+          # Create output directories
+          - mkdir -p Output log
+
+          # Display test execution info
+          - echo "=========================================="
+          - echo "Trigger Source  - ${TRIGGER_SOURCE:-manual}"
+          - echo "Dev Branch      - ${DEV_BRANCH:-unknown}"
+          - echo "Dev Commit      - ${DEV_COMMIT:-unknown}"
+          - echo "Environment     - ${ENV:-test}"
+          - echo "=========================================="
+
+          # Run all Robot Framework tests
+          - python run_tests.py --suite all --env ${ENV:-test} --browser chrome --headless
+
+        after-script:
+          # Send email notification (runs regardless of pass/fail)
+          - python send_notification.py
+
+        artifacts:
+          - Output/**
+
+    - step: &run-automation-tests-release
+        name: Run Automation Tests (Release)
+        caches:
+          - pip-cache
+        size: 2x
+        script:
+          - apt-get update
+          - apt-get install -y wget gnupg2 unzip
+          - wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+          - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+          - apt-get update
+          - apt-get install -y google-chrome-stable
+          - pip install --upgrade pip
+          - pip install -r requirements.txt
+          - mkdir -p Output log
+          - echo "=========================================="
+          - echo "RELEASE TRIGGER"
+          - echo "Release Tag     - ${RELEASE_TAG:-unknown}"
+          - echo "Dev Branch      - ${DEV_BRANCH:-unknown}"
+          - echo "Environment     - ${ENV:-test}"
+          - echo "=========================================="
+          - python run_tests.py --suite all --env ${ENV:-test} --browser chrome --headless
+
+        after-script:
+          - python send_notification.py
+
+        artifacts:
+          - Output/**
+
+pipelines:
+  # ============================================================
+  # Triggered by the dev repo pipeline via Bitbucket API
+  # ============================================================
+  custom:
+    triggered-by-dev:
+      - step: *run-automation-tests
+
+    triggered-by-release:
+      - step: *run-automation-tests-release
+
+  # ============================================================
+  # Also runs when you push directly to this automation repo
+  # ============================================================
+  branches:
+    main:
+      - step: *run-automation-tests
+
+  # ============================================================
+  # Manual trigger (default pipeline)
+  # ============================================================
+  default:
+    - step: *run-automation-tests

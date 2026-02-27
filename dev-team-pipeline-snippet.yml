@@ -1,0 +1,103 @@
+# ================================================================
+# DEV TEAM: Add this to your bitbucket-pipelines.yml
+# ================================================================
+# This snippet triggers the automation tests in the automation repo
+# whenever you push to main or create a release tag.
+#
+# SETUP REQUIRED (one-time):
+#   1. Go to Bitbucket > Your Workspace Settings > App Passwords
+#      (or use Repository Access Tokens)
+#   2. Create an App Password with these permissions:
+#      - Pipelines: Read & Write
+#      - Repositories: Read
+#   3. Go to your DEV repo > Repository Settings > Pipeline > Variables
+#   4. Add these repository variables:
+#      - BB_AUTH_USER     = your_bitbucket_username  (not secured)
+#      - BB_AUTH_PASSWORD  = your_app_password        (secured)
+#      - BB_WORKSPACE     = your_workspace_slug       (not secured)
+#      - BB_AUTOMATION_REPO = automation_repo_slug     (not secured)
+# ================================================================
+
+image: atlassian/default-image:4
+
+definitions:
+  steps:
+    - step: &trigger-automation-tests
+        name: Trigger Automation Tests
+        script:
+          - echo "Triggering automation tests in ${BB_AUTOMATION_REPO}..."
+          - |
+            curl -s -X POST \
+              -u "${BB_AUTH_USER}:${BB_AUTH_PASSWORD}" \
+              -H "Content-Type: application/json" \
+              "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_AUTOMATION_REPO}/pipelines/" \
+              -d '{
+                "target": {
+                  "ref_type": "branch",
+                  "type": "pipeline_ref_target",
+                  "ref_name": "main",
+                  "selector": {
+                    "type": "custom",
+                    "pattern": "triggered-by-dev"
+                  }
+                },
+                "variables": [
+                  { "key": "TRIGGER_SOURCE", "value": "dev-pipeline" },
+                  { "key": "DEV_BRANCH", "value": "'"${BITBUCKET_BRANCH}"'" },
+                  { "key": "DEV_COMMIT", "value": "'"${BITBUCKET_COMMIT}"'" },
+                  { "key": "ENV", "value": "test" }
+                ]
+              }'
+          - echo "Automation tests triggered successfully!"
+
+    - step: &trigger-automation-tests-release
+        name: Trigger Automation Tests (Release)
+        script:
+          - echo "Triggering automation tests for release ${BITBUCKET_TAG}..."
+          - |
+            curl -s -X POST \
+              -u "${BB_AUTH_USER}:${BB_AUTH_PASSWORD}" \
+              -H "Content-Type: application/json" \
+              "https://api.bitbucket.org/2.0/repositories/${BB_WORKSPACE}/${BB_AUTOMATION_REPO}/pipelines/" \
+              -d '{
+                "target": {
+                  "ref_type": "branch",
+                  "type": "pipeline_ref_target",
+                  "ref_name": "main",
+                  "selector": {
+                    "type": "custom",
+                    "pattern": "triggered-by-release"
+                  }
+                },
+                "variables": [
+                  { "key": "TRIGGER_SOURCE", "value": "dev-release" },
+                  { "key": "DEV_BRANCH", "value": "'"${BITBUCKET_BRANCH}"'" },
+                  { "key": "DEV_COMMIT", "value": "'"${BITBUCKET_COMMIT}"'" },
+                  { "key": "RELEASE_TAG", "value": "'"${BITBUCKET_TAG}"'" },
+                  { "key": "ENV", "value": "test" }
+                ]
+              }'
+          - echo "Automation tests triggered for release!"
+
+pipelines:
+  # ================================================
+  # Runs on every push to main branch
+  # ================================================
+  branches:
+    main:
+      - step:
+          name: Build & Deploy   # <-- your existing build steps here
+          script:
+            - echo "Your existing build/deploy steps..."
+      - step: *trigger-automation-tests
+
+  # ================================================
+  # Runs when a release tag is created (e.g., v1.0.0)
+  # ================================================
+  tags:
+    'v*':
+      - step:
+          name: Build & Deploy Release   # <-- your existing release steps here
+          script:
+            - echo "Your existing release build/deploy steps..."
+      - step: *trigger-automation-tests-release
