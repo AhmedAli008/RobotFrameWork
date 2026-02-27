@@ -67,8 +67,8 @@ def add_permit_num(username):
         "tenantId": username[:13],
         "PermitNumber": "shp/MP/48913/2020",
         "PermitNumberLines": [
-            {"gtin": gtin1, "lot": rondom_value(), "quantity": "100"},
-            {"gtin": gtin2, "lot": rondom_value(), "quantity": "100"},
+            {"gtin": gtin1, "lot": rondom_value(), "quantity": "10000"},
+            {"gtin": gtin2, "lot": rondom_value(), "quantity": "10000"},
         ],
     }
     headers = {
@@ -99,4 +99,6 @@ def delete_permit_number(username, id):
     return result
 
 
-print(permit_num("test", "6251151000003_admin", "adminP@ssw0rd"))
+#print(permit_num("test", "6297001303009_admin", "6297001303009_P@ssw0rd"))
+#print(permit_num("stage", "6297001303009_admin", "Admin@12345"))
+#print(permit_num("stage", "6251151000003_admin", "adminP@ssw0rd"))

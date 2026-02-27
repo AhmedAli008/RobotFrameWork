@@ -4,11 +4,11 @@ Resource    Common_Keywords.robot
 
 *** Keywords ***
 Auto Ship Out
-    [Arguments]     ${Name}
+    [Arguments]     ${Name}    ${Supplier}
     Execute JavaScript    document.body.style.zoom='70%'
     Sleep    3s
     Search File    ${Name}
-    Shipout File
+    Shipout File    ${Supplier}
 
 Search File
     [Arguments]     ${File_Name}
@@ -20,10 +20,10 @@ Search File
 Shipout File
     Safe Click Button    xpath=//*[@id="root"]/div[1]/main/div[5]/div[2]/table/tbody/tr[1]/td[10]/button
     Sleep    2s
-    #Click Element    xpath=/html/body/div[4]/div[3]/ul/li[4]
-    Press Keys    None    ARROW_DOWN
-    Press Keys    None    ARROW_DOWN
-    Press Keys    None    ENTER
+    Click Element    xpath=//p[contains(text(),'Ship Out')]
+    #Press Keys    None    ARROW_DOWN
+    #Press Keys    None    ARROW_DOWN
+    #Press Keys    None    ENTER
     Sleep    2s
     Wait For Element And Input    xpath=//*[@id="partner"]    6294018311140
     Sleep    2s

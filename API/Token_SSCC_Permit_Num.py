@@ -10,13 +10,15 @@ def select_env(env):
         url.update({
             'url_to_login' : 'https://wes-identity.test.originsysglobal.com/api/Authentication/GetToken?culture=en',
             'url_to_get_sscc' : "https://wes-api.test.originsysglobal.com/api/v1/SerialGenerator/generate-sscc",
-            'url_to_get_permit_num' : 'https://wes-api.test.originsysglobal.com/PermitNumber/GetPermitNumbers?culture=en'
+            'url_to_get_permit_num' : 'https://wes-api.test.originsysglobal.com/PermitNumber/GetPermitNumbers?culture=en',
+                "url_submit_pack_by_aggregation": "https://wes-api.test.originsysglobal.com/api/v1/pack-by-aggregation/submit?culture=en"
         })
     elif env == 'stage':
         url.update({
             'url_to_login' : 'https://stg.identity.aws.originsysglobal.com/api/Authentication/GetToken?culture=en',
             'url_to_get_sscc' : "https://atp.staging.api.aws.originsysglobal.com/api/v1/SerialGenerator/generate-sscc",
-            'url_to_get_permit_num' : 'https://atp.staging.api.aws.originsysglobal.com/PermitNumber/GetPermitNumbers?culture=en'
+            'url_to_get_permit_num' : 'https://atp.staging.api.aws.originsysglobal.com/PermitNumber/GetPermitNumbers?culture=en',
+                "url_submit_pack_by_aggregation": "https://atp.staging.api.aws.originsysglobal.com/api/v1/pack-by-aggregation/submit?culture=en"
         })
     #return url
 
@@ -66,5 +68,5 @@ def get_gtin_and_lot_from_permit_num(env, username, password):
     data['Lot1']=data['permit_number'][1]['itemTagId'][15:]
     return result[0]['permitNumberLines']
 
-#print(get_gtin_and_lot_from_permit_num('test','6251151000003_admin','adminP@ssw0rd'))
+#print(get_token_from_login('test','6251151000003_admin','adminP@ssw0rd'))
 #print(data)

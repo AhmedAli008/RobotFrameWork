@@ -19,7 +19,7 @@ Pack And Unpack Child
     Sleep    1s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
     Auto Accept    ${Name}
-    Pack By Aggregation    ${ENV}
-    Unpack By Child    ${ENV}    ${UserName}
+    Pack By Aggregation
+    Unpack By Child
     Sleep    3s
     [Teardown]  Close Browser

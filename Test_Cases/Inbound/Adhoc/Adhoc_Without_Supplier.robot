@@ -17,6 +17,6 @@ Adhoc Inbound Without Supplier
     Login Page   ${ENV}   ${UserName}     ${Password}
     Sleep    1s
     ${Name}   Add Shipment File   ${ENV}  ${UserName}   ${Password}    ${SSCC_Num}    ${SGTIN_Num}
-    Inbound Adhoc Without Supplier    ${ENV}
+    Inbound Adhoc Without Supplier
     Sleep    3s
     [Teardown]  Close Browser

@@ -20,17 +20,16 @@ ${Button_Wait}  xpath=//button[contains(text(), 'Ship Out')]
 *** Keywords ***
 Outbound Adhoc
     #Wait Until Page Contains Element    ${Home_Page}
-    [Arguments]     ${ENV}
     Sleep    3s
     Go TO Outbound AdHoc
     Search about Adhoc Supplier
     Select Adhoc Supplier
     Sleep    2s
     FOR    ${key}    ${value}    IN    &{data_SSCC}
-        Outbound Adhoc Scan    ${ENV}    ${value}
+        #Outbound Adhoc Scan    ${ENV}    ${value}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
     END 
-    Sleep    2s
-    Reload Page
     #Sleep    3s
     #Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
@@ -40,17 +39,16 @@ Outbound Adhoc
 
 Outbound Adhoc SGTIN
     #Wait Until Page Contains Element    ${Home_Page}
-    [Arguments]     ${ENV}
     Sleep    3s
     Go TO Outbound AdHoc
     Search about Adhoc Supplier
     Select Adhoc Supplier
     Sleep    2s
     FOR    ${key}    ${value}    IN    &{data_SGTIN}
-        Outbound Adhoc Scan    ${ENV}    ${value}
+        #Outbound Adhoc Scan    ${ENV}    ${value}
+        Input Text    id=test-scan-field    ${value}
+        Click Button    xpath=//button[contains(text(),'Test Scan')]
     END 
-    Sleep    2s
-    Reload Page
     #Sleep    3s
     #Reload Page
     Execute JavaScript    document.body.style.zoom='70%'
@@ -79,9 +77,9 @@ Select Adhoc Supplier
     Sleep    2s
     Safe Click Button    xpath=//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-1hhhz6a"]
     #Wait Until Page Contains Element   ${Drop_Wait}
-    #Click Element    xpath=/html/body/div[4]/div[3]/ul/li
     Sleep    2s
-    Press Keys    None    ENTER
+    Click Element    xpath=//p[contains(text(),'Scan')]
+    #Press Keys    None    ENTER
 
 Submit Ship Out
     #Wait Until Page Contains Element    ${Button_Wait}

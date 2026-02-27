@@ -219,7 +219,7 @@ Scan Inbound Order Twice To Remove
     Execute JavaScript    document.body.style.zoom='70%'
     #Clear All
     Sleep    3s
-    Click Button    xpath=//*[@id="full-width-tabpanel-0"]/div/div/div[2]/button
+    Click Button    xpath=//button[@aria-label="Clear All Scanned Items"]
     Sleep    2s
     Click Button    xpath=//button[contains(text(), 'Confirm')]
     Sleep    3s

@@ -9,6 +9,10 @@ Open Decommission
     Sleep    3s
     Open Decommission Screen
 
+#Scan To Decommission
+#    [Arguments]     ${ENV}  ${Username}     ${SSCC To Scan}
+#    Decommission To Scan    ${ENV}  ${Username}     ${SSCC To Scan}
+
 Scan To Decommission
     [Arguments]     ${SSCC To Scan}
     Sleep    2s

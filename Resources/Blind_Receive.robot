@@ -19,10 +19,10 @@ Blind Receive
     FOR    ${key}    ${value}    IN    &{data_SSCC}
         Aggregate Button
         Execute JavaScript    document.body.style.zoom='70%'
-        Scan Parent    ${ENV}    ${Supplier}    ${value}
-        Reload Page
+        Sleep    2s
+        Scan Parent    ${value}
         FOR    ${Index}    IN RANGE    ${SGTIN Num}
-            Scan Child    ${ENV}    ${Supplier}    ${data_SGTIN['SGTIN'+ str(${SGTIN Serials})]}
+            Scan Child    ${data_SGTIN['SGTIN'+ str(${SGTIN Serials})]}
             ${SGTIN Serials}    Evaluate    ${SGTIN Serials}+1
         END
         Reload Page
@@ -34,13 +34,23 @@ Blind Receive
     #Open Shipment File
 
 
+#Scan Parent
+#    [Arguments]     ${ENV}  ${Supplier}   ${Parent}
+#    Scan Parent Blind Receive    ${ENV}    ${Supplier}    ${Parent}
+#
+#Scan Child
+#    [Arguments]     ${ENV}  ${Supplier}     ${Child}
+#    Scan Child Blind Receive    ${ENV}    ${Supplier}    ${Child}
+
 Scan Parent
-    [Arguments]     ${ENV}  ${Supplier}   ${Parent}
-    Scan Parent Blind Receive    ${ENV}    ${Supplier}    ${Parent}
+    [Arguments]      ${Parent}
+    Input Text    id=test-scan-field    ${Parent}
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
 
 Scan Child
-    [Arguments]     ${ENV}  ${Supplier}     ${Child}
-    Scan Child Blind Receive    ${ENV}    ${Supplier}    ${Child}
+    [Arguments]     ${Child}
+    Input Text    id=test-scan-field     ${Child}
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
 
 Submit Aggregation
     Sleep    3s
@@ -70,8 +80,8 @@ Action To Scan
     Sleep    1s
     Safe Click Button    xpath=//button[@aria-label='Row Actions']
     Sleep    3s
-    #Click Element    xpath=/html/body/div[7]/div[3]/ul/li
-    Press Keys    None    ENTER
+    Click Element    xpath=//p[contains(text(),'Scan')]
+    #Press Keys    None    ENTER
     Sleep    3s
 
 Aggregate Button

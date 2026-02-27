@@ -12,7 +12,7 @@ Resource    ../Resources/Outbound_Adhoc.robot
 ${ENV}
 ${UserName}     6251151000003_admin
 ${Password}     adminP@ssw0rd
-${NUM}    25000
+${NUM}    25
 
 *** Test Cases ***
 Upload and Adhoc Scan and Pack sGTIN
@@ -21,8 +21,8 @@ Upload and Adhoc Scan and Pack sGTIN
     ${Name}   Add Shipment File sGTIN   ${ENV}  ${UserName}   ${Password}    ${NUM}
     View Data    ${Name}
     Sleep    3s
-    Inbound Adhoc sGTIN    ${ENV}    ${data['supplier_to_add_shipment_file']}
-    Pack By Aggregation sGTIN    ${ENV}
-    Unpack By Child sGTIN    ${ENV}    ${UserName}
-    Outbound Adhoc SGTIN    ${ENV}
+    Inbound Adhoc sGTIN    ${data['supplier_to_add_shipment_file']}
+    Pack By Aggregation sGTIN
+    Unpack By Child sGTIN
+    Outbound Adhoc SGTIN
     [Teardown]  Close Browser

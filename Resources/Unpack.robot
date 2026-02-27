@@ -6,34 +6,38 @@ Resource    Common_Keywords.robot
 
 *** Keywords ***
 Unpack By Parent
-    [Arguments]     ${ENV}  ${Username}  ${Parent}
+    [Arguments]    ${Parent}
     Sleep    3s
     Open UnPack Screen
-    Unpack By Parent To Scan    ${ENV}    ${Username}    ${Parent}
+    #Unpack By Parent To Scan    ${ENV}    ${Username}    ${Parent}
+    Input Text    id=test-scan-field    ${Parent}
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
-    Submit Unpack By Parent
-    Reload Page
+    #Submit Unpack By Parent
+    Submit Unpack
 
 Unpack By Child
-    [Arguments]     ${ENV}  ${Username}
     Sleep    3s
     Open UnPack Screen
     Sleep    2s
     Select Unpack By Child
-    Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SSCC['SSCC1']}
+    #Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SSCC['SSCC1']}
+    Input Text    id=test-scan-field    ${data_SSCC['SSCC1']}
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
-    Reload Page
-    Submit Unpack By Child
+    #Submit Unpack By Child
+    Submit Unpack
 
 Unpack By Child sGTIN
-    [Arguments]     ${ENV}  ${Username}
     Sleep    3s
     Open UnPack Screen
     Sleep    2s
     Select Unpack By Child
-    Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SGTIN['SGTIN1']}
+    #Unpack By Child To Scan    ${ENV}    ${Username}    ${data_SGTIN['SGTIN1']}
+    Input Text    id=test-scan-field    ${data_SGTIN['SGTIN1']}
+    Click Button    xpath=//button[contains(text(),'Test Scan')]
     Sleep    3s
     Execute JavaScript    document.body.style.zoom='70%'
     Reload Page

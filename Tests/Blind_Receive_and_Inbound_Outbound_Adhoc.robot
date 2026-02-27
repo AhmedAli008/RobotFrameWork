@@ -22,6 +22,6 @@ Blind Receive and Inbound Outbound Adhoc
     Get Payload To Add File    ${ENV}    ${UserName}    ${Password}    ${SSCC Num}    ${SGTIN Num}
     Blind Receive   ${ENV}   ${GLN_Supplier}    ${SGTIN Num}
     Sleep    3s
-    Inbound Adhoc   ${ENV}      ${GLN_Supplier}
-    Outbound Adhoc  ${ENV}
+    Inbound Adhoc      ${GLN_Supplier}
+    Outbound Adhoc
     [Teardown]  Close Browser

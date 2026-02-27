@@ -1,5 +1,6 @@
 import random
 import string
+import json
 from Token_SSCC_Permit_Num import get_sscc, get_gtin_and_lot_from_permit_num, data, data_SGTIN, data_SSCC
 
 
@@ -14,7 +15,8 @@ def get_payload_to_add_file(env, username, password, sscc_num, sgtin_num):
     get_gtin_and_lot_from_permit_num(env, username, password)
 
     def generate_random_numeric(length):
-        return ''.join(random.choices(string.digits, k=length))
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+    
     data_SSCC.clear()
     for index in range(sscc_num):
         data_SSCC[f'SSCC{index}'] = get_sscc(env, username, password)
@@ -22,8 +24,8 @@ def get_payload_to_add_file(env, username, password, sscc_num, sgtin_num):
     total_barcodes_needed = sscc_num*sgtin_num
     barcodes = set()
     while len(barcodes) < total_barcodes_needed:  # For 200 items, change to 200
-        barcode = generate_random_numeric(13)
-        if len(barcode) == 13:
+        barcode = generate_random_numeric(15)
+        if len(barcode) == 15:
             barcodes.add(barcode)
     barcode_list = list(barcodes)
 
@@ -54,6 +56,9 @@ def get_payload_to_add_file(env, username, password, sscc_num, sgtin_num):
         },
         "OperationType": 3
     }
+
+    with open('data.json', 'w') as json_file:
+        json.dump(payload, json_file, indent=4)
 
     return payload
 
@@ -112,8 +117,11 @@ def get_payload_to_add_mixed_file(env, username, password, sscc_num, sgtin_num):
         "OperationType": 3
     }
 
+    with open('data.json', 'w') as json_file:
+        json.dump(payload, json_file, indent=4)
+
     return payload
 
 
-#print(get_payload_to_add_mixed_file('test','6251151000003_admin','adminP@ssw0rd', 2, 4))
+#get_payload_to_add_mixed_file('test','6297001303009_admin','6297001303009_P@ssw0rd', 5, 4)
 #print(data_SSCC)

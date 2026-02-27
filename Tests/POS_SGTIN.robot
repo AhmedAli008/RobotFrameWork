@@ -17,6 +17,6 @@ POS SGTIN
     Sleep    2s
     ${Name}    Add Shipment File sGTIN   ${ENV}    ${UserName}    ${Password}    ${Num}
     Auto Accept    ${Name}
-    Dispance SGTIN    ${ENV}  
+    Dispance SGTIN 
     [Teardown]  Close Browser  
     
