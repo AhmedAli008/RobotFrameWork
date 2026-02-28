@@ -160,10 +160,11 @@ def build_email_html(results, trigger_source, dev_branch, dev_commit, release_ta
 
 def send_email(html_body, status_text):
     """Send email notification via SMTP."""
-    smtp_server = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
+    smtp_server = os.environ.get("SMTP_SERVER", "smtp.sendgrid.net")
     smtp_port = int(os.environ.get("SMTP_PORT", "587"))
-    smtp_user = os.environ.get("SMTP_USER", "")
+    smtp_user = os.environ.get("SMTP_USER", "apikey")
     smtp_password = os.environ.get("SMTP_PASSWORD", "")
+    sender_email = "Ahmed.Ali@originsysglobal.com"
     recipient = "Ahmed.Ali@originsysglobal.com"
 
     if not smtp_user or not smtp_password:
@@ -173,7 +174,7 @@ def send_email(html_body, status_text):
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"[Automation] {status_text} - Robot Framework Tests"
-    msg["From"] = smtp_user
+    msg["From"] = sender_email
     msg["To"] = recipient
 
     msg.attach(MIMEText(html_body, "html"))
@@ -182,7 +183,7 @@ def send_email(html_body, status_text):
         server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
         server.login(smtp_user, smtp_password)
-        server.sendmail(smtp_user, [recipient], msg.as_string())
+        server.sendmail(sender_email, [recipient], msg.as_string())
         server.quit()
         print(f"Email notification sent to {recipient}")
         return True

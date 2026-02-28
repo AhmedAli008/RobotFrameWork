@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    environment {
+        SMTP_SERVER = 'smtp.sendgrid.net'
+        SMTP_PORT = '587'
+        SMTP_USER = 'apikey'
+        SMTP_PASSWORD = credentials('SENDGRID_API_KEY')
+    }
+
     parameters {
         choice(
             name: 'ENVIRONMENT',
@@ -128,33 +135,11 @@ pipeline {
             echo 'Archiving results...'
             archiveArtifacts artifacts: 'Output/**/*', allowEmptyArchive: true
 
-            script {
-                def buildStatus = currentBuild.result ?: 'SUCCESS'
-
-                // Using mail step with correct syntax
-                mail(
-                    to: 'Ahmed.Ali@originsysglobal.com',
-                    subject: "[Jenkins] ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                    body: """
-                    Robot Framework Test Execution Report
-
-                    Build Status: ${buildStatus}
-                    Job: ${env.JOB_NAME}
-                    Build Number: ${env.BUILD_NUMBER}
-                    Environment: ${params.ENVIRONMENT}
-                    Test Suite: ${params.TEST_SUITE}
-                    Headless Mode: ${params.HEADLESS_MODE}
-                    Build Duration: ${currentBuild.durationString}
-
-                    Build URL: ${env.BUILD_URL}
-                    Console Output: ${env.BUILD_URL}console
-                    Test Report: ${env.BUILD_URL}artifact/Output/report.html
-                    Test Log: ${env.BUILD_URL}artifact/Output/log.html
-
-                    This is an automated message from Jenkins.
-                    """
-                )
-            }
+            // Send email notification via SendGrid
+            bat '''
+                call venv\\Scripts\\activate.bat
+                python send_notification.py
+            '''
         }
 
         success {

@@ -74,13 +74,12 @@ Go to **Automation repo > Repository Settings > Pipelines > Repository Variables
 
 | Variable        | Value                          | Secured |
 |-----------------|--------------------------------|---------|
-| `SMTP_SERVER`   | smtp.gmail.com (or your SMTP)  | No      |
+| `SMTP_SERVER`   | smtp.sendgrid.net              | No      |
 | `SMTP_PORT`     | 587                            | No      |
-| `SMTP_USER`     | sender-email@domain.com        | No      |
-| `SMTP_PASSWORD` | email app password             | Yes     |
+| `SMTP_USER`     | apikey                         | No      |
+| `SMTP_PASSWORD` | SendGrid API Key (SG.xxxxx...) | Yes     |
 
-> **Note:** If using Gmail, you need an [App Password](https://myaccount.google.com/apppasswords), not your regular password.
-> If using company SMTP (e.g., Outlook/Exchange), use: `SMTP_SERVER=smtp.office365.com`, `SMTP_PORT=587`.
+> **Note:** The `SMTP_USER` for SendGrid is always the literal string `apikey`. The `SMTP_PASSWORD` is your SendGrid API Key (starts with `SG.`). You can generate one at [SendGrid API Keys](https://app.sendgrid.com/settings/api_keys).
 
 The email includes:
 - Pass/Fail status with color-coded header

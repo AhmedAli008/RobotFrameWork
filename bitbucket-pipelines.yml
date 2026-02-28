@@ -39,6 +39,9 @@ definitions:
 
         after-script:
           # Send email notification (runs regardless of pass/fail)
+          - export SMTP_SERVER="smtp.sendgrid.net"
+          - export SMTP_PORT="587"
+          - export SMTP_USER="apikey"
           - python send_notification.py
 
         artifacts:
@@ -68,6 +71,9 @@ definitions:
           - python run_tests.py --suite all --env ${ENV:-test} --browser chrome --headless
 
         after-script:
+          - export SMTP_SERVER="smtp.sendgrid.net"
+          - export SMTP_PORT="587"
+          - export SMTP_USER="apikey"
           - python send_notification.py
 
         artifacts:
