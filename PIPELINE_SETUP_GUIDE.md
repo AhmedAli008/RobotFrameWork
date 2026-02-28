@@ -66,20 +66,43 @@ They need to add the trigger steps to their `bitbucket-pipelines.yml`.
 | Push to automation repo main | Tests run automatically                               |
 | Manual trigger               | Default pipeline runs all tests                       |
 
-## Step 6: Configure Email Notifications
+## Step 6: Configure Email Notifications (SendGrid)
 
-Email notifications are sent to `Ahmed.Ali@originsysglobal.com` after every test run.
+Email notifications are sent to `Ahmed.Ali@originsysglobal.com` after every test run using [SendGrid](https://sendgrid.com/) SMTP.
+
+### Bitbucket Pipelines
 
 Go to **Automation repo > Repository Settings > Pipelines > Repository Variables** and add:
 
 | Variable        | Value                          | Secured |
 |-----------------|--------------------------------|---------|
-| `SMTP_SERVER`   | smtp.sendgrid.net              | No      |
-| `SMTP_PORT`     | 587                            | No      |
-| `SMTP_USER`     | apikey                         | No      |
 | `SMTP_PASSWORD` | SendGrid API Key (SG.xxxxx...) | Yes     |
 
-> **Note:** The `SMTP_USER` for SendGrid is always the literal string `apikey`. The `SMTP_PASSWORD` is your SendGrid API Key (starts with `SG.`). You can generate one at [SendGrid API Keys](https://app.sendgrid.com/settings/api_keys).
+> `SMTP_SERVER`, `SMTP_PORT`, and `SMTP_USER` are already set in `bitbucket-pipelines.yml`.
+
+### Jenkins
+
+1. Go to **Manage Jenkins > Credentials > System > Global credentials**
+2. Click **Add Credentials**
+3. Configure:
+   - **Kind**: Secret text
+   - **Secret**: Your SendGrid API Key (`SG.xxxxx...`)
+   - **ID**: `SENDGRID_API_KEY`
+   - **Description**: SendGrid API Key for email notifications
+4. Click **Save**
+
+> `SMTP_SERVER`, `SMTP_PORT`, `SMTP_USER`, and `SMTP_PASSWORD` are already configured in the `Jenkinsfile` environment block.
+
+### SendGrid Setup
+
+1. Create a SendGrid account at [sendgrid.com](https://sendgrid.com/)
+2. Go to [API Keys](https://app.sendgrid.com/settings/api_keys) and create a new key with **Mail Send** permission
+3. Copy the generated key (starts with `SG.`)
+4. Add `Ahmed.Ali@originsysglobal.com` as a [Verified Sender](https://app.sendgrid.com/settings/sender_auth/senders)
+
+> **Note:** The `SMTP_USER` for SendGrid is always the literal string `apikey`. The `SMTP_PASSWORD` is your SendGrid API Key.
+
+### Email Content
 
 The email includes:
 - Pass/Fail status with color-coded header
